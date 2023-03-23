@@ -17,3 +17,5 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/users", usersRouter);
 
 module.exports = app;
+
+console.log("k");
