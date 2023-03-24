@@ -8,9 +8,9 @@ exports.backup = async (req, res, next) => {
 
     connection.connect();
 
-    fs.unlinkSync("C://SQLDatabase/backend/backup/backup.txt");
+    fs.unlinkSync(process.env.PATH_FOR_BACKUP);
     connection.query(
-      "SELECT * FROM payment INTO OUTFILE '/SQLDatabase/backend/backup/backup.txt'",
+      `SELECT * FROM payment INTO OUTFILE '${process.env.PATH_FOR_BACKUP}'`,
       function (error, results, fields) {
         if (error) throw error;
         return res.status(200).json({
@@ -38,7 +38,7 @@ exports.restore = async (req, res, next) => {
     connection.query("TRUNCATE payment");
 
     connection.query(
-      "LOAD DATA INFILE '/SQLDatabase/backend/backup/backup.txt' INTO TABLE payment",
+      `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}' INTO TABLE payment`,
       function (error, results, fields) {
         if (error) throw error;
         return res.status(200).json({
