@@ -6,6 +6,7 @@ const config = {
   user: process.env.DATABASE_INSTANCENAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
+  multipleStatements: true,
 };
 
 module.exports = config;
