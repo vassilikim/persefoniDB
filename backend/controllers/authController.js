@@ -24,11 +24,13 @@ exports.signup = async (req, res) => {
 
     let password = await bcrypt.hash(req.body.password, 12);
 
-    var connection = sql.createConnection(config);
+    let connection = sql.createConnection(config);
     connection.connect();
 
     connection.query(
-      `SET @school_ID=(SELECT ID FROM School WHERE school_name='${req.body.school}'); INSERT INTO Users (username, user_password, user_role, first_name, last_name, school_id) VALUES ('${req.body.username}', '${password}', '${req.body.role}', '${req.body.first_name}', '${req.body.last_name}', @school_ID);`,
+      `SET @school_ID=(SELECT ID FROM School WHERE school_name='${req.body.school}');` +
+        `INSERT INTO Users (username, user_password, user_role, first_name, last_name, school_id)` +
+        `VALUES ('${req.body.username}', '${password}', '${req.body.role}', '${req.body.first_name}', '${req.body.last_name}', @school_ID);`,
       function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -53,37 +55,48 @@ exports.signup = async (req, res) => {
 
 exports.login = async (req, res, next) => {
   try {
-    if (!req.body.emailaddress || !req.body.password) {
+    if (!req.body.username || !req.body.password) {
       return res.status(400).json({
         status: "failed",
-        message: "Please provide email address and password",
+        message: "Please provide username and password",
       });
     }
 
-    let pool = await sql.connect(config);
-    let customer = await pool
-      .request()
-      .input("emailaddress", sql.NVarChar, req.body.emailaddress)
-      .query("SELECT * FROM tblcustomer WHERE emailaddress=@emailaddress");
-    customer = customer.recordsets[0];
+    let connection = sql.createConnection(config);
+    connection.connect();
 
-    if (
-      customer.length == 0 ||
-      !(await correctPassword(req.body.password, customer[0].password))
-    ) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Incorrect username or password",
-      });
-    }
+    connection.query(
+      `SELECT user_password FROM Users WHERE username='${req.body.username}'`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+        if (
+          results.length == 0 ||
+          !(await correctPassword(req.body.password, results[0].user_password))
+        ) {
+          return res.status(400).json({
+            status: "failed",
+            message: "Incorrect username or password",
+          });
+        }
 
-    const token = jwt.sign({ id: customer[0].id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN,
-    });
+        const token = jwt.sign(
+          { id: req.body.username },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: process.env.JWT_EXPIRES_IN,
+          }
+        );
 
-    return res.status(200).json({
-      token: token,
-    });
+        return res.status(200).json({
+          token: token,
+        });
+      }
+    );
+    connection.end();
   } catch (err) {
     return res.status(500).json({
       status: "failed",
@@ -92,70 +105,70 @@ exports.login = async (req, res, next) => {
   }
 };
 
-exports.protect = async (req, res, next) => {
-  try {
-    let token;
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer")
-    ) {
-      token = req.headers.authorization.split(" ")[1];
-    }
+// exports.protect = async (req, res, next) => {
+//   try {
+//     let token;
+//     if (
+//       req.headers.authorization &&
+//       req.headers.authorization.startsWith("Bearer")
+//     ) {
+//       token = req.headers.authorization.split(" ")[1];
+//     }
 
-    if (!token) {
-      return res.status(401).json({
-        status: "failed",
-        message: "Please log in to get access.",
-      });
-    }
+//     if (!token) {
+//       return res.status(401).json({
+//         status: "failed",
+//         message: "Please log in to get access.",
+//       });
+//     }
 
-    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+//     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-    let pool = await sql.connect(config);
-    let customer = await pool
-      .request()
-      .input("Id", sql.UniqueIdentifier, decoded.id)
-      .query("SELECT * FROM tblcustomer WHERE Id=@Id");
-    customer = customer.recordsets[0];
+//     let pool = await sql.connect(config);
+//     let customer = await pool
+//       .request()
+//       .input("Id", sql.UniqueIdentifier, decoded.id)
+//       .query("SELECT * FROM tblcustomer WHERE Id=@Id");
+//     customer = customer.recordsets[0];
 
-    if (customer.length == 0) {
-      return res.status(401).json({
-        status: "failed",
-        message: "User no longer exists.",
-      });
-    }
+//     if (customer.length == 0) {
+//       return res.status(401).json({
+//         status: "failed",
+//         message: "User no longer exists.",
+//       });
+//     }
 
-    // if (freshUser.changedPasswordAfter(decoded.iat)) {
-    //   responseMessage = {
-    //     status: "failed",
-    //     message: "User recently changed password. Please log in again.",
-    //   };
-    //   return handleResponse(req, res, 401, handleResponse);
-    // }
+//     // if (freshUser.changedPasswordAfter(decoded.iat)) {
+//     //   responseMessage = {
+//     //     status: "failed",
+//     //     message: "User recently changed password. Please log in again.",
+//     //   };
+//     //   return handleResponse(req, res, 401, handleResponse);
+//     // }
 
-    req.email = customer[0].emailaddress;
-    req.pelperi = customer[0].peri;
-    req.phone = customer[0].phone;
-    req.mobile = customer[0].mobile;
-    req.pelid = customer[0].id;
+//     req.email = customer[0].emailaddress;
+//     req.pelperi = customer[0].peri;
+//     req.phone = customer[0].phone;
+//     req.mobile = customer[0].mobile;
+//     req.pelid = customer[0].id;
 
-    next();
-  } catch (err) {
-    if (err.name === "JsonWebTokenError") {
-      return res.status(401).json({
-        status: "failed",
-        message: "Please login to get access.",
-      });
-    } else if (err.name === "TokenExpiredError") {
-      return res.status(401).json({
-        status: "failed",
-        message: "Token has expired. Please login again.",
-      });
-    } else {
-      return res.status(500).json({
-        status: "failed",
-        message: err.message,
-      });
-    }
-  }
-};
+//     next();
+//   } catch (err) {
+//     if (err.name === "JsonWebTokenError") {
+//       return res.status(401).json({
+//         status: "failed",
+//         message: "Please login to get access.",
+//       });
+//     } else if (err.name === "TokenExpiredError") {
+//       return res.status(401).json({
+//         status: "failed",
+//         message: "Token has expired. Please login again.",
+//       });
+//     } else {
+//       return res.status(500).json({
+//         status: "failed",
+//         message: err.message,
+//       });
+//     }
+//   }
+// };
