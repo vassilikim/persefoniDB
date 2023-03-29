@@ -191,7 +191,6 @@ exports.protect = async (req, res, next) => {
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.role)) {
-      console.log(roles);
       return res.status(403).json({
         status: "failed",
         message: "You don't have permission to perform this action!",
