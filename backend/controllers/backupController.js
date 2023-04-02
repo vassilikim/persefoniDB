@@ -63,6 +63,7 @@ exports.restore = async (req, res, next) => {
     connection.query(
       `SET FOREIGN_KEY_CHECKS=0;` +
         `TRUNCATE Review; TRUNCATE Lending; TRUNCATE Reservation; TRUNCATE Genre; TRUNCATE Writes; TRUNCATE Writer; TRUNCATE Book; TRUNCATE Users; TRUNCATE School;` +
+        `SET FOREIGN_KEY_CHECKS=1;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/schools.txt' INTO TABLE School;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/users.txt' INTO TABLE Users;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/books.txt' INTO TABLE Book;` +
@@ -71,8 +72,7 @@ exports.restore = async (req, res, next) => {
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/genres.txt' INTO TABLE Genre;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/reservations.txt' INTO TABLE Reservation;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/lendings.txt' INTO TABLE Lending;` +
-        `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/reviews.txt' INTO TABLE Review;` +
-        `SET FOREIGN_KEY_CHECKS=1;`,
+        `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/reviews.txt' INTO TABLE Review;`,
       function (error, results, fields) {
         if (error) throw error;
         return res.status(200).json({
