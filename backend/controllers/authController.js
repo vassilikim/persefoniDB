@@ -49,7 +49,7 @@ exports.signup = async (req, res) => {
         return res.status(200).json({
           status: "success",
           message:
-            "You were signed up successfully! Please wait to be verified if you are a teacher or a student.",
+            "You were signed up successfully! Please wait to be verified.",
         });
       }
     );

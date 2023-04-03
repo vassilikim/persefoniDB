@@ -3,7 +3,6 @@ var router = express.Router();
 var backupController = require("../controllers/backupController");
 var authController = require("../controllers/authController");
 
-/* GET users listing. */
 router.get(
   "/backup",
   authController.protect,
