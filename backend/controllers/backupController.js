@@ -27,9 +27,7 @@ exports.backup = async (req, res, next) => {
       fs.unlinkSync(process.env.PATH_FOR_BACKUP + "/reviews.txt");
     connection.query(
       `SELECT * FROM School INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/schools.txt';` +
-        `SET @Trigger_password_hash = FALSE;` +
         `SELECT * FROM Users INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/users.txt';` +
-        `SET @Trigger_password_hash = TRUE;` +
         `SELECT * FROM Book INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/books.txt';` +
         `SELECT * FROM Writer INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/writers.txt';` +
         `SELECT * FROM Writes INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/writes.txt';` +
@@ -71,7 +69,14 @@ exports.restore = async (req, res, next) => {
         `TRUNCATE Review; TRUNCATE Lending; TRUNCATE Reservation; TRUNCATE Genre; TRUNCATE Writes; TRUNCATE Writer; TRUNCATE Book; TRUNCATE Users; TRUNCATE School;` +
         `SET FOREIGN_KEY_CHECKS=1;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/schools.txt' INTO TABLE School;` +
+        `DROP TRIGGER hash_password_before_insert;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/users.txt' INTO TABLE Users;` +
+        `CREATE TRIGGER hash_password_before_insert BEFORE INSERT ON Users
+        FOR EACH ROW
+          BEGIN
+	          SET NEW.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts',
+	          NEW.user_password), 256);
+          END;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/books.txt' INTO TABLE Book;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/writers.txt' INTO TABLE Writer;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/writes.txt' INTO TABLE Writes;` +

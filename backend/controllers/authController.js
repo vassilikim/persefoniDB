@@ -121,7 +121,9 @@ exports.logout = (req, res) => {
     httpOnly: true,
   });
 
-  res.status(200).json({ status: "success" });
+  return res
+    .status(200)
+    .json({ status: "success", message: "You were successfully logged out!" });
 };
 
 exports.protect = async (req, res, next) => {
@@ -209,4 +211,61 @@ exports.restrictTo = (...roles) => {
     }
     next();
   };
+};
+
+exports.changePassword = (req, res) => {
+  try {
+    if (!req.body.old_password) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Please write your current password first.",
+      });
+    }
+
+    if (!req.body.new_password) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Please choose a new password.",
+      });
+    }
+
+    if (req.body.new_password.length < 8) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Password cannot have less than 8 characters",
+      });
+    }
+
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT change_password('${req.username}','${req.body.old_password}', '${req.body.new_password}') as answer;`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        if (results[0]["answer"] == "OK") {
+          return res.status(200).json({
+            status: "success",
+            message: "Your password was successfully changed!",
+          });
+        } else {
+          return res.status(401).json({
+            status: "failed",
+            message: "Your current password is not correct.",
+          });
+        }
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
 };

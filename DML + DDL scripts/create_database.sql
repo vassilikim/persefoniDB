@@ -162,27 +162,35 @@ BEGIN
 END$$
 DELIMITER ;
 
-SET @Trigger_password_hash = TRUE;
-
 DELIMITER //
 CREATE TRIGGER hash_password_before_insert BEFORE INSERT ON Users
   FOR EACH ROW
   BEGIN
-	IF @Trigger_password_hash = TRUE THEN
-		SET NEW.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts',
-		NEW.user_password), 256);
-	END IF;
+	SET NEW.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts',
+	NEW.user_password), 256);
   END;//
 
 CREATE TRIGGER hash_password_before_update BEFORE UPDATE ON Users
   FOR EACH ROW
   BEGIN
-	IF @Trigger_password_hash = TRUE AND 
-    NEW.user_password <> SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', user_password), 256) THEN
+	IF OLD.user_password <> SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', NEW.user_password), 256) THEN
 		SET NEW.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts',
 		NEW.user_password), 256);
 	END IF;
   END;//
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION change_password(user_username VARCHAR(255), old_password VARCHAR(255), new_password VARCHAR(255)) RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+  IF (SELECT user_password FROM Users WHERE username=user_username) = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', old_password), 256) THEN
+    IF new_password=old_password THEN RETURN "OK"; END IF;
+    UPDATE Users SET user_password=new_password, changed_password_at=NOW() WHERE username = user_username;
+    RETURN 'OK';
+  ELSE 
+	RETURN 'NOT OK';
+  END IF;
+END//
 DELIMITER ;
 
 
