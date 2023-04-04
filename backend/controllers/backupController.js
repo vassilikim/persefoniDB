@@ -27,7 +27,9 @@ exports.backup = async (req, res, next) => {
       fs.unlinkSync(process.env.PATH_FOR_BACKUP + "/reviews.txt");
     connection.query(
       `SELECT * FROM School INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/schools.txt';` +
+        `SET @Trigger_password_hash = FALSE;` +
         `SELECT * FROM Users INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/users.txt';` +
+        `SET @Trigger_password_hash = TRUE;` +
         `SELECT * FROM Book INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/books.txt';` +
         `SELECT * FROM Writer INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/writers.txt';` +
         `SELECT * FROM Writes INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/writes.txt';` +

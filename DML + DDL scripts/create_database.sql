@@ -162,19 +162,26 @@ BEGIN
 END$$
 DELIMITER ;
 
+SET @Trigger_password_hash = TRUE;
+
 DELIMITER //
 CREATE TRIGGER hash_password_before_insert BEFORE INSERT ON Users
   FOR EACH ROW
   BEGIN
-    SET NEW.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts',
-    NEW.user_password), 256);
+	IF @Trigger_password_hash = TRUE THEN
+		SET NEW.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts',
+		NEW.user_password), 256);
+	END IF;
   END;//
 
 CREATE TRIGGER hash_password_before_update BEFORE UPDATE ON Users
   FOR EACH ROW
   BEGIN
-    SET NEW.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts',
-    NEW.user_password), 256);
+	IF @Trigger_password_hash = TRUE AND 
+    NEW.user_password <> SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', user_password), 256) THEN
+		SET NEW.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts',
+		NEW.user_password), 256);
+	END IF;
   END;//
 DELIMITER ;
 
