@@ -4,10 +4,6 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 const { promisify } = require("util");
 
-correctPassword = async function (candidatePassword, userPassword) {
-  return await bcrypt.compare(candidatePassword, userPassword);
-};
-
 changedPasswordAfter = function (JWTTimestamp, passwordChangedAt) {
   if (passwordChangedAt) {
     const changedTimestamp = parseInt(passwordChangedAt.getTime() / 1000, 10);
@@ -31,15 +27,13 @@ exports.signup = async (req, res) => {
       });
     }
 
-    let password = await bcrypt.hash(req.body.password, 12);
-
     let connection = sql.createConnection(config);
     connection.connect();
 
     connection.query(
       `SET @school_ID=(SELECT ID FROM School WHERE school_name='${req.body.school}');` +
         `INSERT INTO Users (username, user_password, user_role, first_name, last_name, school_id)` +
-        `VALUES ('${req.body.username}', '${password}', '${req.body.role}', '${req.body.first_name}', '${req.body.last_name}', @school_ID);`,
+        `VALUES ('${req.body.username}', '${req.body.password}', '${req.body.role}', '${req.body.first_name}', '${req.body.last_name}', @school_ID);`,
       function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -75,17 +69,15 @@ exports.login = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT user_password FROM Users WHERE username='${req.body.username}'`,
+      `SELECT COUNT(*) FROM Users WHERE username = '${req.body.username}'` +
+        `AND user_password = SHA2(CONCAT('${process.env.PASSWORD_HASHING_SALT}', '${req.body.password}'), 256);`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
             status: "failed",
             message: error.message,
           });
-        if (
-          results.length == 0 ||
-          !(await correctPassword(req.body.password, results[0].user_password))
-        ) {
+        if (results[0]["COUNT(*)"] == 0) {
           return res.status(400).json({
             status: "failed",
             message: "Incorrect username or password",
@@ -164,6 +156,7 @@ exports.protect = async (req, res, next) => {
         }
         req.username = freshUser.username;
         req.role = freshUser.user_role;
+        req.school_id = freshUser.school_ID;
         next();
       }
     );

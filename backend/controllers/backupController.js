@@ -36,7 +36,11 @@ exports.backup = async (req, res, next) => {
         `SELECT * FROM Lending INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/lendings.txt';` +
         `SELECT * FROM Review INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/reviews.txt';`,
       function (error, results, fields) {
-        if (error) throw error;
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
         return res.status(200).json({
           status: "success",
           message: "The database was successfully backed up!",
@@ -74,7 +78,11 @@ exports.restore = async (req, res, next) => {
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/lendings.txt' INTO TABLE Lending;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/reviews.txt' INTO TABLE Review;`,
       function (error, results, fields) {
-        if (error) throw error;
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
         return res.status(200).json({
           status: "success",
           message:
