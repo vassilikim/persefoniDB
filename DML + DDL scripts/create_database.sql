@@ -173,7 +173,7 @@ CREATE TRIGGER hash_password_before_insert BEFORE INSERT ON Users
 CREATE TRIGGER hash_password_before_update BEFORE UPDATE ON Users
   FOR EACH ROW
   BEGIN
-	IF OLD.user_password <> SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', NEW.user_password), 256) THEN
+	IF OLD.user_password <> NEW.user_password AND OLD.user_password <> SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', NEW.user_password), 256) THEN
 		SET NEW.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts',
 		NEW.user_password), 256);
 	END IF;
@@ -193,5 +193,21 @@ BEGIN
 END//
 DELIMITER ;
 
+DELIMITER //
+CREATE FUNCTION check_user_login(p_username VARCHAR(255), p_password VARCHAR(255)) 
+RETURNS INT DETERMINISTIC
+BEGIN
+  DECLARE count INT DEFAULT 0;
+  
+  IF (SELECT user_role FROM Users WHERE username = p_username) = 'super-admin' THEN
+    SELECT COUNT(*) INTO count FROM Users WHERE username = p_username AND verified = 1 AND user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', p_password), 256);
+  ELSE
+    SELECT COUNT(*) INTO count FROM Users u JOIN School s ON u.school_ID = s.ID
+    WHERE s.school_active = 1 AND u.username = p_username AND u.verified = 1 AND u.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', p_password), 256);
+  END IF;
+  
+  RETURN count;
+END//
+DELIMITER ;
 
 

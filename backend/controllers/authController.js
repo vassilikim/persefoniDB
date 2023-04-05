@@ -33,7 +33,8 @@ exports.signup = async (req, res) => {
     connection.query(
       `SET @school_ID=(SELECT ID FROM School WHERE school_name='${req.body.school}');` +
         `INSERT INTO Users (username, user_password, user_role, first_name, last_name, school_id)` +
-        `VALUES ('${req.body.username}', '${req.body.password}', '${req.body.role}', '${req.body.first_name}', '${req.body.last_name}', @school_ID);`,
+        `VALUES ('${req.body.username}', '${req.body.password}', '${req.body.role}', '${req.body.first_name}', '${req.body.last_name}', @school_ID);` +
+        `END IF;`,
       function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -69,18 +70,18 @@ exports.login = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT COUNT(*) FROM Users WHERE username = '${req.body.username}'` +
-        `AND user_password = SHA2(CONCAT('${process.env.PASSWORD_HASHING_SALT}', '${req.body.password}'), 256);`,
+      `SELECT check_user_login('${req.body.username}', '${req.body.password}') AS loggedInUser;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
             status: "failed",
             message: error.message,
           });
-        if (results[0]["COUNT(*)"] == 0) {
+        if (results[0]["loggedInUser"] == 0) {
           return res.status(400).json({
             status: "failed",
-            message: "Incorrect username or password",
+            message:
+              "Your username and password do not match with a verified user of an active school.",
           });
         }
 
