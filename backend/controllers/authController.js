@@ -270,5 +270,3 @@ exports.changePassword = (req, res) => {
     });
   }
 };
-
-//
