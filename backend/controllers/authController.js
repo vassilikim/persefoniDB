@@ -33,8 +33,7 @@ exports.signup = async (req, res) => {
     connection.query(
       `SET @school_ID=(SELECT ID FROM School WHERE school_name='${req.body.school}');` +
         `INSERT INTO Users (username, user_password, user_role, first_name, last_name, school_id)` +
-        `VALUES ('${req.body.username}', '${req.body.password}', '${req.body.role}', '${req.body.first_name}', '${req.body.last_name}', @school_ID);` +
-        `END IF;`,
+        `VALUES ('${req.body.username}', '${req.body.password}', '${req.body.role}', '${req.body.first_name}', '${req.body.last_name}', @school_ID);`,
       function (error, results, fields) {
         if (error)
           return res.status(500).json({
