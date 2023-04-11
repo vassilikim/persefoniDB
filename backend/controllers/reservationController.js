@@ -10,7 +10,6 @@ exports.createPendingReservation = async (req, res, next) => {
       });
     }
 
-    console.log(req.school_id);
     let connection = sql.createConnection(config);
     connection.connect();
 
