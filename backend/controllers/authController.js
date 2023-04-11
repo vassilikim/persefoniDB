@@ -174,6 +174,7 @@ exports.protect = async (req, res, next) => {
               "User recently changed their password! Please login again.",
           });
         }
+        req.user_id = freshUser.ID;
         req.username = freshUser.username;
         req.role = freshUser.user_role;
         req.school_id = freshUser.school_ID;

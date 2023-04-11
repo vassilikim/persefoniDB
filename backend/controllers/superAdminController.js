@@ -4,7 +4,7 @@ const sql = require("mysql");
 exports.verifySchoolAdmin = async (req, res, next) => {
   try {
     if (!req.body.school_admin) {
-      return res.status(500).json({
+      return res.status(400).json({
         status: "failed",
         message: "Please provide all the required parameters.",
       });
@@ -21,7 +21,6 @@ exports.verifySchoolAdmin = async (req, res, next) => {
             status: "failed",
             message: error.message,
           });
-        console.log(results);
 
         if (results.affectedRows == 0) {
           return res.status(400).json({

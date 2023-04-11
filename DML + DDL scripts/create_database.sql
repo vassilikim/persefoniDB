@@ -181,7 +181,8 @@ CREATE TRIGGER hash_password_before_update BEFORE UPDATE ON Users
 DELIMITER ;
 
 DELIMITER //
-CREATE FUNCTION change_password(user_username VARCHAR(255), old_password VARCHAR(255), new_password VARCHAR(255)) RETURNS VARCHAR(255) DETERMINISTIC
+CREATE FUNCTION change_password(user_username VARCHAR(255), old_password VARCHAR(255), new_password VARCHAR(255)) 
+RETURNS VARCHAR(255) DETERMINISTIC
 BEGIN
   IF (SELECT user_password FROM Users WHERE username=user_username) = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', old_password), 256) THEN
     IF new_password=old_password THEN RETURN "OK"; END IF;
@@ -207,6 +208,30 @@ BEGIN
   END IF;
   
   RETURN count;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION pending_reservation(book_title VARCHAR(255), school INT, user INT, role VARCHAR(255)) 
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	SET @book = (SELECT ID FROM Book WHERE title = book_title AND school_ID = school);
+    IF @book IS NULL THEN RETURN 'NO BOOK'; END IF;
+	IF role = 'teacher' THEN SET @reservationsAllowed=1;
+	ELSEIF role = 'student' THEN SET @reservationsAllowed=2;
+	END IF;
+    IF (SELECT COUNT(*) FROM Reservation WHERE user_ID=user AND book_ID=@book AND (reservation_status=0 OR reservation_status=1)) <> 0 THEN
+		RETURN 'ALREADY RESERVATION';
+	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND book_ID=@book AND was_returned_at=null) <> 0 THEN
+		RETURN 'ALREADY LENDING';
+	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND was_returned_at=null AND must_be_returned_at<NOW()) <> 0 THEN
+		RETURN 'DELAY';
+	ELSEIF (SELECT COUNT(*) FROM Reservation WHERE user_ID=user AND reservation_status=1 AND DATEDIFF(NOW(), reservation_date)<=7) > (@reservationsAllowed-1) THEN
+		RETURN 'TOO MANY';
+	ELSE 
+		INSERT INTO Reservation (user_ID, book_ID) VALUES (user, @book);
+		RETURN 'OK';
+	END IF;
 END//
 DELIMITER ;
 

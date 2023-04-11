@@ -5,6 +5,7 @@ var logger = require("morgan");
 
 var superAdminRouter = require("./routes/superAdminRoutes");
 var authRouter = require("./routes/authRoutes");
+var reservationRouter = require("./routes/reservationRoutes");
 
 var app = express();
 
@@ -23,5 +24,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/library/super-admin", superAdminRouter);
 app.use("/api/library/auth", authRouter);
+app.use("/api/library/reservations", reservationRouter);
 
 module.exports = app;
