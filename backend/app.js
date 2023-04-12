@@ -21,6 +21,10 @@ app.get("/", (req, res) => {
   res.status(200).render("login");
 });
 
+app.get("/super-admin",(req,res)=>{
+  res.status(200).render("super-admin");
+});
+
 app.use("/api/library/super-admin", superAdminRouter);
 app.use("/api/library/auth", authRouter);
 

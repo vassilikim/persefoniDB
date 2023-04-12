@@ -1,1 +1,3 @@
-console.log('a');
+function openNewPage() {
+    window.open("");
+}
