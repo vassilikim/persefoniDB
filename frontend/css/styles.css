@@ -92,6 +92,7 @@ font-weight: bold;
     border-radius: 12px;
     box-shadow: 0 2px 4px black;
     padding: 10px;
+    width: 300px;
   }
   
   .card img {
@@ -126,8 +127,8 @@ font-weight: bold;
     flex-wrap: wrap;
     justify-content:center;
     gap: 25px;
-    margin-top: 60px;
-    margin-bottom: 8%;
+    margin-top: 75px;
+    margin-bottom: 20%;
     }
 
 /* Logout Button */
@@ -230,7 +231,7 @@ font-weight: bold;
   position: absolute;
   background-color: #573478;
   width: 100%;
-  height: 20%;
+  height: 30%;
   margin: auto 0 20px 0;
   left: 0;
   text-align: center;
