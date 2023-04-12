@@ -6,7 +6,7 @@ exports.verifySchoolAdmin = async (req, res, next) => {
     if (!req.body.school_admin) {
       return res.status(400).json({
         status: "failed",
-        message: "Please provide all the required parameters.",
+        message: "Please choose which school admin you want to verify.",
       });
     }
 
