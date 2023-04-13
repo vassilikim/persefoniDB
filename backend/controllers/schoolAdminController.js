@@ -7,7 +7,7 @@ exports.getNotVerifiedTeachersStudents = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT * FROM Users WHERE (user_role='teacher' OR user_role='student') AND verified=0;`,
+      `SELECT * FROM activeUsers WHERE (user_role='teacher' OR user_role='student') AND verified=0;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({

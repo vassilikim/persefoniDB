@@ -75,7 +75,7 @@ exports.getAllPendingReservations = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT * FROM Reservation WHERE reservation_status=0;`,
+      `SELECT r.* FROM Reservation r JOIN verifiedUsers v ON r.user_ID=v.ID WHERE reservation_status=0;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({

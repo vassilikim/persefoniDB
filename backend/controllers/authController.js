@@ -149,7 +149,7 @@ exports.protect = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT * FROM Users WHERE username='${decoded.id}'`,
+      `SELECT * FROM verifiedUsers WHERE username='${decoded.id}'`,
       function (error, results, fields) {
         if (error)
           return res.status(500).json({

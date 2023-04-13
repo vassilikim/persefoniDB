@@ -116,6 +116,12 @@ CREATE TABLE Review (
     INDEX index_review_book (book_ID)
 );
 
+CREATE VIEW activeUsers AS
+SELECT u.* FROM Users u JOIN School s ON u.school_ID=s.ID WHERE s.school_active=1;
+
+CREATE VIEW verifiedUsers AS
+SELECT * FROM activeUsers WHERE verified=1;
+
 DELIMITER $$
 CREATE TRIGGER update_user_verification
 BEFORE INSERT ON Users
@@ -203,8 +209,8 @@ BEGIN
   IF (SELECT user_role FROM Users WHERE username = p_username) = 'super-admin' THEN
     SELECT COUNT(*) INTO count FROM Users WHERE username = p_username AND verified = 1 AND user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', p_password), 256);
   ELSE
-    SELECT COUNT(*) INTO count FROM Users u JOIN School s ON u.school_ID = s.ID
-    WHERE s.school_active = 1 AND u.username = p_username AND u.verified = 1 AND u.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', p_password), 256);
+    SELECT COUNT(*) INTO count FROM verifiedUsers
+    WHERE username = p_username AND user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts', p_password), 256);
   END IF;
   
   RETURN count;
