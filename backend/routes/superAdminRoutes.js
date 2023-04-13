@@ -10,11 +10,19 @@ router.get(
   authController.restrictTo("super-admin"),
   backupController.backup
 );
+
 router.get(
   "/restore",
   authController.protect,
   authController.restrictTo("super-admin"),
   backupController.restore
+);
+
+router.get(
+  "/school-admins",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  superAdminController.getNotVerifiedSchoolAdmins
 );
 
 router.patch(

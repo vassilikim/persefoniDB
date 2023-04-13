@@ -10,4 +10,11 @@ router.post(
   reservationController.createPendingReservation
 );
 
+router.get(
+  "/allrequests",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  reservationController.getAllPendingReservations
+);
+
 module.exports = router;

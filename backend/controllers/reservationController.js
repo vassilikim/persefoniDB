@@ -68,3 +68,32 @@ exports.createPendingReservation = async (req, res, next) => {
     });
   }
 };
+
+exports.getAllPendingReservations = async (req, res, next) => {
+  try {
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT * FROM Reservation WHERE reservation_status=0;`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        return res.status(200).json({
+          status: "success",
+          data: results,
+        });
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};

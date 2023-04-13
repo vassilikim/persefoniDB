@@ -1,13 +1,13 @@
 var config = require("../dbconfig");
 const sql = require("mysql");
 
-exports.getNotVerifiedSchoolAdmins = async (req, res, next) => {
+exports.getNotVerifiedTeachersStudents = async (req, res, next) => {
   try {
     let connection = sql.createConnection(config);
     connection.connect();
 
     connection.query(
-      `SELECT * FROM Users WHERE user_role='school-admin' AND verified=0;`,
+      `SELECT * FROM Users WHERE (user_role='teacher' OR user_role='student') AND verified=0;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -30,12 +30,12 @@ exports.getNotVerifiedSchoolAdmins = async (req, res, next) => {
   }
 };
 
-exports.verifySchoolAdmin = async (req, res, next) => {
+exports.verifyTeacherStudent = async (req, res, next) => {
   try {
-    if (!req.body.school_admin) {
+    if (!req.body.username) {
       return res.status(400).json({
         status: "failed",
-        message: "Please choose which school admin you want to verify.",
+        message: "Please choose which teacher/student you want to verify.",
       });
     }
 
@@ -43,8 +43,8 @@ exports.verifySchoolAdmin = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `UPDATE Users SET verified=1 WHERE username='${req.body.school_admin}' 
-      AND user_role='school-admin' AND verified=0;`,
+      `UPDATE Users SET verified=1 WHERE username='${req.body.username}' 
+      AND (user_role='teacher' OR user_role='student') AND verified=0;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -56,13 +56,13 @@ exports.verifySchoolAdmin = async (req, res, next) => {
           return res.status(400).json({
             status: "failed",
             message:
-              "There is no not verified school admin with this username!",
+              "There is no not verified teacher/student with this username!",
           });
         }
 
         return res.status(200).json({
           status: "success",
-          message: "The school admin is now successfully verified!",
+          message: "The teacher/student is now successfully verified!",
         });
       }
     );
