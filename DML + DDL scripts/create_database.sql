@@ -117,7 +117,9 @@ CREATE TABLE Review (
 );
 
 CREATE VIEW activeUsers AS
-SELECT u.* FROM Users u JOIN School s ON u.school_ID=s.ID WHERE s.school_active=1;
+(SELECT u.* FROM Users u JOIN School s ON u.school_ID=s.ID WHERE s.school_active=1)
+UNION
+(SELECT * FROM Users WHERE user_role='super-admin');
 
 CREATE VIEW verifiedUsers AS
 SELECT * FROM activeUsers WHERE verified=1;
