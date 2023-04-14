@@ -2,8 +2,6 @@ DROP DATABASE IF EXISTS persefoniDB;
 CREATE DATABASE persefoniDB;
 USE persefoniDB;
 
-SET @@session.time_zone := '+06:00';
-
 CREATE TABLE School (
     ID INT NOT NULL AUTO_INCREMENT,
     school_name VARCHAR(255) NOT NULL UNIQUE,
@@ -83,7 +81,7 @@ CREATE TABLE Reservation (
     pending_reservation_date DATETIME DEFAULT(NULL),
     canceled_at DATETIME DEFAULT(NULL),
 	served_at DATETIME DEFAULT(NULL),
-    reservation_status BIT NOT NULL DEFAULT(0),
+    reservation_status INT NOT NULL DEFAULT(0),
     PRIMARY KEY (user_ID, book_ID, request_date),
     FOREIGN KEY (user_ID) REFERENCES Users(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (book_ID) REFERENCES Book(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -232,9 +230,9 @@ BEGIN
 	END IF;
     IF (SELECT COUNT(*) FROM Reservation WHERE user_ID=user AND book_ID=@book AND (reservation_status=0 OR reservation_status=1)) <> 0 THEN
 		RETURN 'ALREADY RESERVATION';
-	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND book_ID=@book AND was_returned_at=null) <> 0 THEN
+	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND book_ID=@book AND was_returned_at IS NULL) <> 0 THEN
 		RETURN 'ALREADY LENDING';
-	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND was_returned_at=null AND must_be_returned_at<NOW()) <> 0 THEN
+	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND was_returned_at IS NULL AND must_be_returned_at<NOW()) <> 0 THEN
 		RETURN 'DELAY';
 	ELSEIF (SELECT COUNT(*) FROM Reservation WHERE user_ID=user AND reservation_status=0) > (@reservationsAllowed-1) THEN
 		RETURN 'TOO MANY';
@@ -246,24 +244,48 @@ END//
 DELIMITER ;
 
 DELIMITER //
-CREATE FUNCTION handle_pending_reservation(book_title VARCHAR(255), school INT, user INT, role VARCHAR(255)) 
+CREATE FUNCTION handle_reservation(book_title VARCHAR(255), school INT, u_username VARCHAR(255)) 
 RETURNS VARCHAR(255) DETERMINISTIC
 BEGIN
 	SET @book = (SELECT ID FROM Book WHERE title = book_title AND school_ID = school);
-    IF @book IS NULL THEN RETURN 'NO BOOK'; END IF;
-	IF role = 'teacher' THEN SET @reservationsAllowed=1;
-	ELSEIF role = 'student' THEN SET @reservationsAllowed=2;
+    IF @book IS NULL THEN RETURN 'NO BOOK'; 
+    END IF;
+    
+    SET @libraryuser = (SELECT ID FROM verifiedUsers WHERE username = u_username AND school_ID = school);
+    IF @libraryuser IS NULL THEN RETURN 'NO USER'; 
+    END IF;
+    
+    SET @userrole = (SELECT user_role FROM verifiedUsers WHERE username = u_username AND school_ID = school);
+    
+    IF (SELECT COUNT(*) FROM Reservation WHERE user_ID=@libraryuser AND book_ID=@book AND reservation_status=0) = 0 THEN
+		SET @original = true;
+	ELSE 
+		SET @original = false;
 	END IF;
-    IF (SELECT COUNT(*) FROM Reservation WHERE user_ID=user AND book_ID=@book AND (reservation_status=0 OR reservation_status=1)) <> 0 THEN
-		RETURN 'ALREADY RESERVATION';
-	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND book_ID=@book AND was_returned_at=null) <> 0 THEN
+    
+	IF @userrole = 'teacher' THEN 
+		SET @lendingsAllowed=1;
+	ELSEIF @userrole = 'student' THEN 
+		SET @lendingsAllowed=2;
+	END IF;
+    
+    IF (SELECT COUNT(*) FROM Lending WHERE user_ID=@libraryuser AND book_ID=@book AND was_returned_at IS NULL) <> 0 THEN
 		RETURN 'ALREADY LENDING';
-	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND was_returned_at=null AND must_be_returned_at<NOW()) <> 0 THEN
+	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=@libraryuser AND was_returned_at IS NULL AND must_be_returned_at<NOW()) <> 0 THEN
 		RETURN 'DELAY';
-	ELSEIF (SELECT COUNT(*) FROM Reservation WHERE user_ID=user AND reservation_status=1 AND DATEDIFF(NOW(), reservation_date)<=7) > (@reservationsAllowed-1) THEN
+	ELSEIF (SELECT copies FROM Book WHERE ID=@book) = 0 THEN
+		IF @original = false THEN
+			UPDATE Reservation SET pending_reservation_date=NOW(), reservation_status=1 WHERE user_ID=@libraryuser AND book_ID=@book AND reservation_status=0;
+            RETURN 'NO COPY, UPDATED TO PENDING';
+		ELSE 
+			RETURN 'NO COPY';
+		END IF;
+	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=@libraryuser AND was_returned_at IS NULL) > (@lendingsAllowed-1) THEN
 		RETURN 'TOO MANY';
 	ELSE 
-		INSERT INTO Reservation (user_ID, book_ID) VALUES (user, @book);
+		INSERT INTO Lending (user_ID, book_ID) VALUES (@libraryuser, @book);
+        UPDATE Book SET copies=copies-1 WHERE ID=@book;
+        UPDATE Reservation SET served_at=NOW(), reservation_status=2 WHERE user_ID=@libraryuser AND book_ID=@book AND (reservation_status=0 OR reservation_status=1);
 		RETURN 'OK';
 	END IF;
 END//

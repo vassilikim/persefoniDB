@@ -10,6 +10,13 @@ router.post(
   reservationController.createReservation
 );
 
+router.post(
+  "/handlereservation",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  reservationController.handleReservation
+);
+
 router.get(
   "/allreservations",
   authController.protect,

@@ -56,7 +56,7 @@ exports.verifyTeacherStudent = async (req, res, next) => {
           return res.status(400).json({
             status: "failed",
             message:
-              "There is no not verified teacher/student with this username!",
+              "There is no not verified teacher/student with this username in your school!",
           });
         }
 
