@@ -4,17 +4,17 @@ var authController = require("../controllers/authController");
 var reservationController = require("../controllers/reservationController");
 
 router.post(
-  "/request",
+  "/makereservation",
   authController.protect,
   authController.restrictTo("student", "teacher"),
-  reservationController.createPendingReservation
+  reservationController.createReservation
 );
 
 router.get(
-  "/allrequests",
+  "/allreservations",
   authController.protect,
   authController.restrictTo("school-admin"),
-  reservationController.getAllPendingReservations
+  reservationController.getAllReservations
 );
 
 module.exports = router;

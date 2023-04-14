@@ -80,7 +80,7 @@ CREATE TABLE Reservation (
     user_ID INT NOT NULL,
     book_ID INT NOT NULL,
     request_date DATETIME NOT NULL DEFAULT(NOW()),
-    reservation_date DATETIME DEFAULT(NULL),
+    pending_reservation_date DATETIME DEFAULT(NULL),
     canceled_at DATETIME DEFAULT(NULL),
 	served_at DATETIME DEFAULT(NULL),
     reservation_status BIT NOT NULL DEFAULT(0),
@@ -222,7 +222,7 @@ END//
 DELIMITER ;
 
 DELIMITER //
-CREATE FUNCTION pending_reservation(book_title VARCHAR(255), school INT, user INT, role VARCHAR(255)) 
+CREATE FUNCTION make_reservation(book_title VARCHAR(255), school INT, user INT, role VARCHAR(255)) 
 RETURNS VARCHAR(255) DETERMINISTIC
 BEGIN
 	SET @book = (SELECT ID FROM Book WHERE title = book_title AND school_ID = school);
@@ -236,7 +236,7 @@ BEGIN
 		RETURN 'ALREADY LENDING';
 	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND was_returned_at=null AND must_be_returned_at<NOW()) <> 0 THEN
 		RETURN 'DELAY';
-	ELSEIF (SELECT COUNT(*) FROM Reservation WHERE user_ID=user AND reservation_status=1 AND DATEDIFF(NOW(), reservation_date)<=7) > (@reservationsAllowed-1) THEN
+	ELSEIF (SELECT COUNT(*) FROM Reservation WHERE user_ID=user AND reservation_status=0) > (@reservationsAllowed-1) THEN
 		RETURN 'TOO MANY';
 	ELSE 
 		INSERT INTO Reservation (user_ID, book_ID) VALUES (user, @book);
@@ -275,8 +275,8 @@ ON SCHEDULE EVERY 1 DAY
 DO
 BEGIN
     UPDATE Reservation
-    SET canceled_at = NOW()
-    WHERE reservation_at <= DATE_SUB(NOW(), INTERVAL 1 WEEK) AND reservation_status=1;
+    SET canceled_at = NOW(), reservation_status=3
+    WHERE request_at <= DATE_SUB(NOW(), INTERVAL 1 WEEK) AND (reservation_status=0 OR reservation_status=1);
 END //
 DELIMITER ;
 

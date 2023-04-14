@@ -1,7 +1,7 @@
 var config = require("../dbconfig");
 const sql = require("mysql");
 
-exports.createPendingReservation = async (req, res, next) => {
+exports.createReservation = async (req, res, next) => {
   try {
     if (!req.body.book) {
       return res.status(400).json({
@@ -14,7 +14,7 @@ exports.createPendingReservation = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT pending_reservation('${req.body.book}', ${req.school_id}, ${req.user_id}, '${req.role}') as answer;`,
+      `SELECT make_reservation('${req.body.book}', ${req.school_id}, ${req.user_id}, '${req.role}') as answer;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -69,7 +69,7 @@ exports.createPendingReservation = async (req, res, next) => {
   }
 };
 
-exports.getAllPendingReservations = async (req, res, next) => {
+exports.getAllReservations = async (req, res, next) => {
   try {
     let connection = sql.createConnection(config);
     connection.connect();
