@@ -7,7 +7,7 @@ exports.getNotVerifiedTeachersStudents = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT * FROM activeUsers WHERE (user_role='teacher' OR user_role='student') AND verified=0;`,
+      `SELECT * FROM activeUsers WHERE (user_role='teacher' OR user_role='student') AND verified=0 AND school_ID=${req.school_id};`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -44,7 +44,7 @@ exports.verifyTeacherStudent = async (req, res, next) => {
 
     connection.query(
       `UPDATE Users SET verified=1 WHERE username='${req.body.username}' 
-      AND (user_role='teacher' OR user_role='student') AND verified=0;`,
+      AND (user_role='teacher' OR user_role='student') AND verified=0 AND school_ID=${req.school_id};`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({

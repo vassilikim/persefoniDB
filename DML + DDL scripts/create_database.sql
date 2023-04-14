@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS persefoniDB;
 CREATE DATABASE persefoniDB;
 USE persefoniDB;
 
+SET @@session.time_zone := '+06:00';
+
 CREATE TABLE School (
     ID INT NOT NULL AUTO_INCREMENT,
     school_name VARCHAR(255) NOT NULL UNIQUE,
@@ -79,7 +81,7 @@ CREATE TABLE Reservation (
     book_ID INT NOT NULL,
     request_date DATETIME NOT NULL DEFAULT(NOW()),
     reservation_date DATETIME DEFAULT(NULL),
-    cancelled_at DATETIME DEFAULT(NULL),
+    canceled_at DATETIME DEFAULT(NULL),
 	served_at DATETIME DEFAULT(NULL),
     reservation_status BIT NOT NULL DEFAULT(0),
     PRIMARY KEY (user_ID, book_ID, request_date),
@@ -241,6 +243,41 @@ BEGIN
 		RETURN 'OK';
 	END IF;
 END//
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION handle_pending_reservation(book_title VARCHAR(255), school INT, user INT, role VARCHAR(255)) 
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	SET @book = (SELECT ID FROM Book WHERE title = book_title AND school_ID = school);
+    IF @book IS NULL THEN RETURN 'NO BOOK'; END IF;
+	IF role = 'teacher' THEN SET @reservationsAllowed=1;
+	ELSEIF role = 'student' THEN SET @reservationsAllowed=2;
+	END IF;
+    IF (SELECT COUNT(*) FROM Reservation WHERE user_ID=user AND book_ID=@book AND (reservation_status=0 OR reservation_status=1)) <> 0 THEN
+		RETURN 'ALREADY RESERVATION';
+	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND book_ID=@book AND was_returned_at=null) <> 0 THEN
+		RETURN 'ALREADY LENDING';
+	ELSEIF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND was_returned_at=null AND must_be_returned_at<NOW()) <> 0 THEN
+		RETURN 'DELAY';
+	ELSEIF (SELECT COUNT(*) FROM Reservation WHERE user_ID=user AND reservation_status=1 AND DATEDIFF(NOW(), reservation_date)<=7) > (@reservationsAllowed-1) THEN
+		RETURN 'TOO MANY';
+	ELSE 
+		INSERT INTO Reservation (user_ID, book_ID) VALUES (user, @book);
+		RETURN 'OK';
+	END IF;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE EVENT cancel_reservations_after_one_week
+ON SCHEDULE EVERY 1 DAY
+DO
+BEGIN
+    UPDATE Reservation
+    SET canceled_at = NOW()
+    WHERE reservation_at <= DATE_SUB(NOW(), INTERVAL 1 WEEK) AND reservation_status=1;
+END //
 DELIMITER ;
 
 
