@@ -199,3 +199,35 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+
+exports.print_school = async (req, res, next) => {
+  try {
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT * FROM School`,
+      async function (error, results, fields) {
+        if (error) {
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+        }
+
+        return res.status(200).json({
+          status: "success",
+          message: "Data for all schools retrieved successfully.",
+          data: results,
+        });
+      }
+    );
+    
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};

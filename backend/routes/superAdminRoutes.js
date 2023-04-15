@@ -18,3 +18,8 @@ router.get(
 );
 
 module.exports = router;
+
+router.get(
+  "/super-admin/edit-school",
+  authController.print_school
+);

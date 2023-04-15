@@ -5,4 +5,6 @@ var authController = require("../controllers/authController");
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
 
+router.get("/super-admin/edit-school",authController.print_school);
+
 module.exports = router;
