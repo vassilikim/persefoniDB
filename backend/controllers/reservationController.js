@@ -243,7 +243,7 @@ exports.returnBook = async (req, res, next) => {
             message: "The book return was successfully submitted!",
           });
         } else if (results[0]["answer"] == "NO LENDING") {
-          return res.status(403).json({
+          return res.status(400).json({
             status: "failed",
             message: "This user does not have a pending lending for this book!",
           });
@@ -298,7 +298,7 @@ exports.cancelReservation = async (req, res, next) => {
             message: "The reservation was successfully canceled!",
           });
         } else if (results[0]["answer"] == "NO RESERVATION") {
-          return res.status(403).json({
+          return res.status(400).json({
             status: "failed",
             message: "You have not made a reservation for this book!",
           });
