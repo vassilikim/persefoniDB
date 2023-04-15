@@ -314,6 +314,25 @@ END//
 DELIMITER ;
 
 DELIMITER //
+CREATE FUNCTION cancel_reservation(book_title VARCHAR(255), school INT, u_username VARCHAR(255)) 
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	SET @book = (SELECT ID FROM Book WHERE title = book_title AND school_ID = school);
+    IF @book IS NULL THEN RETURN 'NO BOOK'; 
+    END IF;
+    
+    SET @libraryuser = (SELECT ID FROM verifiedUsers WHERE username = u_username AND school_ID = school AND (user_role='teacher' OR user_role='student'));
+    
+    IF (SELECT COUNT(*) FROM Reservation WHERE user_ID=@libraryuser AND book_ID=@book AND (reservation_status=0 OR reservation_status=1)) = 0 THEN
+		RETURN 'NO RESERVATION';
+	ELSE 
+        UPDATE Reservation SET canceled_at=NOW(), reservation_status=3 WHERE user_ID=@libraryuser AND book_ID=@book;
+        RETURN 'OK';
+	END IF;
+END//
+DELIMITER ;
+
+DELIMITER //
 CREATE EVENT cancel_reservations_after_one_week
 ON SCHEDULE EVERY 1 DAY
 DO
