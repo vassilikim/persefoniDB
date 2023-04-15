@@ -251,7 +251,7 @@ BEGIN
     IF @book IS NULL THEN RETURN 'NO BOOK'; 
     END IF;
     
-    SET @libraryuser = (SELECT ID FROM verifiedUsers WHERE username = u_username AND school_ID = school);
+    SET @libraryuser = (SELECT ID FROM verifiedUsers WHERE username = u_username AND school_ID = school AND (user_role='teacher' OR user_role='student'));
     IF @libraryuser IS NULL THEN RETURN 'NO USER'; 
     END IF;
     
@@ -287,6 +287,28 @@ BEGIN
         UPDATE Book SET copies=copies-1 WHERE ID=@book;
         UPDATE Reservation SET served_at=NOW(), reservation_status=2 WHERE user_ID=@libraryuser AND book_ID=@book AND (reservation_status=0 OR reservation_status=1);
 		RETURN 'OK';
+	END IF;
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION return_book(book_title VARCHAR(255), school INT, u_username VARCHAR(255)) 
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	SET @book = (SELECT ID FROM Book WHERE title = book_title AND school_ID = school);
+    IF @book IS NULL THEN RETURN 'NO BOOK'; 
+    END IF;
+    
+    SET @libraryuser = (SELECT ID FROM verifiedUsers WHERE username = u_username AND school_ID = school AND (user_role='teacher' OR user_role='student'));
+    IF @libraryuser IS NULL THEN RETURN 'NO USER'; 
+    END IF;
+    
+    IF (SELECT COUNT(*) FROM Lending WHERE user_ID=@libraryuser AND book_ID=@book AND was_returned_at IS NULL) = 0 THEN
+		RETURN 'NO LENDING';
+	ELSE 
+		UPDATE Book SET copies=copies+1 WHERE ID=@book;
+        UPDATE Lending SET was_returned_at=NOW() WHERE user_ID=@libraryuser AND book_ID=@book;
+        RETURN 'OK';
 	END IF;
 END//
 DELIMITER ;
