@@ -75,7 +75,46 @@ exports.getAllReservations = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT r.* FROM Reservation r JOIN verifiedUsers v ON r.user_ID=v.ID WHERE reservation_status=0;`,
+      `SELECT r.*, v.username, v.user_role, b.title 
+      FROM Reservation r 
+      JOIN verifiedUsers v
+      JOIN Book b 
+      ON r.user_ID=v.ID AND r.book_ID=b.ID 
+      WHERE r.reservation_status=0 AND v.school_ID=${req.school_id};`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        return res.status(200).json({
+          status: "success",
+          data: results,
+        });
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.getAllPendingReservations = async (req, res, next) => {
+  try {
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT r.*, v.username, v.user_role, b.title 
+      FROM Reservation r 
+      JOIN verifiedUsers v
+      JOIN Book b 
+      ON r.user_ID=v.ID AND r.book_ID=b.ID 
+      WHERE r.reservation_status=1 AND v.school_ID=${req.school_id};`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({

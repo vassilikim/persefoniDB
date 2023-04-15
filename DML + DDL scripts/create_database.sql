@@ -298,7 +298,8 @@ DO
 BEGIN
     UPDATE Reservation
     SET canceled_at = NOW(), reservation_status=3
-    WHERE request_at <= DATE_SUB(NOW(), INTERVAL 1 WEEK) AND (reservation_status=0 OR reservation_status=1);
+    WHERE request_date <= DATE_SUB(NOW(), INTERVAL 1 WEEK) AND reservation_status=0
+    OR pending_reservation_date <= DATE_SUB(NOW(), INTERVAL 1 WEEK) AND reservation_status=1;
 END //
 DELIMITER ;
 

@@ -24,4 +24,11 @@ router.get(
   reservationController.getAllReservations
 );
 
+router.get(
+  "/pendingreservations",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  reservationController.getAllPendingReservations
+);
+
 module.exports = router;
