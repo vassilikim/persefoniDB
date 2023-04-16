@@ -333,6 +333,37 @@ END//
 DELIMITER ;
 
 DELIMITER //
+CREATE FUNCTION deactivate_user(school INT, u_username VARCHAR(255)) 
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+    SET @libraryuser = (SELECT ID FROM verifiedUsers WHERE username = u_username AND school_ID = school AND (user_role='teacher' OR user_role='student'));
+    IF @libraryuser IS NULL THEN RETURN 'NO USER';
+    END IF;
+    
+    UPDATE Reservation SET canceled_at=NOW(), reservation_status=3 WHERE user_ID=@libraryuser AND (reservation_status=0 OR reservation_status=1);
+    UPDATE Book b JOIN Lending l ON l.book_ID=b.ID SET b.copies=b.copies+1, l.was_returned_at=NOW() WHERE l.user_ID=@libraryuser AND l.was_returned_at IS NULL;
+    UPDATE Users SET verified=0 WHERE ID=@libraryuser;
+    RETURN 'OK';
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION delete_user(school INT, u_username VARCHAR(255)) 
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+    SET @libraryuser = (SELECT ID FROM activeUsers WHERE username = u_username AND school_ID = school AND (user_role='teacher' OR user_role='student'));
+    IF @libraryuser IS NULL THEN RETURN 'NO USER';
+    END IF;
+    
+    DELETE FROM Reservation WHERE user_ID=@libraryuser;
+    UPDATE Book b JOIN Lending l ON l.book_ID=b.ID SET b.copies=b.copies+1 WHERE l.user_ID=@libraryuser AND l.was_returned_at IS NULL;
+    DELETE FROM Lending WHERE user_ID=@libraryuser;
+    DELETE FROM Users WHERE ID=@libraryuser;
+    RETURN 'OK';
+END//
+DELIMITER ;
+
+DELIMITER //
 CREATE EVENT cancel_reservations_after_one_week
 ON SCHEDULE EVERY 1 DAY
 DO
