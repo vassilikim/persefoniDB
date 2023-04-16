@@ -364,6 +364,22 @@ END//
 DELIMITER ;
 
 DELIMITER //
+CREATE FUNCTION make_review(book_title VARCHAR(255), school INT, user INT, review VARCHAR(255), rating FLOAT) 
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	SET @book = (SELECT ID FROM Book WHERE title = book_title AND school_ID = school);
+    IF @book IS NULL THEN RETURN 'NO BOOK'; END IF;
+    
+    IF (SELECT COUNT(*) FROM Lending WHERE user_ID=user AND book_ID=@book) = 0 THEN
+		RETURN 'NO LENDING';
+	END IF;
+    
+    INSERT INTO Review (user_ID, book_ID, review, rating) VALUES (user, @book, review, rating);
+	RETURN 'OK';
+END//
+DELIMITER ;
+
+DELIMITER //
 CREATE EVENT cancel_reservations_after_one_week
 ON SCHEDULE EVERY 1 DAY
 DO
