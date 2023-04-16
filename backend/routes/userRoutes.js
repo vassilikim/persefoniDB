@@ -10,6 +10,20 @@ router.get(
   userController.getAllTeachersStudents
 );
 
+router.get(
+  "/account",
+  authController.protect,
+  authController.restrictTo("teacher", "student"),
+  userController.getAccountInfo
+);
+
+router.patch(
+  "/account",
+  authController.protect,
+  authController.restrictTo("teacher"),
+  userController.updateAccountInfo
+);
+
 router.patch(
   "/deactivate",
   authController.protect,
