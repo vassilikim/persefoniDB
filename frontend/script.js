@@ -1,3 +1,18 @@
+document.addEventListener("DOMContentLoaded", function() {
+    var link = document.querySelector(".card-profil a.editprofil");
+    var link1 = document.querySelector(".card-profil a.editpassword");
+    var role = "admin1";
+    
+    if (role === "admin") {
+      link.classList.add("view-link");   
+
+    } else {
+      link1.classList.add("add-margin");
+      link.style.display = "none";
+    }
+});
+
+
 // Get the form element and add a submit event listener
 var passwordForm = document.getElementById("password-form");
 
@@ -68,3 +83,5 @@ passwordForm.addEventListener("submit", function(event) {
         // (you would normally send the form data to the server here)
     }
 });
+
+

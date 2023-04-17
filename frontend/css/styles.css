@@ -114,45 +114,66 @@ font-weight: bold;
   }
 
 /* card for profil */
-.card-profil{
+.card-profil {
   display: flex;
-  gap:70px;
+  gap: 65px;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgb(0, 0, 0,0.2);
-  max-width: 650px;
+  max-width: 600px;
   margin: auto;
-  text-align: center;
+  /* text-align: center; */
   margin-top: 150px;
   margin-bottom: 200px;
   padding: 25px;
+}
 
-  }
-  .card-profil img{
-    width: 250px;
-    height: 250px;
-    /* margin-top: 12.5%; */
-    margin-left: 10px;
-  }
+.card-profil img {
+  width: 250px;
+  height: 250px;
+  margin-left: 10px;
+}
 
-  .card-profil a{
-    display: block;
-    font-size: 15px;
-    text-align: center;
-    padding: 5px 0;
-    background-color: white;
-    color: black;
-    border-radius: 12px;
-    text-decoration: none;
-    border: 2px solid #534caf;
-  }
+.card-profil a {
+  display: block;
+  font-size: 15px;
+  text-align: center;
+  padding: 5px 7px;
+  margin-bottom: 10px;
+  background-color: white;
+  color: black;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 2px solid #534caf;
+}
 
-  .card-profil a:hover {
-    background-color: #573478;
-    color: white;
-    }
+.card-profil a:hover {
+  background-color: #573478;
+  color: white;
+}
+.card-profil .add-margin{
+  margin-left: 25%;
+}
+.card-profil .editprofil {
+  display: none;
+  
+}
 
-/* card for password change */
-.password-form{
+.card-profil .view-link {
+  display: block;
+}
+
+.card-profil .links{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-profil .editpassword{
+  display: block;
+}
+
+/* card for password change  */
+.change-form{
   background-color: white;
   box-shadow: 0 4px 8px 0 rgb(0, 0, 0,0.2);
   max-width: 350px;
@@ -161,10 +182,10 @@ font-weight: bold;
   margin-bottom: 150px;
   padding: 25px;
   }
-  .password-form .error{
+  .change-form .error{
     color: red;
   }
-  .password-form .submit{
+  .change-form .submit{
     background-color: #534caf;
     color: white;
     padding: 15px 20px;
@@ -175,7 +196,7 @@ font-weight: bold;
     width: 100%;
     }
     
-  .password-form .submit:hover {
+  .change-form .submit:hover {
   background-color: #573478;
   }
 
@@ -190,7 +211,7 @@ font-weight: bold;
   display: block;
   position: fixed; 
   bottom: 50px;
-  background: rgb(11, 11, 11);
+  background: rgb(255, 132, 132);
   color: rgb(0, 0, 0);
   max-width: 80%;
   padding: 10px;
@@ -309,9 +330,8 @@ font-weight: bold;
   display:block;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgb(0, 0, 0,0.2);
-  max-width: 300px;
+  max-width: 250px;
   margin: auto;
-  text-align: center;
   margin-top: 50px;
   margin-bottom: 100px;
   padding: 25px;
@@ -321,7 +341,15 @@ font-weight: bold;
     margin-bottom: 25px;
     margin-left: auto;
   }
-  
+
+  .card-profil .links{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-profil .add-margin{
+    margin-left: 20%;
+  }
 }
 
 @media (min-width: 668px) and (max-width: 916px){
