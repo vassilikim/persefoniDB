@@ -4,7 +4,9 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var superAdminRouter = require("./routes/superAdminRoutes");
+var schoolAdminRouter = require("./routes/schoolAdminRoutes");
 var authRouter = require("./routes/authRoutes");
+var reservationRouter = require("./routes/reservationRoutes");
 
 var app = express();
 
@@ -21,11 +23,9 @@ app.get("/", (req, res) => {
   res.status(200).render("login");
 });
 
-app.get("/super-admin",(req,res)=>{
-  res.status(200).render("super-admin");
-});
-
 app.use("/api/library/super-admin", superAdminRouter);
+app.use("/api/library/school-admin", schoolAdminRouter);
 app.use("/api/library/auth", authRouter);
+app.use("/api/library/reservations", reservationRouter);
 
 module.exports = app;

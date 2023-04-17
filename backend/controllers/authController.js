@@ -4,10 +4,6 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 const { promisify } = require("util");
 
-correctPassword = async function (candidatePassword, userPassword) {
-  return await bcrypt.compare(candidatePassword, userPassword);
-};
-
 changedPasswordAfter = function (JWTTimestamp, passwordChangedAt) {
   if (passwordChangedAt) {
     const changedTimestamp = parseInt(passwordChangedAt.getTime() / 1000, 10);
@@ -31,15 +27,13 @@ exports.signup = async (req, res) => {
       });
     }
 
-    let password = await bcrypt.hash(req.body.password, 12);
-
     let connection = sql.createConnection(config);
     connection.connect();
 
     connection.query(
       `SET @school_ID=(SELECT ID FROM School WHERE school_name='${req.body.school}');` +
         `INSERT INTO Users (username, user_password, user_role, first_name, last_name, school_id)` +
-        `VALUES ('${req.body.username}', '${password}', '${req.body.role}', '${req.body.first_name}', '${req.body.last_name}', @school_ID);`,
+        `VALUES ('${req.body.username}', '${req.body.password}', '${req.body.role}', '${req.body.first_name}', '${req.body.last_name}', @school_ID);`,
       function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -49,7 +43,7 @@ exports.signup = async (req, res) => {
         return res.status(200).json({
           status: "success",
           message:
-            "You were signed up successfully! Please wait to be verified if you are a teacher or a student.",
+            "You were signed up successfully! Please wait to be verified.",
         });
       }
     );
@@ -75,20 +69,18 @@ exports.login = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT user_password FROM Users WHERE username='${req.body.username}'`,
+      `SELECT check_user_login('${req.body.username}', '${req.body.password}') AS loggedInUser;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
             status: "failed",
             message: error.message,
           });
-        if (
-          results.length == 0 ||
-          !(await correctPassword(req.body.password, results[0].user_password))
-        ) {
+        if (results[0]["loggedInUser"] == 0) {
           return res.status(400).json({
             status: "failed",
-            message: "Incorrect username or password",
+            message:
+              "Your username and password do not match with a verified user of an active school.",
           });
         }
 
@@ -99,6 +91,15 @@ exports.login = async (req, res, next) => {
             expiresIn: process.env.JWT_EXPIRES_IN,
           }
         );
+
+        const cookieOptions = {
+          expires: new Date(
+            Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+          ),
+          httpOnly: true,
+        };
+
+        res.cookie("jwt", token, cookieOptions);
 
         return res.status(200).json({
           token: token,
@@ -114,6 +115,17 @@ exports.login = async (req, res, next) => {
   }
 };
 
+exports.logout = (req, res) => {
+  res.cookie("jwt", "loggedout", {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+
+  return res
+    .status(200)
+    .json({ status: "success", message: "You were successfully logged out!" });
+};
+
 exports.protect = async (req, res, next) => {
   try {
     let token;
@@ -122,7 +134,7 @@ exports.protect = async (req, res, next) => {
       req.headers.authorization.startsWith("Bearer")
     ) {
       token = req.headers.authorization.split(" ")[1];
-    }
+    } else if (req.cookies.jwt) token = req.cookies.jwt;
 
     if (!token) {
       return res.status(401).json({
@@ -137,7 +149,7 @@ exports.protect = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT * FROM Users WHERE username='${decoded.id}'`,
+      `SELECT * FROM verifiedUsers WHERE username='${decoded.id}'`,
       function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -162,8 +174,10 @@ exports.protect = async (req, res, next) => {
               "User recently changed their password! Please login again.",
           });
         }
+        req.user_id = freshUser.ID;
         req.username = freshUser.username;
         req.role = freshUser.user_role;
+        req.school_id = freshUser.school_ID;
         next();
       }
     );
@@ -200,29 +214,54 @@ exports.restrictTo = (...roles) => {
   };
 };
 
-exports.print_school = async (req, res, next) => {
+exports.changePassword = (req, res) => {
   try {
+    if (!req.body.old_password) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Please write your current password first.",
+      });
+    }
+
+    if (!req.body.new_password) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Please choose a new password.",
+      });
+    }
+
+    if (req.body.new_password.length < 8) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Password cannot have less than 8 characters",
+      });
+    }
+
     let connection = sql.createConnection(config);
     connection.connect();
 
     connection.query(
-      `SELECT * FROM School`,
+      `SELECT change_password('${req.username}','${req.body.old_password}', '${req.body.new_password}') as answer;`,
       async function (error, results, fields) {
-        if (error) {
+        if (error)
           return res.status(500).json({
             status: "failed",
             message: error.message,
           });
-        }
 
-        return res.status(200).json({
-          status: "success",
-          message: "Data for all schools retrieved successfully.",
-          data: results,
-        });
+        if (results[0]["answer"] == "OK") {
+          return res.status(200).json({
+            status: "success",
+            message: "Your password was successfully changed!",
+          });
+        } else {
+          return res.status(401).json({
+            status: "failed",
+            message: "Your current password is not correct.",
+          });
+        }
       }
     );
-    
     connection.end();
   } catch (err) {
     return res.status(500).json({

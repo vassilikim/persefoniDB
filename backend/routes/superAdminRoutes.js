@@ -2,14 +2,15 @@ var express = require("express");
 var router = express.Router();
 var backupController = require("../controllers/backupController");
 var authController = require("../controllers/authController");
+var superAdminController = require("../controllers/superAdminController");
 
-/* GET users listing. */
 router.get(
   "/backup",
   authController.protect,
   authController.restrictTo("super-admin"),
   backupController.backup
 );
+
 router.get(
   "/restore",
   authController.protect,
@@ -17,9 +18,18 @@ router.get(
   backupController.restore
 );
 
-module.exports = router;
-
 router.get(
-  "/super-admin/edit-school",
-  authController.print_school
+  "/school-admins",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  superAdminController.getNotVerifiedSchoolAdmins
 );
+
+router.patch(
+  "/verifyschadmin",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  superAdminController.verifySchoolAdmin
+);
+
+module.exports = router;

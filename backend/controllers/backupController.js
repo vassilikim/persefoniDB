@@ -36,7 +36,11 @@ exports.backup = async (req, res, next) => {
         `SELECT * FROM Lending INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/lendings.txt';` +
         `SELECT * FROM Review INTO OUTFILE '${process.env.PATH_FOR_BACKUP}/reviews.txt';`,
       function (error, results, fields) {
-        if (error) throw error;
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
         return res.status(200).json({
           status: "success",
           message: "The database was successfully backed up!",
@@ -63,18 +67,29 @@ exports.restore = async (req, res, next) => {
     connection.query(
       `SET FOREIGN_KEY_CHECKS=0;` +
         `TRUNCATE Review; TRUNCATE Lending; TRUNCATE Reservation; TRUNCATE Genre; TRUNCATE Writes; TRUNCATE Writer; TRUNCATE Book; TRUNCATE Users; TRUNCATE School;` +
+        `SET FOREIGN_KEY_CHECKS=1;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/schools.txt' INTO TABLE School;` +
+        `DROP TRIGGER hash_password_before_insert;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/users.txt' INTO TABLE Users;` +
+        `CREATE TRIGGER hash_password_before_insert BEFORE INSERT ON Users
+        FOR EACH ROW
+          BEGIN
+	          SET NEW.user_password = SHA2(CONCAT('kimnamjoonkimseokjinminyoongijunghoseokparkjiminkimtaehyungjeonjungkookbts',
+	          NEW.user_password), 256);
+          END;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/books.txt' INTO TABLE Book;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/writers.txt' INTO TABLE Writer;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/writes.txt' INTO TABLE Writes;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/genres.txt' INTO TABLE Genre;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/reservations.txt' INTO TABLE Reservation;` +
         `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/lendings.txt' INTO TABLE Lending;` +
-        `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/reviews.txt' INTO TABLE Review;` +
-        `SET FOREIGN_KEY_CHECKS=1;`,
+        `LOAD DATA INFILE '${process.env.PATH_FOR_BACKUP}/reviews.txt' INTO TABLE Review;`,
       function (error, results, fields) {
-        if (error) throw error;
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
         return res.status(200).json({
           status: "success",
           message:
