@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     var link = document.querySelector(".card-profil a.editprofil");
     var link1 = document.querySelector(".card-profil a.editpassword");
-    var role = "admin1";
+    var role = "admin";
     
     if (role === "admin") {
       link.classList.add("view-link");   
