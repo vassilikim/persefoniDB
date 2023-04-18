@@ -10,4 +10,18 @@ router.post(
   reviewController.createReview
 );
 
+router.get(
+  "/notverified",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  reviewController.getNotVerifedReviews
+);
+
+router.patch(
+  "/verify",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  reviewController.verifyStudentReview
+);
+
 module.exports = router;

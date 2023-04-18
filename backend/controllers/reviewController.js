@@ -53,3 +53,86 @@ exports.createReview = async (req, res, next) => {
     });
   }
 };
+
+exports.getNotVerifedReviews = async (req, res, next) => {
+  try {
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT r.*, v.username, b.title 
+      FROM Review r 
+      JOIN verifiedUsers v
+      JOIN Book b 
+      ON r.user_ID=v.ID AND r.book_ID=b.ID 
+      WHERE r.verified=0 AND v.school_ID=${req.school_id} AND v.user_role='student';`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        return res.status(200).json({
+          status: "success",
+          data: results,
+        });
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.verifyStudentReview = async (req, res, next) => {
+  try {
+    if (!req.body.book || !req.body.student) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Please choose which review you want to verify.",
+      });
+    }
+
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `UPDATE Review r 
+      JOIN verifiedUsers v
+      JOIN Book b 
+      ON r.user_ID=v.ID AND r.book_ID=b.ID
+      SET r.verified=1
+      WHERE v.username='${req.body.student}' AND v.user_role='student' AND b.title='${req.body.book}';`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        if (results.affectedRows == 0) {
+          return res.status(400).json({
+            status: "failed",
+            message:
+              "There is no not verified review for this book from this student!",
+          });
+        }
+
+        return res.status(200).json({
+          status: "success",
+          message: "The review is now successfully verified!",
+        });
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
