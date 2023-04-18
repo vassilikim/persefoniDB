@@ -342,7 +342,26 @@ BEGIN
     
     UPDATE Reservation SET canceled_at=NOW(), reservation_status=3 WHERE user_ID=@libraryuser AND (reservation_status=0 OR reservation_status=1);
     UPDATE Book b JOIN Lending l ON l.book_ID=b.ID SET b.copies=b.copies+1, l.was_returned_at=NOW() WHERE l.user_ID=@libraryuser AND l.was_returned_at IS NULL;
+    UPDATE Review SET verified=0 WHERE user_ID=@libraryuser;
     UPDATE Users SET verified=0 WHERE ID=@libraryuser;
+    RETURN 'OK';
+END//
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION verify_teacher_student(school INT, u_username VARCHAR(255)) 
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	DECLARE libraryuser INT;
+    DECLARE u_role VARCHAR(255);
+    SELECT ID, user_role INTO @libraryuser, u_role FROM activeUsers WHERE username = u_username AND school_ID = school AND (user_role='teacher' OR user_role='student');
+    IF @libraryuser IS NULL THEN RETURN 'NO USER';
+    END IF;
+    
+    UPDATE Users SET verified=1 WHERE ID=@libraryuser;
+    IF u_role = 'teacher' THEN 
+		UPDATE Review SET verified=1 WHERE user_ID=@libraryuser;
+	END IF;
     RETURN 'OK';
 END//
 DELIMITER ;
@@ -358,6 +377,7 @@ BEGIN
     DELETE FROM Reservation WHERE user_ID=@libraryuser;
     UPDATE Book b JOIN Lending l ON l.book_ID=b.ID SET b.copies=b.copies+1 WHERE l.user_ID=@libraryuser AND l.was_returned_at IS NULL;
     DELETE FROM Lending WHERE user_ID=@libraryuser;
+    DELETE FROM Review WHERE user_ID=@libraryuser;
     DELETE FROM Users WHERE ID=@libraryuser;
     RETURN 'OK';
 END//

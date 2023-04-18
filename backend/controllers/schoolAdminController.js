@@ -43,8 +43,7 @@ exports.verifyTeacherStudent = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `UPDATE Users SET verified=1 WHERE username='${req.body.username}' 
-      AND (user_role='teacher' OR user_role='student') AND verified=0 AND school_ID=${req.school_id};`,
+      `SELECT verify_teacher_student(${req.school_id}, '${req.body.username}') as answer;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -52,18 +51,18 @@ exports.verifyTeacherStudent = async (req, res, next) => {
             message: error.message,
           });
 
-        if (results.affectedRows == 0) {
+        if (results[0]["answer"] == "OK") {
+          return res.status(200).json({
+            status: "success",
+            message: "The teacher/student was successfully verified!",
+          });
+        } else if (results[0]["answer"] == "NO USER") {
           return res.status(400).json({
             status: "failed",
             message:
-              "There is no not verified teacher/student with this username in your school!",
+              "There is no teacher/student with this username in your school!",
           });
         }
-
-        return res.status(200).json({
-          status: "success",
-          message: "The teacher/student is now successfully verified!",
-        });
       }
     );
     connection.end();
