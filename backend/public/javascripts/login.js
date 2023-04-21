@@ -16,7 +16,7 @@ const login = async (username, password) => {
     if (res.status == 200) {
       showAlert("success", "Logged in successfully!");
       window.setTimeout(() => {
-        location.assign("/super-admin");
+        location.assign("/main-screen");
       }, 1500);
     }
   } catch (err) {
