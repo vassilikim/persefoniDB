@@ -31,4 +31,18 @@ router.get(
   reservationController.getAllPendingReservations
 );
 
+router.patch(
+  "/returnbook",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  reservationController.returnBook
+);
+
+router.patch(
+  "/cancel",
+  authController.protect,
+  authController.restrictTo("student", "teacher"),
+  reservationController.cancelReservation
+);
+
 module.exports = router;

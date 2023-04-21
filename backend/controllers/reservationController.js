@@ -168,12 +168,6 @@ exports.handleReservation = async (req, res, next) => {
             status: "failed",
             message: "You already have this book lended!",
           });
-        } else if (results[0]["answer"] == "ALREADY LENDING") {
-          return res.status(403).json({
-            status: "failed",
-            message:
-              "You can't make a request to lend a book you have not yet returned!",
-          });
         } else if (results[0]["answer"] == "DELAY") {
           return res.status(403).json({
             status: "failed",
@@ -209,6 +203,109 @@ exports.handleReservation = async (req, res, next) => {
             status: "failed",
             message:
               "There is no copy of this book available. Please make a reservation for it online!",
+          });
+        }
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.returnBook = async (req, res, next) => {
+  try {
+    if (!req.body.book || !req.body.username) {
+      return res.status(400).json({
+        status: "failed",
+        message: "The book title and user's username can't be blank!",
+      });
+    }
+
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT return_book('${req.body.book}', ${req.school_id}, '${req.body.username}') as answer;`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        if (results[0]["answer"] == "OK") {
+          return res.status(200).json({
+            status: "success",
+            message: "The book return was successfully submitted!",
+          });
+        } else if (results[0]["answer"] == "NO LENDING") {
+          return res.status(400).json({
+            status: "failed",
+            message: "This user does not have a pending lending for this book!",
+          });
+        } else if (results[0]["answer"] == "NO BOOK") {
+          return res.status(400).json({
+            status: "failed",
+            message:
+              "The requested book title does not exist in your school library!",
+          });
+        } else if (results[0]["answer"] == "NO USER") {
+          return res.status(400).json({
+            status: "failed",
+            message:
+              "There is no verified teacher/student with this username in your school!",
+          });
+        }
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.cancelReservation = async (req, res, next) => {
+  try {
+    if (!req.body.book) {
+      return res.status(400).json({
+        status: "failed",
+        message: "The book title can't be blank!",
+      });
+    }
+
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT cancel_reservation('${req.body.book}', ${req.school_id}, '${req.username}') as answer;`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        if (results[0]["answer"] == "OK") {
+          return res.status(200).json({
+            status: "success",
+            message: "The reservation was successfully canceled!",
+          });
+        } else if (results[0]["answer"] == "NO RESERVATION") {
+          return res.status(400).json({
+            status: "failed",
+            message: "You have not made a reservation for this book!",
+          });
+        } else if (results[0]["answer"] == "NO BOOK") {
+          return res.status(400).json({
+            status: "failed",
+            message: "The book title does not exist in your school library!",
           });
         }
       }

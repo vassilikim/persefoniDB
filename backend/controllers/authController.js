@@ -58,6 +58,7 @@ exports.signup = async (req, res) => {
 
 exports.login = async (req, res, next) => {
   try {
+    console.log(req.body.username)
     if (!req.body.username || !req.body.password) {
       return res.status(400).json({
         status: "failed",
@@ -83,6 +84,7 @@ exports.login = async (req, res, next) => {
               "Your username and password do not match with a verified user of an active school.",
           });
         }
+        
 
         const token = jwt.sign(
           { id: req.body.username },
