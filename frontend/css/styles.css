@@ -233,6 +233,9 @@ font-weight: bold;
 
 /* Card for the options that the users have */
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: white;
     border: none;
     border-radius: 12px;
@@ -246,7 +249,11 @@ font-weight: bold;
     margin:auto;
     width: 80px;
   }
-
+  
+  /* .card-content{
+    display: inline;
+    justify-items: right;
+  } */
   .card-content h3{
     text-align: center;
   }
