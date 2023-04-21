@@ -2,10 +2,10 @@
 <html>
   <head>
     <title>Welcome - Login Page</title>
-    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="display-box">
@@ -14,31 +14,27 @@
       </div>
       <div class="box2">
         <!-- form for login -->
-        <form class="form-login" action="/api/library/auth/login" method="post">
+        <form class="form-login" id="form-login">
           <h1>Login</h1>
-            <select name="sch" id="sch">
-              <option value="0">Choose your School</option>
-              <option value="1">1 ---------------------</option>
-              <option value="2">2 ############################</option>
-              <option value="3">3 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$</option>
-            </select>
+          
             <div>
-                <label for="username">Username</label><input type="text" id="username" name="username">
+                <label>Username</label><input type="text" placeholder="Type here your username" id="username" >
             </div>
             <div>
-                <label for="password">Password</label><input type="password" id="password" name="password">
+                <label>Password</label><input type="password" placeholder="Type here your password" id="password" >
             </div>
             <input type="submit" value="Login">
-            <div class="signup-link">
-              Dont you have an account yet? <a href="sigup.html">Signup</a>
+            <div class="signup-link"> Don't you have an account yet? <a href="signup.html">Signup</a>
             </div>
         </form>
       </div>
       
     </div>
     <div class="footer">
-      <h3>Copyright © 2023 the best team ever made</h3>
+      <h3>Copyright © 2023</h3>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type=module src="javascripts/login.js"> </script>
   </body>
 </html>

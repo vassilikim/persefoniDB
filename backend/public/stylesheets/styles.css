@@ -22,15 +22,15 @@ select {
 }
 
 .form-login,
-.form-sigup {
+.form-signup {
   max-width: 500px;
   background-color: white;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0px 4px 10px 0px black;
+  box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.2);
 }
 
-.form-sigup {
+.form-signup {
   margin: 100px auto;
   width: 80%;
 }
@@ -43,6 +43,7 @@ input[type="password"] {
   box-sizing: border-box;
   border: none;
   border-bottom: 2px solid gray;
+  outline: none;
 }
 
 input[type="submit"] {
@@ -86,13 +87,160 @@ label {
   width: 5%;
 }
 
-/* Card style */
-.card {
-  background-color: white;
-  border: 1px solid gray;
+/* menu -> logout button and profil image*/
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+}
+.menu img {
+  width: 18%;
+}
+
+/* Logout Button */
+.logout-button {
+  font-size: 15px;
+  text-align: center;
+  color: white;
+  background-color: #534caf;
   border-radius: 12px;
-  box-shadow: 0 2px 4px black;
+  padding: 5px 15px;
+  border: none;
+}
+
+.logout-button:hover {
+  background-color: #573478;
+  cursor: pointer;
+}
+
+/* card for profil */
+.card-profil {
+  display: flex;
+  gap: 65px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: auto;
+  /* text-align: center; */
+  margin-top: 150px;
+  margin-bottom: 200px;
+  padding: 25px;
+}
+
+.card-profil img {
+  width: 250px;
+  height: 250px;
+  margin-left: 10px;
+}
+
+.card-profil a {
+  display: block;
+  font-size: 15px;
+  text-align: center;
+  padding: 5px 7px;
+  margin-bottom: 10px;
+  background-color: white;
+  color: black;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 2px solid #534caf;
+}
+
+.card-profil a:hover {
+  background-color: #573478;
+  color: white;
+}
+.card-profil .add-margin {
+  margin-left: 25%;
+}
+.card-profil .editprofil {
+  display: none;
+}
+
+.card-profil .view-link {
+  display: block;
+}
+
+.card-profil .links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-profil .editpassword {
+  display: block;
+}
+
+/* card for password change  */
+.change-form {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.2);
+  max-width: 350px;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 150px;
+  padding: 25px;
+}
+.change-form .error {
+  color: red;
+}
+.change-form .submit {
+  background-color: #534caf;
+  color: white;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.change-form .submit:hover {
+  background-color: #573478;
+}
+
+.error-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* error pop up */
+.error {
+  display: block;
+  position: fixed;
+  bottom: 50px;
+  background: rgb(255, 132, 132);
+  color: rgb(0, 0, 0);
+  max-width: 80%;
   padding: 10px;
+  text-align: center;
+  visibility: hidden;
+}
+
+.newerror {
+  visibility: visible;
+}
+.errorr {
+  visibility: hidden;
+}
+.success_error {
+  background: rgb(187, 255, 187);
+  visibility: visible;
+}
+
+/* Card for the options that the users have */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.2);
+  padding: 10px;
+  width: 300px;
 }
 
 .card img {
@@ -101,6 +249,10 @@ label {
   width: 80px;
 }
 
+/* .card-content{
+    display: inline;
+    justify-items: right;
+  } */
 .card-content h3 {
   text-align: center;
 }
@@ -127,30 +279,8 @@ label {
   flex-wrap: wrap;
   justify-content: center;
   gap: 25px;
-  margin-top: 60px;
-  margin-bottom: 8%;
-}
-
-/* Logout Button */
-.right-display {
-  display: flex;
-  justify-content: right;
-  margin: 20px 10px 0 0;
-}
-
-.logout-button {
-  font-size: 15px;
-  text-align: center;
-  color: white;
-  background-color: #534caf;
-  border-radius: 12px;
-  padding: 5px 15px;
-  border: none;
-}
-
-.logout-button:hover {
-  background-color: #573478;
-  cursor: pointer;
+  margin-top: 75px;
+  margin-bottom: 20%;
 }
 
 .display-box {
@@ -198,6 +328,31 @@ label {
     /* left: 15%; */
     width: 100%;
   }
+
+  /* card for profil */
+  .card-profil {
+    display: block;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.2);
+    max-width: 250px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    padding: 25px;
+  }
+  .card-profil img {
+    margin-bottom: 25px;
+    margin-left: auto;
+  }
+
+  .card-profil .links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-profil .add-margin {
+    margin-left: 20%;
+  }
 }
 
 @media (min-width: 668px) and (max-width: 916px) {
@@ -228,7 +383,7 @@ label {
   position: absolute;
   background-color: #573478;
   width: 100%;
-  height: 20%;
+  height: 30%;
   margin: auto 0 20px 0;
   left: 0;
   text-align: center;
