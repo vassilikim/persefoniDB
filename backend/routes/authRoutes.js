@@ -12,5 +12,4 @@ router.post(
   authController.changePassword
 );
 
-
 module.exports = router;

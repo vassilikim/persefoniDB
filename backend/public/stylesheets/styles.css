@@ -200,14 +200,74 @@ font-weight: bold;
   background-color: #573478;
   }
 
-.error-items {
+
+  .alert {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+  }
+
+  .alert--success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .alert--error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .alert--info {
+    background-color: #cce5ff;
+    color: #004085;
+  }
+
+  .loading {
+    position: relative;
+  }
+  
+  .loading:before {
+    content: "";
+    position: absolute;
+    top: 39%;
+    left: 60%;
+    width: 15px;
+    height: 15px;
+    border-radius: 52%;
+    border: 2.5px solid #fff;
+    border-top-color: transparent;
+    animation: spin .85s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .button-login{
+    display:flex;
+    width: 100%;
+    border: none;
+    background: none;
+  }
+  
+  
+/* .error-items {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 /* error pop up */
-.error {
+/* .error {
   display: block;
   position: fixed; 
   bottom: 50px;
@@ -217,9 +277,9 @@ font-weight: bold;
   padding: 10px;
   text-align: center;
   visibility: hidden;
-}
+} */
 
-.newerror {
+/* .newerror {
   visibility: visible;
 
 }
@@ -229,7 +289,7 @@ font-weight: bold;
 .success_error{
   background:rgb(187, 255, 187);
   visibility: visible;
-}
+} */
 
 /* Card for the options that the users have */
 .card {
