@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var link1 = document.querySelector(".card-profil a.editpassword");
     var role = "admin";
     
-    if (role === "admin1") {
+    if (role === "admin") {
       link.classList.add("view-link");   
 
     } else {

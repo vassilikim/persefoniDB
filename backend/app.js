@@ -9,6 +9,7 @@ var authRouter = require("./routes/authRoutes");
 var reservationRouter = require("./routes/reservationRoutes");
 var userRouter = require("./routes/userRoutes");
 var reviewRouter = require("./routes/reviewRoutes");
+var viewsRouter = require("./routes/viewsRoutes");
 
 var app = express();
 
@@ -21,14 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
-  res.status(200).render("login");
-});
-
-app.get("/super-admin", (req, res) => {
-  res.status(200).render("super-admin");
-});
-
+app.use("/", viewsRouter);
 app.use("/api/library/super-admin", superAdminRouter);
 app.use("/api/library/school-admin", schoolAdminRouter);
 app.use("/api/library/auth", authRouter);

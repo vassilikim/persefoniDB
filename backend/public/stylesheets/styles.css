@@ -215,13 +215,13 @@ font-weight: bold;
   }
 
   .alert--success {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: #9af7b0;
+    color: #1f7a34;
   }
   
   .alert--error {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #fbc5ca;
+    color: #d94251;
   }
   
   .alert--info {
@@ -290,6 +290,12 @@ font-weight: bold;
   background:rgb(187, 255, 187);
   visibility: visible;
 } */
+/* profil btn */
+.profile-btn{
+  display: flex;
+  border:none;
+  background: none;
+}
 
 /* Card for the options that the users have */
 .card {
