@@ -1,0 +1,35 @@
+var express = require("express");
+var router = express.Router();
+// var backupController = require("../controllers/backupController");
+// var authController = require("../controllers/authController");
+var schoolAdminController = require("../controllers/schoolAdminController");
+
+// router.get(
+//     "/books",
+//     // authController.protect,
+//     // authController.restrictTo("super-admin"),
+//     schoolAdminController.selectAllBooks
+//   );
+
+  router.get(
+    "/books:schoolName",
+    schoolAdminController.selectAllBooks
+  );
+  
+  router.post(
+    "/book",
+    schoolAdminController.addBook
+  );
+  
+//   router.patch(
+//     "/book/:schoolName",
+//     schoolAdminController.updateBook
+//   );
+  
+//   router.delete(
+//     "/school/:schoolName",
+//     superAdminController.deleteSchool
+//   );
+  
+  module.exports = router;
+  

@@ -24,4 +24,24 @@ router.patch(
   superAdminController.verifySchoolAdmin
 );
 
+router.get(
+  "/schools",
+  superAdminController.selectAllSchools
+);
+
+router.post(
+  "/school",
+  superAdminController.addSchool
+);
+
+router.patch(
+  "/school/:schoolName",
+  superAdminController.updateSchool
+);
+
+router.delete(
+  "/school/:schoolName",
+  superAdminController.deleteSchool
+);
+
 module.exports = router;
