@@ -2,24 +2,37 @@
 <html>
   <head>
     <title>Super Admin</title>
-    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
   </head>
-  <div class="right-display">
-    <a href="login.html">
-      <button class="logout-button">Logout</button>
-    </a>
+  
+  <div class="menu">
+    <div>
+      <button class="profile-btn" id="profile-btn"><img src="images/id-card-solid.svg" alt="id card"></button>
+      //- <a class="" href="profil.html">
+      //-   <img src="images/id-card-solid.svg" alt="id card">
+      //- </a>
+    </div>
+
+
+    <div>
+      <a href="login.html">
+        <button class="logout-button">Logout</button>
+      </a>
+    </div>
+    
   </div>
   
-  <h1>Super Admin</h1>
+
+  
   <body>
     <div class="card-desk">
         <div class="card">
-            <img src="images/plus-solid.svg" alt="Card Image plus">
+            <img src="images/pen-to-square-solid.svg" alt="Card Image plus">
             <div class="card-content">
-              <h3>New School</h3>
+              <h3>Schools</h3>
               <!-- <p>With this option you can add new School</p> -->
               <a href="#">Let's start!</a>
             </div>
@@ -27,7 +40,7 @@
         <div class="card">
           <img src="images/check-solid.svg" alt="Card Image check">
           <div class="card-content">
-            <h3>Verify School's Admin request</h3>
+            <h3>Verify School Admin's request</h3>
             <!-- <p>With this option you can verify the registration request of the school-admin</p> -->
             <a href="#">Let's start!</a>
           </div>
@@ -50,9 +63,11 @@
         </div>
 
     </div>
-    <div class="footer">
-        <h3>Copyright © 2023</h3>
-    </div>
-    
+
+  <div class="footer">
+    <h3>Copyright © 2023</h3>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type=module src="javascripts/profile.js"> </script>
   </body>
 </html>
