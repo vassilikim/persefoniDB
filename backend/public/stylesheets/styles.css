@@ -153,13 +153,13 @@ font-weight: bold;
 .card-profil .add-margin{
   margin-left: 25%;
 }
-.card-profil .editprofil {
-  display: none;
+.card-profil .editprofile {
+  display: block;
   
 }
 
-.card-profil .view-link {
-  display: block;
+.card-profil .hide-link {
+  display: none;
 }
 
 .card-profil .links{
@@ -290,11 +290,19 @@ font-weight: bold;
   background:rgb(187, 255, 187);
   visibility: visible;
 } */
-/* profil btn */
+/* profile btn */
 .profile-btn{
   display: flex;
   border:none;
   background: none;
+}
+.profile-btn:hover{
+  cursor: pointer;
+}
+
+/* into profile for the name of the School*/
+.hide-element{
+  display: none;
 }
 
 /* Card for the options that the users have */
