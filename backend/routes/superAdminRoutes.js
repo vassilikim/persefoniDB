@@ -17,12 +17,12 @@ router.get(
   backupController.restore
 );
 
-router.patch(
-  "/verifyschadmin",
-  authController.protect,
-  authController.restrictTo("super-admin"),
-  superAdminController.verifySchoolAdmin
-);
+// router.patch(
+//   "/verifyschadmin",
+//   authController.protect,
+//   authController.restrictTo("super-admin"),
+//   superAdminController.verifySchoolAdmin
+// );
 
 router.get(
   "/schools",

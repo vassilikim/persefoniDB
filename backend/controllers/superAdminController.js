@@ -1,50 +1,6 @@
 var config = require("../dbconfig");
 const sql = require("mysql");
 
-exports.verifySchoolAdmin = async (req, res, next) => {
-  try {
-    if (!req.body.school_admin) {
-      return res.status(500).json({
-        status: "failed",
-        message: "Please provide all the required parameters.",
-      });
-    }
-
-    let connection = sql.createConnection(config);
-    connection.connect();
-
-    connection.query(
-      `UPDATE Users SET verified=1 WHERE username='${req.body.school_admin}' AND user_role='school-admin';`,
-      async function (error, results, fields) {
-        if (error)
-          return res.status(500).json({
-            status: "failed",
-            message: error.message,
-          });
-        console.log(results);
-
-        if (results.affectedRows == 0) {
-          return res.status(400).json({
-            status: "failed",
-            message: "There is no school admin with this username!",
-          });
-        }
-
-        return res.status(200).json({
-          status: "success",
-          message: "The school admin is now successfully verified!",
-        });
-      }
-    );
-    connection.end();
-  } catch (err) {
-    return res.status(500).json({
-      status: "failed",
-      message: err.message,
-    });
-  }
-};
-
 exports.selectAllSchools = async (req, res, next) => {
   try {
 
@@ -52,7 +8,7 @@ exports.selectAllSchools = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT school_name FROM school;`,
+      `SELECT * FROM school;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -84,17 +40,14 @@ exports.addSchool = async (req, res, next) => {
         message: "Please provide all the required parameters.",
       });
     }
-    console.log(req.body.school_active);
-    if (!req.body.school_active) {
-      req.body.school_active = 0;
-      console.log(req.body.school_active);
-    }
+    
+
     let connection = sql.createConnection(config);
     connection.connect();
 
     
     connection.query(
-      `INSERT INTO school (school_name, address, city, phone, email, principal, school_active)` + `VALUES ('${req.body.school_name}', '${req.body.address}', '${req.body.city}', '${req.body.phone}', '${req.body.email}', '${req.body.principal}', ${req.body.school_active});`,
+      `INSERT INTO school (school_name, address, city, phone, email, principal)` + `VALUES ('${req.body.school_name}', '${req.body.address}', '${req.body.city}', '${req.body.phone}', '${req.body.email}', '${req.body.principal}');`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -120,7 +73,7 @@ exports.addSchool = async (req, res, next) => {
 exports.updateSchool = async (req, res, next) => {
   try {
 
-    if (!req.body.school_name || !req.body.address || !req.body.city || !req.body.phone || !req.body.email || !req.body.principal || (req.body.school_active != 0 && req.body.school_active != 1)) {
+    if (!req.body.school_name || !req.body.address || !req.body.city || !req.body.phone || !req.body.email || !req.body.principal) {
       return res.status(500).json({
         status: "failed",
         message: "Please provide all the required parameters.",
@@ -132,7 +85,7 @@ exports.updateSchool = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `UPDATE school SET school_name = '${req.body.school_name}', address = '${req.body.address}', city = '${req.body.city}', phone = '${req.body.phone}', email = '${req.body.email}', principal = '${req.body.principal}', school_active = ${req.body.school_active} WHERE ID = ${req.params.schoolID};`,
+      `UPDATE school SET school_name = '${req.body.school_name}', address = '${req.body.address}', city = '${req.body.city}', phone = '${req.body.phone}', email = '${req.body.email}', principal = '${req.body.principal}' WHERE ID = ${req.params.schoolID};`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -168,19 +121,9 @@ exports.deleteSchool = async (req, res, next) => {
     let connection = sql.createConnection(config);
     connection.connect();
 
+    
     connection.query(
-      //`SET @tab=SELECT ID FROM book WHERE school_ID=${req.params.schoolID};`, 
-      // `SELECT * FROM @tab;`,
-      // `DELETE FROM school WHERE ID=${req.params.schoolID};`,
-      `SELECT * FROM review WHERE book_ID IN (SELECT ID FROM book WHERE school_ID=${req.params.schoolID});` +
-      `SELECT * FROM reservation WHERE book_ID IN (SELECT ID FROM book WHERE school_ID=${req.params.schoolID});` +
-      `SELECT * FROM lending WHERE book_ID IN (SELECT ID FROM book WHERE school_ID=${req.params.schoolID});` + 
-      `SELECT * FROM genre WHERE book_ID IN (SELECT ID FROM book WHERE school_ID=${req.params.schoolID});` +
-      `SELECT ID FROM user WHERE school_ID=${req.params.schoolID};` +
-      `SELECT * FROM writer WHERE writer_ID IN (SELECT writer_ID FROM writes WHERE book_ID IN (SELECT ID FROM book WHERE school_ID=${req.params.schoolID}));` +
-      `SELECT * FROM writes WHERE book_ID IN (SELECT ID FROM book WHERE school_ID=${req.params.schoolID});` +
-      `SELECT ID FROM book WHERE school_ID=${req.params.schoolID}` +
-      `DELETE FROM school WHERE ID=${req.params.schoolID};`,
+      `SELECT DelSchool(${req.params.schoolID}) as answer;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -188,16 +131,17 @@ exports.deleteSchool = async (req, res, next) => {
             message: error.message,
           });
 
-        if (results.affectedRows == 0) {
-          return res.status(400).json({
+        if (results[0]["answer"] == "NOT OK") {
+          return res.status(200).json({
             status: "failed",
             message: "There is no school with this name!",
           });
+        } else {
+          return res.status(200).json({
+            status: "success",
+            message: "The school was deleted successfully ",
+          });
         }
-        return res.status(200).json({
-          status: "success",
-          message: results,
-        });
       }
     );
     connection.end();
@@ -221,8 +165,8 @@ exports.selectAllBooks = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT title FROM book WHERE school_ID=${req.params.schoolID};` +
-      `SELECT ID FROM book WHERE school_ID=${req.params.schoolID};`,
+      // `SELECT title FROM book WHERE school_ID=${req.school_id};`,
+      `SELECT * FROM book WHERE school_ID=${req.params.schoolID};`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
