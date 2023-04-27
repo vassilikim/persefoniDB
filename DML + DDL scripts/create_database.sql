@@ -66,6 +66,7 @@ CREATE TABLE Users (
     user_role ENUM('super-admin', 'school-admin', 'teacher', 'student') NOT NULL,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
+    birth_date DATETIME NOT NULL,
     school_ID INT DEFAULT(NULL),
     verified BIT NOT NULL DEFAULT(0),
     changed_password_at DATETIME DEFAULT(NULL),

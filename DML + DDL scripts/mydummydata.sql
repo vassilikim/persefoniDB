@@ -69,16 +69,16 @@ INSERT INTO `Writes` (`writer_ID`, `book_ID`) VALUES (10, 8);
 INSERT INTO `Writes` (`writer_ID`, `book_ID`) VALUES (2, 1);
 INSERT INTO `Writes` (`writer_ID`, `book_ID`) VALUES (1, 2);
 
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `school_ID`) VALUES ('superadmin42', 'test1234', 'super-admin', 'Ciara', 'Kulas', null);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `school_ID`) VALUES ('school1admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', 1);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `school_ID`) VALUES ('school2admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', 2);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `school_ID`) VALUES ('school3admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', 3);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `school_ID`) VALUES ('teacher2', 'test1234', 'teacher', 'Ciara', 'Kulas', 1);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `school_ID`) VALUES ('teacher3', 'test1234', 'teacher', 'Ciara', 'Kulas', 2);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `school_ID`) VALUES ('teacher4', 'test1234', 'teacher', 'Ciara', 'Kulas', 3);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `school_ID`) VALUES ('student1', 'test1234', 'student', 'Ciara', 'Kulas', 1);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `school_ID`) VALUES ('student2', 'test1234', 'student', 'Ciara', 'Kulas', 2);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `school_ID`) VALUES ('student3', 'test1234', 'student', 'Ciara', 'Kulas', 3);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('superadmin42', 'test1234', 'super-admin', 'Ciara', 'Kulas', '2001-08-10 00:00:00', null);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('school1admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 1);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('school2admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 2);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('school3admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 3);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('teacher2', 'test1234', 'teacher', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 1);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('teacher3', 'test1234', 'teacher', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 2);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('teacher4', 'test1234', 'teacher', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 3);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('student1', 'test1234', 'student', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 1);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('student2', 'test1234', 'student', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 2);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('student3', 'test1234', 'student', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 3);
 
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (5, 1);
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (6, 1);
