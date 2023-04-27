@@ -1,0 +1,72 @@
+#book-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    margin: 10px;
+    padding: 2.5%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+    text-align: center;
+  }
+  
+  .book_image {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #e0e0e0;
+  }
+
+  .lend{
+    background-color: rgb(123, 193, 18);
+  }
+
+  .del{
+    background-color: rgb(189, 64, 64);
+  }
+
+  .book-body{
+    margin-bottom: 20%;
+    text-align: center;
+  }
+
+  #search-bar {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 18px;
+    font-size: 16px;
+    width: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 35px;
+  }
+  
+  #search-bar:focus {
+    outline: none;
+    border-color: #7c4dff;
+    box-shadow: 0 2px 5px rgba(124, 77, 255, 0.2);
+  } 
+  
+  @media (max-width:668px){
+    #search-bar {
+      width: 80%;
+    }
+  }
