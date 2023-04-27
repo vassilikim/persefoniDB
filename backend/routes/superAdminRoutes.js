@@ -17,48 +17,32 @@ router.get(
   backupController.restore
 );
 
-// router.patch(
-//   "/verifyschadmin",
-//   authController.protect,
-//   authController.restrictTo("super-admin"),
-//   superAdminController.verifySchoolAdmin
-// );
-
 router.get(
   "/schools",
+  authController.protect,
+  authController.restrictTo("super-admin"),
   superAdminController.selectAllSchools
 );
 
 router.post(
   "/school",
+  authController.protect,
+  authController.restrictTo("super-admin"),
   superAdminController.addSchool
 );
 
 router.patch(
   "/school/:schoolID",
+  authController.protect,
+  authController.restrictTo("super-admin"),
   superAdminController.updateSchool
 );
 
 router.delete(
   "/school/:schoolID",
+  authController.protect,
+  authController.restrictTo("super-admin"),
   superAdminController.deleteSchool
-);
-
-//////////////////////////////  school admin /////////////////////////////////////
-
-// router.get(
-//   "/books:schoolName",
-//   schoolAdminController.selectAllBooks
-// );
-
-router.get(
-  "/books/:schoolID",
-  superAdminController.selectAllBooks
-);
-
-router.post(
-  "/book",
-  superAdminController.addBook
 );
 
 module.exports = router;

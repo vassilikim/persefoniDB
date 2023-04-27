@@ -31,5 +31,22 @@ var schoolAdminController = require("../controllers/schoolAdminController");
 //     superAdminController.deleteSchool
 //   );
   
+//////////////////////////////  school admin /////////////////////////////////////
+
+// router.get(
+//   "/books:schoolName",
+//   schoolAdminController.selectAllBooks
+// );
+
+router.get(
+  "/books/:schoolID",
+  superAdminController.selectAllBooks
+);
+
+router.post(
+  "/book",
+  superAdminController.addBook
+);
   module.exports = router;
+  
   
