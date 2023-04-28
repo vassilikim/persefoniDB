@@ -1,25 +1,19 @@
 var express = require("express");
 var router = express.Router();
-// var backupController = require("../controllers/backupController");
-// var authController = require("../controllers/authController");
+var authController = require("../controllers/authController");
 var schoolAdminController = require("../controllers/schoolAdminController");
 
-// router.get(
-//     "/books",
-//     // authController.protect,
-//     // authController.restrictTo("super-admin"),
-//     schoolAdminController.selectAllBooks
-//   );
-
   router.get(
-    "/books:schoolName",
+    "/books",
+    authController.protect,
+    authController.restrictTo("school-admin"),
     schoolAdminController.selectAllBooks
   );
   
-  router.post(
-    "/book",
-    schoolAdminController.addBook
-  );
+  // router.post(
+  //   "/book",
+  //   schoolAdminController.addBook
+  // );
   
 //   router.patch(
 //     "/book/:schoolName",
@@ -38,15 +32,15 @@ var schoolAdminController = require("../controllers/schoolAdminController");
 //   schoolAdminController.selectAllBooks
 // );
 
-router.get(
-  "/books/:schoolID",
-  superAdminController.selectAllBooks
-);
+// router.get(
+//   "/books/:schoolID",
+//   superAdminController.selectAllBooks
+// );
 
-router.post(
-  "/book",
-  superAdminController.addBook
-);
+// router.post(
+//   "/book",
+//   superAdminController.addBook
+// );
   module.exports = router;
   
   

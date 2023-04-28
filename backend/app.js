@@ -4,6 +4,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var superAdminRouter = require("./routes/superAdminRoutes");
+var schoolAdminRouter = require("./routes/schoolAdminRoutes");
 var authRouter = require("./routes/authRoutes");
 
 var app = express();
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/library/super-admin", superAdminRouter);
+app.use("/api/library/school-admin", schoolAdminRouter);
 app.use("/api/library/auth", authRouter);
 
 module.exports = app;
