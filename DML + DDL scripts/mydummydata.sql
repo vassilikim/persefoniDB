@@ -94,16 +94,15 @@ INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (9, 4);
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (10, 3);
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (5, 2);
 
-INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (5, 1);
-INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (6, 2);
-INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (7, 3);
-INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (8, 4);
-INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (9, 5);
-INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (10, 6);
+INSERT INTO `Lending` (`user_ID`, `book_ID`, `lending_date`, `must_be_returned_at`) VALUES (5, 1, '2022-10-08 00:00:00', '2022-11-08 00:00:00');
+INSERT INTO `Lending` (`user_ID`, `book_ID`, `lending_date`, `must_be_returned_at`) VALUES (6, 3, '2022-10-08 00:00:00', '2022-11-08 00:00:00');
+INSERT INTO `Lending` (`user_ID`, `book_ID`, `lending_date`, `must_be_returned_at`) VALUES (7, 5, '2022-10-08 00:00:00', '2022-11-08 00:00:00');
+INSERT INTO `Lending` (`user_ID`, `book_ID`, `lending_date`, `must_be_returned_at`) VALUES (8, 4, '2022-10-08 00:00:00', '2022-11-08 00:00:00');
+INSERT INTO `Lending` (`user_ID`, `book_ID`, `lending_date`, `must_be_returned_at`) VALUES (9, 6, '2022-10-08 00:00:00', '2022-11-08 00:00:00');
+INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (10, 5);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (5, 7);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (6, 8);
-INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (7, 6);
-INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (8, 5);
+INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (8, 1);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (9, 8);
 
 INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (5, 1, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4.0);

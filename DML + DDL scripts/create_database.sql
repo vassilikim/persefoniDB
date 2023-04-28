@@ -21,7 +21,7 @@ CREATE TABLE Book (
     publisher VARCHAR(255) NOT NULL,
     ISBN VARCHAR(255) NOT NULL,
     page_number INT NOT NULL,
-    summary VARCHAR(255) NOT NULL,
+    summary VARCHAR(1000) NOT NULL,
     copies INT NOT NULL,
     image VARCHAR(255) NOT NULL,
     lang VARCHAR(255) NOT NULL,
@@ -411,5 +411,151 @@ BEGIN
     OR pending_reservation_date <= DATE_SUB(NOW(), INTERVAL 1 WEEK) AND reservation_status=1;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_lendings_by_school(IN year_param INT, IN month_param INT)
+BEGIN
+    IF year_param IS NULL AND month_param IS NULL THEN
+        SELECT s.school_name, COUNT(l.book_ID) as lendings
+		FROM School s 
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
+		WHERE s.school_active=1
+		GROUP BY s.school_name;
+    ELSEIF year_param IS NULL AND month_param IS NOT NULL THEN
+        SELECT s.school_name, COUNT(CASE WHEN MONTH(l.lending_date) = month_param THEN l.book_ID ELSE NULL END) as lendings
+		FROM School s 
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
+		WHERE s.school_active=1
+		GROUP BY s.school_name;
+    ELSEIF year_param IS NOT NULL AND month_param IS NULL THEN
+        SELECT s.school_name, COUNT(CASE WHEN YEAR(l.lending_date) = year_param THEN l.book_ID ELSE NULL END) as lendings
+		FROM School s 
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
+		WHERE s.school_active=1
+		GROUP BY s.school_name;
+    ELSE
+        SELECT s.school_name, COUNT(CASE WHEN MONTH(l.lending_date) = month_param AND YEAR(l.lending_date) = year_param THEN l.book_ID ELSE NULL END) as lendings
+		FROM School s 
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
+		WHERE s.school_active=1
+		GROUP BY s.school_name;
+    END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_writers_teachers_per_genre(IN genre VARCHAR(255))
+BEGIN
+    SELECT DISTINCT u.username AS teacher
+	FROM activeUsers u 
+	JOIN Lending l ON u.ID=l.user_ID
+	JOIN Genre g ON g.book_ID=l.book_ID
+	WHERE u.user_role='teacher' AND TIMESTAMPDIFF(YEAR, NOW(), l.lending_date)<1 AND g.genre=genre;
+
+	SELECT DISTINCT CONCAT(w.first_name, ' ', w.last_name) AS writer
+	FROM Writer w 
+	JOIN Writes wr ON wr.writer_ID=w.ID
+	JOIN Genre g ON wr.book_ID=g.book_ID
+	JOIN School s ON s.school_active=1
+	JOIN Book b ON g.book_ID=b.ID AND b.school_ID=s.ID
+	WHERE g.genre=genre;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_young_teachers_max_books()
+BEGIN
+	WITH young_teachers_books AS (
+		SELECT u.username, COUNT(l.book_ID) AS books
+		FROM activeUsers u
+		LEFT JOIN Lending l ON u.ID=l.user_ID
+		WHERE u.user_role='teacher' AND TIMESTAMPDIFF(YEAR, NOW(), u.birth_date)<40 
+		GROUP BY u.username
+	)
+	SELECT username, books
+	FROM young_teachers_books
+	WHERE books = (
+		SELECT MAX(books)
+		FROM young_teachers_books
+	);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_writers_no_lendings()
+BEGIN
+	WITH writer_lendings AS (
+		SELECT CONCAT(w.first_name, ' ', w.last_name) AS writer, COUNT(l.book_ID) AS lendings
+		FROM Writer w 
+		LEFT JOIN Writes wr ON wr.writer_ID=w.ID
+		LEFT JOIN Book b ON wr.book_ID=b.ID
+		LEFT JOIN Lending l ON l.book_ID=b.ID
+		JOIN School s ON s.school_active=1 AND b.school_ID=s.ID
+		GROUP BY w.first_name, w.last_name
+	)
+	SELECT writer
+	FROM writer_lendings
+	WHERE lendings=0;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_schooladmins_same_lendings()
+BEGIN
+	WITH schooladmin_lendings AS (
+		SELECT u.username, YEAR(l.lending_date) AS year, COUNT(l.book_ID) AS lendings
+		FROM School s
+		JOIN activeUsers u ON u.school_ID=s.ID
+		JOIN Book b ON b.school_ID=s.ID
+		LEFT JOIN Lending l ON l.book_ID=b.ID 
+		WHERE u.user_role='school-admin'
+		GROUP BY u.username, YEAR(l.lending_date)
+	)
+	SELECT DISTINCT sc1.username AS schooladmin1, sc2.username AS schooladmin2, sc1.lendings AS lendings
+	FROM schooladmin_lendings sc1
+	JOIN schooladmin_lendings sc2 ON sc1.lendings=sc2.lendings AND sc1.username<sc2.username AND sc1.year=sc2.year
+	WHERE sc1.lendings>20;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_top3_genre_pairs()
+BEGIN
+	SELECT g1.genre AS genre1, g2.genre AS genre2, COUNT(l.book_ID) AS lendings
+	FROM Genre g1
+	JOIN Genre g2 ON g1.book_ID=g2.book_ID AND g1.genre<g2.genre
+	LEFT JOIN Lending l ON g1.book_ID=l.book_ID
+	GROUP BY g1.genre, g2.genre
+	ORDER BY lendings DESC
+	LIMIT 3;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_writers_5_less_than_max()
+BEGIN
+	WITH writer_books AS (
+		SELECT CONCAT(w.first_name, ' ', w.last_name) AS writer, COUNT(wr.book_ID) AS books
+		FROM Writer w 
+		LEFT JOIN Writes wr ON wr.writer_ID=w.ID
+		GROUP BY w.first_name, w.last_name
+		ORDER BY books DESC
+	),
+	max_books AS (
+		SELECT books 
+		FROM writer_books
+		LIMIT 1
+	)
+	SELECT w.writer, w.books
+	FROM writer_books w
+	JOIN max_books m
+	WHERE w.books<=m.books-5;
+END //
+DELIMITER ;
+
 
 
