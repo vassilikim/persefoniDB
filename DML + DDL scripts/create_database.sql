@@ -557,5 +557,109 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE get_users_delayed_return(IN f_name VARCHAR(255), IN l_name VARCHAR(255), IN delay_days INT, IN school_id INT)
+BEGIN
+    IF f_name IS NULL AND l_name IS NULL AND delay_days IS NULL THEN
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id;
+    ELSEIF f_name IS NOT NULL AND l_name IS NULL AND delay_days IS NULL THEN
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name;
+    ELSEIF f_name IS NULL AND l_name IS NOT NULL AND delay_days IS NULL THEN
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.last_name=l_name;
+	ELSEIF f_name IS NULL AND l_name IS NULL AND delay_days IS NOT NULL THEN
+		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
+    ELSEIF f_name IS NOT NULL AND l_name IS NOT NULL AND delay_days IS NULL THEN
+		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND u.last_name=l_name;
+    ELSEIF f_name IS NOT NULL AND l_name IS NULL AND delay_days IS NOT NULL THEN
+		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
+    ELSEIF f_name IS NULL AND l_name IS NOT NULL AND delay_days IS NOT NULL THEN
+		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.last_name=l_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
+    ELSE
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND u.last_name=l_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
+    END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_avg_rating_per_genre_user(IN genre VARCHAR(255), IN full_name VARCHAR(255), IN school_id INT)
+BEGIN
+    IF genre IS NULL AND full_name IS NULL THEN
+        SELECT g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM Genre g
+		JOIN Book b ON b.ID=g.book_ID
+		JOIN Review r ON r.book_ID=b.ID
+		JOIN activeUsers u ON u.ID=r.user_ID AND u.school_ID=school_id 
+		GROUP BY g.genre;
+        
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM activeUsers u
+		JOIN Review r ON r.user_ID=u.ID AND u.school_ID=school_id
+		GROUP BY u.username, u.first_name, u.last_name;
+    ELSEIF genre IS NOT NULL AND full_name IS NULL THEN
+        SELECT g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM Genre g
+		JOIN Book b ON b.ID=g.book_ID
+		JOIN Review r ON r.book_ID=b.ID
+		JOIN activeUsers u ON u.ID=r.user_ID AND u.school_ID=school_id
+        WHERE g.genre=genre
+		GROUP BY g.genre;
+        
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM Genre g
+		JOIN activeUsers u ON u.school_ID=school_id
+		JOIN Book b ON b.ID=g.book_ID
+		JOIN Review r ON r.book_ID=b.ID AND r.user_ID=u.ID
+        WHERE g.genre=genre
+		GROUP BY u.username, u.first_name, u.last_name;
+	ELSEIF genre IS NULL AND full_name IS NOT NULL THEN
+		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM Genre g
+		JOIN activeUsers u ON u.school_ID=school_id
+		JOIN Book b ON b.ID=g.book_ID
+		JOIN Review r ON r.book_ID=b.ID AND r.user_ID=u.ID
+        WHERE CONCAT(u.first_name, ' ', u.last_name)=full_name
+		GROUP BY g.genre, u.username, u.first_name, u.last_name;
+        
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM activeUsers u
+		JOIN Review r ON r.user_ID=u.ID AND u.school_ID=school_id
+        WHERE CONCAT(u.first_name, ' ', u.last_name)=full_name
+		GROUP BY u.username, u.first_name, u.last_name;
+    ELSE
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM Genre g
+		JOIN activeUsers u ON u.school_ID=school_id
+		JOIN Book b ON b.ID=g.book_ID
+		JOIN Review r ON r.book_ID=b.ID AND r.user_ID=u.ID
+        WHERE g.genre=genre AND CONCAT(u.first_name, ' ', u.last_name)=full_name
+		GROUP BY g.genre, u.username, u.first_name, u.last_name;
+    END IF;
+END //
+DELIMITER ;
+
 
 

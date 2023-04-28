@@ -1,9 +1,3 @@
--- 3.2.2 Returns all users that have delayed the return of a book and have not returned it yet
-SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
-FROM activeUsers u
-JOIN Lending l ON u.ID=l.user_ID
-WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.first_name='Ciara' AND u.last_name='Kulas' AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=171;
-
 -- 3.2.3 Returns average review rating per user
 SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, ROUND(AVG(r.rating), 2) AS avg_rating
 FROM activeUsers u
