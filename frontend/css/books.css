@@ -8,13 +8,22 @@
   }
   
   li {
+    position: relative;
     margin: 10px;
-    padding: 2.5%;
-    border: 1px solid #ccc;
+    padding: 2.2%;
+    background-color: #e2daf9;
     border-radius: 5px;
     width: 250px;
     text-align: center;
   }
+
+  .info{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+  }
+  
   
   .book_image {
     max-width: 200px;
@@ -26,7 +35,7 @@
   button {
     background-color: #f0f0f0;
     border: none;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 5px;
     margin: 5px;
     cursor: pointer;
@@ -51,9 +60,9 @@
 
   #search-bar {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 18px;
-    font-size: 16px;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    font-size: 15px;
     width: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 35px;
@@ -61,7 +70,7 @@
   
   #search-bar:focus {
     outline: none;
-    border-color: #7c4dff;
+    border-color: #af92ff;
     box-shadow: 0 2px 5px rgba(124, 77, 255, 0.2);
   } 
   
@@ -69,4 +78,34 @@
     #search-bar {
       width: 80%;
     }
+  }
+
+  .bookInfoDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 65%;
+    height: 50%;
+    padding: 20px;
+    background-color: white;
+    border: 2px solid black;
+    z-index: 9999;
+    display: none;
+  }
+
+  .del{
+    background-color: white;
+    border: 2px solid #f45757;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .del:hover{
+    background-color: #f45757;
   }

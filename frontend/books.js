@@ -142,6 +142,7 @@ const bookList = document.getElementById('book-list');
 function renderBooks(books) {
   bookList.innerHTML = '';
   books.forEach(book => {
+    const button_info = document.createElement('button');
     const li = document.createElement('li');
     const title = document.createElement('h2');
     const authors = document.createElement('h3');
@@ -150,30 +151,55 @@ function renderBooks(books) {
     const keywords = document.createElement('p');
     const button_del = document.createElement('button');
     const button_lend = document.createElement('button');
+    const div_pop= document.createElement('div');
 
     title.textContent = book.title;
     authors.textContent = `by ${book.authors.join(', ')}`;
     publisher.textContent = `Publisher: ${book.publisher}`;
     publishDate.textContent = `Published on: ${book.publishDate}`;
     keywords.textContent = `Keywords: ${book.keywords.join(', ')}`;
+    button_info.textContent ='Info';
+    button_info.className = 'info';
     button_lend.textContent = 'Lend';
     button_lend.className = 'lend';
-    button_del.textContent = 'Delete';
+    button_del.innerHTML = '<span>x</span>';
     button_del.className = 'del';
+    div_pop.innerHTML = `
+      <h2>${book.title}</h2>
+      <p><strong>Authors:</strong> ${book.authors.join(', ')}</p>
+      <p><strong>Publisher:</strong> ${book.publisher}</p>
+      <p><strong>Published on:</strong> ${book.publishDate}</p>
+      <p><strong>Keywords:</strong> ${book.keywords.join(', ')}</p>
+    `;
+    div_pop.className = 'bookInfoDiv';
+    div_pop.style.display = 'none';
 
+    button_info.addEventListener('click', () => {
+      if (div_pop.style.display === 'none') {
+        div_pop.style.display = 'block';
+      } else {
+        div_pop.style.display = 'none';
+      }
+    });
+
+    button_del.addEventListener('click', () => {
+      div_pop.style.display = 'none';
+    });
+
+    li.appendChild(button_info);
     li.appendChild(title);
     li.appendChild(authors);
-    li.appendChild(publisher);
-    li.appendChild(publishDate);
-    li.appendChild(keywords);
-    li.appendChild(button_lend);
-    li.appendChild(button_del);
+    // li.appendChild(publisher);
+    // li.appendChild(publishDate);
+    // li.appendChild(keywords);
+    // li.appendChild(button_lend);
+    div_pop.appendChild(button_del);
+    li.appendChild(div_pop);
     bookList.appendChild(li);
   });
 }
 
 const searchBar = document.getElementById('search-bar');
-const searchButton = document.getElementById('search-button');
 
 function filterBooks(searchQuery) {
   const searchTerms = searchQuery.toLowerCase().split(' ');
@@ -209,3 +235,4 @@ function filterBooks(searchQuery) {
 
 // // Initial render
 // renderBooks(books);
+
