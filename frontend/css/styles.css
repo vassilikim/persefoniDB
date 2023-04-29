@@ -96,6 +96,9 @@ font-weight: bold;
   .menu img{
     width: 18%;
   }
+  .menu .back-arrow{
+    width: 30px;
+  }
 
 /* Logout Button */
 .logout-button{
@@ -398,3 +401,56 @@ font-weight: bold;
   margin-top: 5%;
  }
 
+/* schools card for super-admin */
+
+.sch-card{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+.sch-card .schOfone{
+  position: relative;
+  padding: 10px;
+  width: 50%;
+  height: 50%;
+  background-color: aliceblue;
+  margin: 10px;
+  border-radius: 10px;
+  padding-bottom:20px;
+}
+.sch-card .schOfone h2{
+  text-align: center;
+}
+.sch-card .schOfone h3{
+  text-align: left;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+.sch-card .sch-edit{
+  position:absolute;
+  top:0;
+  right: 0;
+  margin: 15px;
+  font-size: 13px;
+  background-color: #534caf;
+  border: 2px solid #534caf;
+  border-radius: 10px;
+  color:white;
+}
+.sch-card .sch-edit:hover{
+  background-color:white;
+  border: 2px solid #534caf;
+  border-radius: 12px;
+  color:#573478;
+  cursor: pointer;
+}
+.sch-card .schOfone h2{
+  font-size: 30px;
+  color: #573478;
+}
+.sch-card .schOfone strong ,h2{
+  font-size: 21px;
+  color: #573478;
+}
