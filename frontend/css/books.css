@@ -87,18 +87,49 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    width: 65%;
-    height: 50%;
+    max-width: 70%;
+    max-height: 70%;
     padding: 20px;
-    background-color: white;
-    border: 2px solid black;
+    padding-bottom: 50px;
+    background-color: rgba(255, 255, 255);
+    border: 0.5px none #482c62;
+    border-radius: 5px;
     z-index: 9999;
     display: none;
-  }
 
+    }
+    .bookInfoDiv h2{
+      text-align: center;
+    }
+    .bookInfoDiv p{
+      margin-left: 15%;
+      margin-right: 15%;
+    }
+    .bookInfoDiv strong, h2{
+      color: #482c62;
+    }
+  
+  .conteiner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: #d2c3fa7b;
+    border: none;
+    z-index: 9999;
+    display: none;
+    text-align: left;
+  }
+  
+    
   .del{
     background-color: white;
-    border: 2px solid #f45757;
+    border: 2px solid #fc9b9b;
     position: absolute;
     top: 0;
     right: 0;
@@ -107,5 +138,5 @@
     padding-right: 10px;
   }
   .del:hover{
-    background-color: #f45757;
+    background-color: #fc9b9b;
   }

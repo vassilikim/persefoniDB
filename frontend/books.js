@@ -119,6 +119,11 @@ const books = [
     authors: ['mike kon', 'niko parl'],
     publisher: 'Publisher1',
     publishDate: '2022-01-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
     keywords: ['one', 'two', 'three']
   },
   {
@@ -126,6 +131,11 @@ const books = [
     authors: ['Author3'],
     publisher: 'Publisher2',
     publishDate: '2022-02-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
     keywords: ['four', 'five', 'six']
   },
   {
@@ -133,6 +143,155 @@ const books = [
     authors: ['Author3', 'niko parl'],
     publisher: 'Publisher1',
     publishDate: '2022-03-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['seven', 'eight', 'nine']
+  },
+  {
+    title: 'Book 2',
+    authors: ['Author3'],
+    publisher: 'Publisher2',
+    publishDate: '2022-02-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['four', 'five', 'six']
+  },
+  {
+    title: 'Book 3',
+    authors: ['Author3', 'niko parl'],
+    publisher: 'Publisher1',
+    publishDate: '2022-03-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['seven', 'eight', 'nine']
+  },
+  {
+    title: 'Book 2',
+    authors: ['Author3'],
+    publisher: 'Publisher2',
+    publishDate: '2022-02-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['four', 'five', 'six']
+  },
+  {
+    title: 'Book 3',
+    authors: ['Author3', 'niko parl'],
+    publisher: 'Publisher1',
+    publishDate: '2022-03-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['seven', 'eight', 'nine']
+  },
+  {
+    title: 'Book 2',
+    authors: ['Author3'],
+    publisher: 'Publisher2',
+    publishDate: '2022-02-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['four', 'five', 'six']
+  },
+  {
+    title: 'Book 3',
+    authors: ['Author3', 'niko parl'],
+    publisher: 'Publisher1',
+    publishDate: '2022-03-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['seven', 'eight', 'nine']
+  },
+  {
+    title: 'Book 2',
+    authors: ['Author3'],
+    publisher: 'Publisher2',
+    publishDate: '2022-02-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['four', 'five', 'six']
+  },
+  {
+    title: 'Book 3',
+    authors: ['Author3', 'niko parl'],
+    publisher: 'Publisher1',
+    publishDate: '2022-03-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['seven', 'eight', 'nine']
+  },
+  {
+    title: 'Book 2',
+    authors: ['Author3'],
+    publisher: 'Publisher2',
+    publishDate: '2022-02-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['four', 'five', 'six']
+  },
+  {
+    title: 'Book 3',
+    authors: ['Author3', 'niko parl'],
+    publisher: 'Publisher1',
+    publishDate: '2022-03-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['seven', 'eight', 'nine']
+  },
+  {
+    title: 'Book 2',
+    authors: ['Author3'],
+    publisher: 'Publisher2',
+    publishDate: '2022-02-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
+    keywords: ['four', 'five', 'six']
+  },
+  {
+    title: 'Book 3',
+    authors: ['Author3', 'niko parl'],
+    publisher: 'Publisher1',
+    publishDate: '2022-03-01',
+    ISBN:'e5e79a46-61a7-3a1c-9648-20f3f71945e7',
+    page_number:'100',
+    summary:'Natus sunt qui et iure. Eaque voluptate perspiciatis voluptatem. Accusamus perferendis similique optio fugit quas rerum. Rerum ipsam ut reiciendis nulla illum quos ex.',
+    copies:'10',
+    lang:'Greek',
     keywords: ['seven', 'eight', 'nine']
   }
 ];
@@ -149,8 +308,14 @@ function renderBooks(books) {
     const publisher = document.createElement('h4');
     const publishDate = document.createElement('p');
     const keywords = document.createElement('p');
+    const summary = document.createElement('p');
+    const ISBN = document.createElement('p');
+    const copies = document.createElement('h4');
+    const lang = document.createElement('h4');
+    const page_number = document.createElement('h4');
     const button_del = document.createElement('button');
     const button_lend = document.createElement('button');
+    const conteiner= document.createElement('div');
     const div_pop= document.createElement('div');
 
     title.textContent = book.title;
@@ -164,26 +329,36 @@ function renderBooks(books) {
     button_lend.className = 'lend';
     button_del.innerHTML = '<span>x</span>';
     button_del.className = 'del';
+    conteiner.className = 'conteiner';
     div_pop.innerHTML = `
       <h2>${book.title}</h2>
       <p><strong>Authors:</strong> ${book.authors.join(', ')}</p>
       <p><strong>Publisher:</strong> ${book.publisher}</p>
       <p><strong>Published on:</strong> ${book.publishDate}</p>
       <p><strong>Keywords:</strong> ${book.keywords.join(', ')}</p>
+      <p><strong>Summary:</strong> ${book.summary}</p>
+      <p><strong>ISBN:</strong> ${book.ISBN}</p>
+      <p><strong>Copies:</strong> ${book.copies}</p>
+      <p><strong>Nuber of pages:</strong> ${book.page_number}</p>
+      <p><strong>Language:</strong> ${book.lang}</p>
     `;
     div_pop.className = 'bookInfoDiv';
     div_pop.style.display = 'none';
+    conteiner.style.display = 'none';
 
     button_info.addEventListener('click', () => {
       if (div_pop.style.display === 'none') {
         div_pop.style.display = 'block';
+        conteiner.style.display='block';
       } else {
         div_pop.style.display = 'none';
+        conteiner.style.display = 'none';
       }
     });
 
     button_del.addEventListener('click', () => {
       div_pop.style.display = 'none';
+      conteiner.style.display = 'none';
     });
 
     li.appendChild(button_info);
@@ -194,7 +369,8 @@ function renderBooks(books) {
     // li.appendChild(keywords);
     // li.appendChild(button_lend);
     div_pop.appendChild(button_del);
-    li.appendChild(div_pop);
+    conteiner.appendChild(div_pop);
+    li.appendChild(conteiner);
     bookList.appendChild(li);
   });
 }
