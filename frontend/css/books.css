@@ -36,13 +36,14 @@
     background-color: #f0f0f0;
     border: none;
     /* padding: 10px; */
-    border-radius: 5px;
-    margin: 5px;
+    border-radius: 0 5px;
+    /* margin: 5px; */
     cursor: pointer;
   }
   
   button:hover {
-    background-color: #e0e0e0;
+    background-color: #482c62;
+    color:white;
   }
 
   .lend{
@@ -132,7 +133,6 @@
     position: absolute;
     top: 0;
     right: 0;
-    right:10px;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
