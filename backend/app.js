@@ -10,6 +10,7 @@ var reservationRouter = require("./routes/reservationRoutes");
 var userRouter = require("./routes/userRoutes");
 var reviewRouter = require("./routes/reviewRoutes");
 var viewsRouter = require("./routes/viewsRoutes");
+var schoolRouter = require("./routes/schoolRoutes");
 
 var app = express();
 
@@ -29,5 +30,6 @@ app.use("/api/library/auth", authRouter);
 app.use("/api/library/reservations", reservationRouter);
 app.use("/api/library/users", userRouter);
 app.use("/api/library/reviews", reviewRouter);
+app.use("/api/library/schools", schoolRouter);
 
 module.exports = app;

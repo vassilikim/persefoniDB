@@ -178,6 +178,8 @@ exports.protect = async (req, res, next) => {
         req.username = freshUser.username;
         req.role = freshUser.user_role;
         req.school_id = freshUser.school_ID;
+        req.first_name = freshUser.first_name;
+        req.last_name = freshUser.last_name;
         next();
       }
     );

@@ -125,7 +125,7 @@ exports.getAccountInfo = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT u.username, u.first_name, u.last_name, s.school_name 
+      `SELECT u.username, u.first_name, u.last_name, u.birth_date, s.school_name 
       FROM verifiedUsers u JOIN School s ON u.school_ID=s.ID
       WHERE u.username='${req.username}'`,
       async function (error, results, fields) {
@@ -152,7 +152,12 @@ exports.getAccountInfo = async (req, res, next) => {
 
 exports.updateAccountInfo = async (req, res, next) => {
   try {
-    if (!req.body.username || !req.body.first_name || !req.body.last_name) {
+    if (
+      !req.body.username ||
+      !req.body.first_name ||
+      !req.body.last_name ||
+      !req.body.birth_date
+    ) {
       return res.status(400).json({
         status: "failed",
         message: "Please provide all the required parameters!",
@@ -164,7 +169,7 @@ exports.updateAccountInfo = async (req, res, next) => {
 
     connection.query(
       `UPDATE Users 
-      SET username='${req.body.username}', first_name='${req.body.first_name}', last_name='${req.body.last_name}'
+      SET username='${req.body.username}', first_name='${req.body.first_name}', last_name='${req.body.last_name}', birth_date='${req.body.birth_date}'
       WHERE username='${req.username}'`,
       async function (error, results, fields) {
         if (error)

@@ -21,7 +21,7 @@ CREATE TABLE Book (
     publisher VARCHAR(255) NOT NULL,
     ISBN VARCHAR(255) NOT NULL,
     page_number INT NOT NULL,
-    summary VARCHAR(255) NOT NULL,
+    summary VARCHAR(1000) NOT NULL,
     copies INT NOT NULL,
     image VARCHAR(255) NOT NULL,
     lang VARCHAR(255) NOT NULL,
@@ -66,6 +66,7 @@ CREATE TABLE Users (
     user_role ENUM('super-admin', 'school-admin', 'teacher', 'student') NOT NULL,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
+    birth_date DATETIME NOT NULL,
     school_ID INT DEFAULT(NULL),
     verified BIT NOT NULL DEFAULT(0),
     changed_password_at DATETIME DEFAULT(NULL),
@@ -410,5 +411,296 @@ BEGIN
     OR pending_reservation_date <= DATE_SUB(NOW(), INTERVAL 1 WEEK) AND reservation_status=1;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_lendings_by_school(IN year_param INT, IN month_param INT)
+BEGIN
+    IF year_param IS NULL AND month_param IS NULL THEN
+        SELECT s.school_name, COUNT(l.book_ID) as lendings
+		FROM School s 
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
+		WHERE s.school_active=1
+		GROUP BY s.school_name;
+    ELSEIF year_param IS NULL AND month_param IS NOT NULL THEN
+        SELECT s.school_name, COUNT(CASE WHEN MONTH(l.lending_date) = month_param THEN l.book_ID ELSE NULL END) as lendings
+		FROM School s 
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
+		WHERE s.school_active=1
+		GROUP BY s.school_name;
+    ELSEIF year_param IS NOT NULL AND month_param IS NULL THEN
+        SELECT s.school_name, COUNT(CASE WHEN YEAR(l.lending_date) = year_param THEN l.book_ID ELSE NULL END) as lendings
+		FROM School s 
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
+		WHERE s.school_active=1
+		GROUP BY s.school_name;
+    ELSE
+        SELECT s.school_name, COUNT(CASE WHEN MONTH(l.lending_date) = month_param AND YEAR(l.lending_date) = year_param THEN l.book_ID ELSE NULL END) as lendings
+		FROM School s 
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
+		WHERE s.school_active=1
+		GROUP BY s.school_name;
+    END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_writers_teachers_per_genre(IN genre VARCHAR(255))
+BEGIN
+    SELECT DISTINCT u.username AS teacher
+	FROM activeUsers u 
+	JOIN Lending l ON u.ID=l.user_ID
+	JOIN Genre g ON g.book_ID=l.book_ID
+	WHERE u.user_role='teacher' AND TIMESTAMPDIFF(YEAR, NOW(), l.lending_date)<1 AND g.genre=genre;
+
+	SELECT DISTINCT CONCAT(w.first_name, ' ', w.last_name) AS writer
+	FROM Writer w 
+	JOIN Writes wr ON wr.writer_ID=w.ID
+	JOIN Genre g ON wr.book_ID=g.book_ID
+	JOIN School s ON s.school_active=1
+	JOIN Book b ON g.book_ID=b.ID AND b.school_ID=s.ID
+	WHERE g.genre=genre;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_young_teachers_max_books()
+BEGIN
+	WITH young_teachers_books AS (
+		SELECT u.username, COUNT(l.book_ID) AS books
+		FROM activeUsers u
+		LEFT JOIN Lending l ON u.ID=l.user_ID
+		WHERE u.user_role='teacher' AND TIMESTAMPDIFF(YEAR, NOW(), u.birth_date)<40 
+		GROUP BY u.username
+	)
+	SELECT username, books
+	FROM young_teachers_books
+	WHERE books = (
+		SELECT MAX(books)
+		FROM young_teachers_books
+	);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_writers_no_lendings()
+BEGIN
+	WITH writer_lendings AS (
+		SELECT CONCAT(w.first_name, ' ', w.last_name) AS writer, COUNT(l.book_ID) AS lendings
+		FROM Writer w 
+		LEFT JOIN Writes wr ON wr.writer_ID=w.ID
+		LEFT JOIN Book b ON wr.book_ID=b.ID
+		LEFT JOIN Lending l ON l.book_ID=b.ID
+		JOIN School s ON s.school_active=1 AND b.school_ID=s.ID
+		GROUP BY w.first_name, w.last_name
+	)
+	SELECT writer
+	FROM writer_lendings
+	WHERE lendings=0;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_schooladmins_same_lendings()
+BEGIN
+	WITH schooladmin_lendings AS (
+		SELECT u.username, YEAR(l.lending_date) AS year, COUNT(l.book_ID) AS lendings
+		FROM School s
+		JOIN activeUsers u ON u.school_ID=s.ID
+		JOIN Book b ON b.school_ID=s.ID
+		LEFT JOIN Lending l ON l.book_ID=b.ID 
+		WHERE u.user_role='school-admin'
+		GROUP BY u.username, YEAR(l.lending_date)
+	)
+	SELECT DISTINCT sc1.username AS schooladmin1, sc2.username AS schooladmin2, sc1.lendings AS lendings
+	FROM schooladmin_lendings sc1
+	JOIN schooladmin_lendings sc2 ON sc1.lendings=sc2.lendings AND sc1.username<sc2.username AND sc1.year=sc2.year
+	WHERE sc1.lendings>20;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_top3_genre_pairs()
+BEGIN
+	SELECT g1.genre AS genre1, g2.genre AS genre2, COUNT(l.book_ID) AS lendings
+	FROM Genre g1
+	JOIN Genre g2 ON g1.book_ID=g2.book_ID AND g1.genre<g2.genre
+	LEFT JOIN Lending l ON g1.book_ID=l.book_ID
+	GROUP BY g1.genre, g2.genre
+	ORDER BY lendings DESC
+	LIMIT 3;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_writers_5_less_than_max()
+BEGIN
+	WITH writer_books AS (
+		SELECT CONCAT(w.first_name, ' ', w.last_name) AS writer, COUNT(wr.book_ID) AS books
+		FROM Writer w 
+		LEFT JOIN Writes wr ON wr.writer_ID=w.ID
+		GROUP BY w.first_name, w.last_name
+		ORDER BY books DESC
+	),
+	max_books AS (
+		SELECT books 
+		FROM writer_books
+		LIMIT 1
+	)
+	SELECT w.writer, w.books
+	FROM writer_books w
+	JOIN max_books m
+	WHERE w.books<=m.books-5;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_users_delayed_return(IN f_name VARCHAR(255), IN l_name VARCHAR(255), IN delay_days INT, IN school_id INT)
+BEGIN
+    IF f_name IS NULL AND l_name IS NULL AND delay_days IS NULL THEN
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id;
+    ELSEIF f_name IS NOT NULL AND l_name IS NULL AND delay_days IS NULL THEN
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name;
+    ELSEIF f_name IS NULL AND l_name IS NOT NULL AND delay_days IS NULL THEN
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.last_name=l_name;
+	ELSEIF f_name IS NULL AND l_name IS NULL AND delay_days IS NOT NULL THEN
+		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
+    ELSEIF f_name IS NOT NULL AND l_name IS NOT NULL AND delay_days IS NULL THEN
+		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND u.last_name=l_name;
+    ELSEIF f_name IS NOT NULL AND l_name IS NULL AND delay_days IS NOT NULL THEN
+		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
+    ELSEIF f_name IS NULL AND l_name IS NOT NULL AND delay_days IS NOT NULL THEN
+		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.last_name=l_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
+    ELSE
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		FROM activeUsers u
+		JOIN Lending l ON u.ID=l.user_ID
+		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND u.last_name=l_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
+    END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE get_avg_rating_per_genre_user(IN genre VARCHAR(255), IN full_name VARCHAR(255), IN school_id INT)
+BEGIN
+    IF genre IS NULL AND full_name IS NULL THEN
+        SELECT g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM Genre g
+		JOIN Book b ON b.ID=g.book_ID
+		JOIN Review r ON r.book_ID=b.ID
+		JOIN activeUsers u ON u.ID=r.user_ID AND u.school_ID=school_id 
+		GROUP BY g.genre;
+        
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM activeUsers u
+		JOIN Review r ON r.user_ID=u.ID AND u.school_ID=school_id
+		GROUP BY u.username, u.first_name, u.last_name;
+    ELSEIF genre IS NOT NULL AND full_name IS NULL THEN
+        SELECT g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM Genre g
+		JOIN Book b ON b.ID=g.book_ID
+		JOIN Review r ON r.book_ID=b.ID
+		JOIN activeUsers u ON u.ID=r.user_ID AND u.school_ID=school_id
+        WHERE g.genre=genre
+		GROUP BY g.genre;
+        
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM Genre g
+		JOIN activeUsers u ON u.school_ID=school_id
+		JOIN Book b ON b.ID=g.book_ID
+		JOIN Review r ON r.book_ID=b.ID AND r.user_ID=u.ID
+        WHERE g.genre=genre
+		GROUP BY u.username, u.first_name, u.last_name;
+	ELSEIF genre IS NULL AND full_name IS NOT NULL THEN
+		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM Genre g
+		JOIN activeUsers u ON u.school_ID=school_id
+		JOIN Book b ON b.ID=g.book_ID
+		JOIN Review r ON r.book_ID=b.ID AND r.user_ID=u.ID
+        WHERE CONCAT(u.first_name, ' ', u.last_name)=full_name
+		GROUP BY g.genre, u.username, u.first_name, u.last_name;
+        
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM activeUsers u
+		JOIN Review r ON r.user_ID=u.ID AND u.school_ID=school_id
+        WHERE CONCAT(u.first_name, ' ', u.last_name)=full_name
+		GROUP BY u.username, u.first_name, u.last_name;
+    ELSE
+        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
+		FROM Genre g
+		JOIN activeUsers u ON u.school_ID=school_id
+		JOIN Book b ON b.ID=g.book_ID
+		JOIN Review r ON r.book_ID=b.ID AND r.user_ID=u.ID
+        WHERE g.genre=genre AND CONCAT(u.first_name, ' ', u.last_name)=full_name
+		GROUP BY g.genre, u.username, u.first_name, u.last_name;
+    END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION DelSchool(schoolID INT)
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	IF (SELECT ID from School where ID = schoolID) IS NULL THEN
+		RETURN "NOT OK";
+	ELSE 
+		CREATE TEMPORARY TABLE delBooks(
+			book_id INT PRIMARY KEY
+		);
+		CREATE TEMPORARY TABLE delWriters(
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			writer_id INT 
+		);
+
+		INSERT INTO delBooks(book_id)
+		SELECT ID
+		FROM Book
+		WHERE school_ID = schoolID;
+
+		INSERT INTO delWriters(writer_id)
+		SELECT DISTINCT writer_ID
+		FROM Writes
+		WHERE book_ID IN (SELECT book_id FROM delBooks);
+
+		DELETE FROM Reservation WHERE book_ID IN (SELECT book_id FROM delBooks);
+		DELETE FROM Lending WHERE book_ID IN (SELECT book_id FROM delBooks);
+		DELETE FROM Review WHERE book_ID IN (SELECT book_id FROM delBooks);
+		DELETE FROM Genre WHERE book_ID IN (SELECT book_id FROM delBooks);
+		DELETE FROM Writes WHERE book_ID IN (SELECT book_id FROM delBooks);
+		DELETE FROM Writer WHERE ID IN (SELECT writer_id FROM delWriters WHERE writer_id NOT IN (SELECT writer_ID FROM Writes));
+		DELETE FROM Book WHERE school_ID=schoolID;
+		DELETE FROM Users WHERE school_ID=schoolID;
+		DELETE FROM School WHERE ID=schoolID;
+
+		RETURN "OK";
+	END IF;
+END //
+
+DELIMITER ;
+
 
 
