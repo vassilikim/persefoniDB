@@ -139,7 +139,7 @@ exports.deleteSchool = async (req, res, next) => {
           });
 
         if (results[0]["answer"] == "NOT OK") {
-          return res.status(200).json({
+          return res.status(400).json({
             status: "failed",
             message: "There is no school with this ID!",
           });
