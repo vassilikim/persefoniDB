@@ -661,5 +661,46 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE FUNCTION DelSchool(schoolID INT)
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	IF (SELECT ID from School where ID = schoolID) IS NULL THEN
+		RETURN "NOT OK";
+	ELSE 
+		CREATE TEMPORARY TABLE delBooks(
+			book_id INT PRIMARY KEY
+		);
+		CREATE TEMPORARY TABLE delWriters(
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			writer_id INT 
+		);
+
+		INSERT INTO delBooks(book_id)
+		SELECT ID
+		FROM Book
+		WHERE school_ID = schoolID;
+
+		INSERT INTO delWriters(writer_id)
+		SELECT DISTINCT writer_ID
+		FROM Writes
+		WHERE book_ID IN (SELECT book_id FROM delBooks);
+
+		DELETE FROM Reservation WHERE book_ID IN (SELECT book_id FROM delBooks);
+		DELETE FROM Lending WHERE book_ID IN (SELECT book_id FROM delBooks);
+		DELETE FROM Review WHERE book_ID IN (SELECT book_id FROM delBooks);
+		DELETE FROM Genre WHERE book_ID IN (SELECT book_id FROM delBooks);
+		DELETE FROM Writes WHERE book_ID IN (SELECT book_id FROM delBooks);
+		DELETE FROM Writer WHERE ID IN (SELECT writer_id FROM delWriters WHERE writer_id NOT IN (SELECT writer_ID FROM Writes));
+		DELETE FROM Book WHERE school_ID=schoolID;
+		DELETE FROM Users WHERE school_ID=schoolID;
+		DELETE FROM School WHERE ID=schoolID;
+
+		RETURN "OK";
+	END IF;
+END //
+
+DELIMITER ;
+
 
 

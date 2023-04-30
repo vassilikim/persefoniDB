@@ -69,49 +69,43 @@ INSERT INTO `Writes` (`writer_ID`, `book_ID`) VALUES (10, 8);
 INSERT INTO `Writes` (`writer_ID`, `book_ID`) VALUES (2, 1);
 INSERT INTO `Writes` (`writer_ID`, `book_ID`) VALUES (1, 2);
 
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('superadmin42', 'test1234', 'super-admin', 'Ciara', 'Kulas', '2001-08-10 00:00:00', null);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('school1admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 1);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('school2admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 2);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('school3admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 3);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('teacher2', 'test1234', 'teacher', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 1);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('teacher3', 'test1234', 'teacher', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 2);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('teacher4', 'test1234', 'teacher', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 3);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('student1', 'test1234', 'student', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 1);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('student2', 'test1234', 'student', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 2);
-INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('student3', 'test1234', 'student', 'Ciara', 'Kulas', '2001-08-10 00:00:00', 3);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('superadmin42', 'test1234', 'super-admin', 'Ciara', 'Kulas', '2022-10-08', null);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('school1admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', '2022-10-08', 1);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('school2admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', '2022-10-08', 2);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('school3admin', 'test1234', 'school-admin', 'Ciara', 'Kulas', '2022-10-08', 3);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('teacher2', 'test1234', 'teacher', 'Ciara', 'Kulas', '2022-10-08', 1);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('teacher3', 'test1234', 'teacher', 'Ciara', 'Kulas', '2022-10-08', 2);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('teacher4', 'test1234', 'teacher', 'Ciara', 'Kulas', '2022-10-08', 3);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('student1', 'test1234', 'student', 'Ciara', 'Kulas', '2022-10-08', 1);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('student2', 'test1234', 'student', 'Ciara', 'Kulas', '2022-10-08', 2);
+INSERT INTO `Users` (`username`, `user_password`, `user_role`, `first_name`, `last_name`, `birth_date`, `school_ID`) VALUES ('student3', 'test1234', 'student', 'Ciara', 'Kulas', '2022-10-08', 3);
 
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (5, 1);
-INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (6, 1);
+INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (6, 3);
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (7, 5);
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (8, 4);
-INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (9, 1);
-INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (10, 2);
+INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (9, 6);
+INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (10, 5);
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (5, 7);
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (6, 8);
-INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (7, 6);
-INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (8, 6);
-INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (9, 4);
-INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (10, 3);
+INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (8, 2);
+INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (9, 3);
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (5, 2);
 
-INSERT INTO `Lending` (`user_ID`, `book_ID`, `lending_date`, `must_be_returned_at`) VALUES (5, 1, '2022-10-08 00:00:00', '2022-11-08 00:00:00');
-INSERT INTO `Lending` (`user_ID`, `book_ID`, `lending_date`, `must_be_returned_at`) VALUES (6, 3, '2022-10-08 00:00:00', '2022-11-08 00:00:00');
-INSERT INTO `Lending` (`user_ID`, `book_ID`, `lending_date`, `must_be_returned_at`) VALUES (7, 5, '2022-10-08 00:00:00', '2022-11-08 00:00:00');
-INSERT INTO `Lending` (`user_ID`, `book_ID`, `lending_date`, `must_be_returned_at`) VALUES (8, 4, '2022-10-08 00:00:00', '2022-11-08 00:00:00');
-INSERT INTO `Lending` (`user_ID`, `book_ID`, `lending_date`, `must_be_returned_at`) VALUES (9, 6, '2022-10-08 00:00:00', '2022-11-08 00:00:00');
+INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (5, 1);
+INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (6, 3);
+INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (7, 5);
+INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (8, 4);
+INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (9, 6);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (10, 5);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (5, 7);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (6, 8);
-INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (8, 1);
+INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (8, 2);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (9, 8);
 
 INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (5, 1, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4.0);
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (6, 2, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4.5);
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (7, 3, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 3.5);
+INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (6, 6, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4.5);
+INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (7, 5, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 3.5);
 INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (8, 4, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 3.0);
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (9, 4, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4.2);
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (10, 8, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 5.0);
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (10, 7, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 1.5);
-
-
-
+INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (9, 3, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4.2);
+INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (10, 5, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 5.0);
