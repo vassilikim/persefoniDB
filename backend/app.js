@@ -11,6 +11,7 @@ var userRouter = require("./routes/userRoutes");
 var reviewRouter = require("./routes/reviewRoutes");
 var viewsRouter = require("./routes/viewsRoutes");
 var schoolRouter = require("./routes/schoolRoutes");
+var bookRouter = require("./routes/bookRoutes");
 
 var app = express();
 
@@ -31,5 +32,6 @@ app.use("/api/library/reservations", reservationRouter);
 app.use("/api/library/users", userRouter);
 app.use("/api/library/reviews", reviewRouter);
 app.use("/api/library/schools", schoolRouter);
+app.use("/api/library/books", bookRouter);
 
 module.exports = app;
