@@ -699,7 +699,44 @@ BEGIN
 		RETURN "OK";
 	END IF;
 END //
+DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE selectBooks(IN schoolID INT)
+BEGIN
+	CREATE TEMPORARY TABLE mywrites(
+		book_id INT ,
+		writer_id int,
+		PRIMARY KEY(book_id, writer_id)
+	);
+	CREATE TEMPORARY TABLE Books(
+		book_id INT PRIMARY KEY
+	);
+	
+    INSERT INTO Books(book_id)
+	SELECT ID
+	FROM Book
+	WHERE school_ID = schoolID;
+
+	INSERT INTO mywrites(book_id, writer_id)
+	SELECT book_ID, writer_ID
+	FROM Writes
+	WHERE book_ID IN (SELECT book_id FROM Books);
+
+	SELECT b.ID, b.title, b.publisher, b.ISBN, b.page_number, b.summary, b.copies, b.image, b.lang, b.keywords, gen.genres, final.full_names
+	FROM Book b
+	JOIN (SELECT book_ID, GROUP_CONCAT(genre SEPARATOR ", ") AS genres
+		FROM Genre g
+		WHERE book_ID IN (SELECT book_id FROM Books) GROUP BY book_ID) AS gen
+	ON b.ID = gen.book_ID
+	JOIN (SELECT sm.book_id, GROUP_CONCAT(full_name SEPARATOR ", ") AS full_names 
+		FROM (SELECT book_id, CONCAT(first_name, " ", last_name) AS full_name
+		FROM (SELECT m.book_id, w.first_name, w.last_name
+			FROM mywrites m
+			JOIN writer w ON m.writer_id = w.ID) AS books_writers) AS sm GROUP BY book_id) AS final
+	ON final.book_id = b.ID;
+
+END//
 DELIMITER ;
 
 
