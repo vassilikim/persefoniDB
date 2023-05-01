@@ -702,7 +702,7 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE selectBooks(IN schoolID INT)
+CREATE PROCEDURE selectBooks(IN schoolID INT, IN title VARCHAR(255), IN genre VARCHAR(255), IN writer VARCHAR(255), IN copies INT)
 BEGIN
 	CREATE TEMPORARY TABLE mywrites(
 		book_id INT ,
@@ -713,10 +713,111 @@ BEGIN
 		book_id INT PRIMARY KEY
 	);
 	
-    INSERT INTO Books(book_id)
-	SELECT ID
-	FROM Book
-	WHERE school_ID = schoolID;
+    IF title IS NULL AND genre IS NULL AND writer IS NULL AND copies IS NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+		WHERE b.school_ID = schoolID;
+	ELSEIF title IS NOT NULL AND genre IS NULL AND writer IS NULL AND copies IS NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+		WHERE b.school_ID = schoolID AND b.title = title;
+	ELSEIF title IS NULL AND genre IS NOT NULL AND writer IS NULL AND copies IS NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Genre g ON b.ID = g.book_ID
+		WHERE b.school_ID = schoolID AND g.genre = genre;
+    ELSEIF title IS NULL AND genre IS NULL AND writer IS NOT NULL AND copies IS NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Writes wr ON b.ID = wr.book_ID
+        JOIN Writer w ON w.ID = wr.writer_ID
+		WHERE b.school_ID = schoolID AND CONCAT(W.first_name, ' ', w.last_name) = writer;
+    ELSEIF title IS NULL AND genre IS NULL AND writer IS NULL AND copies IS NOT NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+		WHERE b.school_ID = schoolID AND b.copies = copies;
+    ELSEIF title IS NOT NULL AND genre IS NOT NULL AND writer IS NULL AND copies IS NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Genre g ON b.ID = g.book_ID
+		WHERE b.school_ID = schoolID AND b.title = title AND g.genre = genre;
+    ELSEIF title IS NOT NULL AND genre IS NULL AND writer IS NOT NULL AND copies IS NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Writes wr ON b.ID = wr.book_ID
+        JOIN Writer w ON w.ID = wr.writer_ID
+		WHERE b.school_ID = schoolID AND b.title = title AND CONCAT(W.first_name, ' ', w.last_name) = writer;
+    ELSEIF title IS NOT NULL AND genre IS NULL AND writer IS NULL AND copies IS NOT NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+		WHERE b.school_ID = schoolID AND b.title = title AND b.copies = copies;
+    ELSEIF title IS NULL AND genre IS NOT NULL AND writer IS NOT NULL AND copies IS NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Writes wr ON b.ID = wr.book_ID
+        JOIN Writer w ON w.ID = wr.writer_ID
+        JOIN Genre g ON b.ID = g.book_ID
+		WHERE b.school_ID = schoolID AND CONCAT(W.first_name, ' ', w.last_name) = writer AND g.genre = genre;
+    ELSEIF title IS NULL AND genre IS NOT NULL AND writer IS NULL AND copies IS NOT NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Genre g ON b.ID = g.book_ID
+		WHERE b.school_ID = schoolID AND b.copies = copies AND g.genre = genre;
+    ELSEIF title IS NULL AND genre IS NULL AND writer IS NOT NULL AND copies IS NOT NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Writes wr ON b.ID = wr.book_ID
+        JOIN Writer w ON w.ID = wr.writer_ID
+		WHERE b.school_ID = schoolID AND b.copies = copies AND CONCAT(W.first_name, ' ', w.last_name) = writer;
+    ELSEIF title IS NOT NULL AND genre IS NOT NULL AND writer IS NOT NULL AND copies IS NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Writes wr ON b.ID = wr.book_ID
+        JOIN Writer w ON w.ID = wr.writer_ID
+        JOIN Genre g ON b.ID = g.book_ID
+		WHERE b.school_ID = schoolID AND CONCAT(W.first_name, ' ', w.last_name) = writer AND g.genre = genre AND b.title = title;
+    ELSEIF title IS NOT NULL AND genre IS NOT NULL AND writer IS NULL AND copies IS NOT NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Genre g ON b.ID = g.book_ID
+		WHERE b.school_ID = schoolID AND b.title  = title AND b.copies = copies AND g.genre = genre;
+    ELSEIF title IS NOT NULL AND genre IS NULL AND writer IS NOT NULL AND copies IS NOT NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Writes wr ON b.ID = wr.book_ID
+        JOIN Writer w ON w.ID = wr.writer_ID
+		WHERE b.school_ID = schoolID AND b.title = title AND b.copies = copies AND CONCAT(W.first_name, ' ', w.last_name) = writer;
+    ELSEIF title IS NULL AND genre IS NOT NULL AND writer IS NOT NULL AND copies IS NOT NULL THEN
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Writes wr ON b.ID = wr.book_ID
+        JOIN Writer w ON w.ID = wr.writer_ID
+        JOIN Genre g ON b.ID = g.book_ID
+		WHERE b.school_ID = schoolID AND CONCAT(W.first_name, ' ', w.last_name) = writer AND g.genre = genre AND b.copies = copies;
+    ELSE 
+		INSERT INTO Books(book_id)
+		SELECT b.ID
+		FROM Book b
+        JOIN Writes wr ON b.ID = wr.book_ID
+        JOIN Writer w ON w.ID = wr.writer_ID
+        JOIN Genre g ON b.ID = g.book_ID
+		WHERE b.school_ID = schoolID AND CONCAT(W.first_name, ' ', w.last_name) = writer AND g.genre = genre AND b.title = title AND b.copies = copies;
+	END IF;
 
 	INSERT INTO mywrites(book_id, writer_id)
 	SELECT book_ID, writer_ID
@@ -725,9 +826,9 @@ BEGIN
 
 	SELECT b.ID, b.title, b.publisher, b.ISBN, b.page_number, b.summary, b.copies, b.image, b.lang, b.keywords, gen.genres, final.full_names
 	FROM Book b
-	JOIN (SELECT book_ID, GROUP_CONCAT(genre SEPARATOR ", ") AS genres
+	JOIN (SELECT g.book_ID, GROUP_CONCAT(g.genre SEPARATOR ", ") AS genres
 		FROM Genre g
-		WHERE book_ID IN (SELECT book_id FROM Books) GROUP BY book_ID) AS gen
+		WHERE g.book_ID IN (SELECT book_id FROM Books) GROUP BY g.book_ID) AS gen
 	ON b.ID = gen.book_ID
 	JOIN (SELECT sm.book_id, GROUP_CONCAT(full_name SEPARATOR ", ") AS full_names 
 		FROM (SELECT book_id, CONCAT(first_name, " ", last_name) AS full_name
@@ -736,7 +837,47 @@ BEGIN
 			JOIN writer w ON m.writer_id = w.ID) AS books_writers) AS sm GROUP BY book_id) AS final
 	ON final.book_id = b.ID;
 
-END//
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE selectLendedBooks(IN userID INT)
+BEGIN
+	CREATE TEMPORARY TABLE mywrites(
+		book_id INT ,
+		writer_id int,
+		PRIMARY KEY(book_id, writer_id)
+	);
+	CREATE TEMPORARY TABLE Books(
+		book_id INT PRIMARY KEY
+	);
+    
+    INSERT INTO Books(book_id)
+	SELECT b.ID
+	FROM Book b
+    JOIN Lending l ON b.ID = l.book_ID
+	WHERE l.user_ID = userID;
+
+	INSERT INTO mywrites(book_id, writer_id)
+	SELECT book_ID, writer_ID
+	FROM Writes
+	WHERE book_ID IN (SELECT book_id FROM Books);
+
+	SELECT b.ID, b.title, b.publisher, b.ISBN, b.page_number, b.summary, b.copies, b.image, b.lang, b.keywords, gen.genres, final.full_names, l.was_returned_at
+	FROM Book b
+    JOIN Lending l ON l.book_ID = b.ID
+	JOIN (SELECT g.book_ID, GROUP_CONCAT(g.genre SEPARATOR ", ") AS genres
+		FROM Genre g
+		WHERE g.book_ID IN (SELECT book_id FROM Books) GROUP BY g.book_ID) AS gen
+	ON b.ID = gen.book_ID
+	JOIN (SELECT sm.book_id, GROUP_CONCAT(full_name SEPARATOR ", ") AS full_names 
+		FROM (SELECT book_id, CONCAT(first_name, " ", last_name) AS full_name
+		FROM (SELECT m.book_id, w.first_name, w.last_name
+			FROM mywrites m
+			JOIN writer w ON m.writer_id = w.ID) AS books_writers) AS sm GROUP BY book_id) AS final
+	ON final.book_id = b.ID;
+
+END //
 DELIMITER ;
 
 

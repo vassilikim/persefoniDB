@@ -10,4 +10,11 @@ router.get(
   bookController.selectAllBooks
 );
 
+router.get(
+  "/lended",
+  authController.protect,
+  authController.restrictTo("teacher", "student"),
+  bookController.selectLendedBooks
+);
+
 module.exports = router;
