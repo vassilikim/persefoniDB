@@ -102,10 +102,10 @@ exports.verifySchoolAdmin = async (req, res, next) => {
 
 exports.getNumOfLendingsPerSchool = async (req, res, next) => {
   try {
-    if (!req.body.year) req.body.year = null;
-    if (!req.body.month) req.body.month = null;
-    else if ((month = monthToNumber(req.body.month)) != null) {
-      req.body.month = month;
+    if (!req.query.year) req.query.year = null;
+    if (!req.query.month) req.query.month = null;
+    else if ((month = monthToNumber(req.query.month)) != null) {
+      req.query.month = month;
     } else {
       return res.status(400).json({
         status: "failed",
@@ -117,7 +117,7 @@ exports.getNumOfLendingsPerSchool = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `CALL get_lendings_by_school(${req.body.year}, ${req.body.month})`,
+      `CALL get_lendings_by_school(${req.query.year}, ${req.query.month})`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -142,7 +142,7 @@ exports.getNumOfLendingsPerSchool = async (req, res, next) => {
 
 exports.getWritersTeachersPerGenre = async (req, res, next) => {
   try {
-    if (!req.body.genre)
+    if (!req.query.genre)
       return res.status(400).json({
         status: "failed",
         message: "Please provide the genre in the parameters!",
@@ -152,7 +152,7 @@ exports.getWritersTeachersPerGenre = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `CALL get_writers_teachers_per_genre('${req.body.genre}')`,
+      `CALL get_writers_teachers_per_genre('${req.query.genre}')`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({

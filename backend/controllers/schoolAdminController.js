@@ -77,17 +77,17 @@ exports.verifyTeacherStudent = async (req, res, next) => {
 
 exports.getUsersWithDelayedLending = async (req, res, next) => {
   try {
-    if (!req.body.first_name) req.body.first_name = null;
-    else req.body.first_name = `'${req.body.first_name}'`;
-    if (!req.body.last_name) req.body.last_name = null;
-    else req.body.last_name = `'${req.body.last_name}'`;
-    if (!req.body.delay) req.body.delay = null;
+    if (!req.query.first_name) req.query.first_name = null;
+    else req.query.first_name = `'${req.query.first_name}'`;
+    if (!req.query.last_name) req.query.last_name = null;
+    else req.query.last_name = `'${req.query.last_name}'`;
+    if (!req.query.delay) req.query.delay = null;
 
     let connection = sql.createConnection(config);
     connection.connect();
 
     connection.query(
-      `CALL get_users_delayed_return(${req.body.first_name}, ${req.body.last_name}, ${req.body.delay}, ${req.school_id})`,
+      `CALL get_users_delayed_return(${req.query.first_name}, ${req.query.last_name}, ${req.query.delay}, ${req.school_id})`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -113,20 +113,20 @@ exports.getUsersWithDelayedLending = async (req, res, next) => {
 exports.getAverageRatingPerGenreAndUser = async (req, res, next) => {
   try {
     let isNull = false;
-    if (!req.body.full_name) {
+    if (!req.query.full_name) {
       isNull = true;
-      req.body.full_name = null;
-    } else req.body.full_name = `'${req.body.full_name}'`;
-    if (!req.body.genre) {
+      req.query.full_name = null;
+    } else req.query.full_name = `'${req.query.full_name}'`;
+    if (!req.query.genre) {
       isNull = true;
-      req.body.genre = null;
-    } else req.body.genre = `'${req.body.genre}'`;
+      req.query.genre = null;
+    } else req.query.genre = `'${req.query.genre}'`;
 
     let connection = sql.createConnection(config);
     connection.connect();
 
     connection.query(
-      `CALL get_avg_rating_per_genre_user(${req.body.genre}, ${req.body.full_name}, ${req.school_id})`,
+      `CALL get_avg_rating_per_genre_user(${req.query.genre}, ${req.query.full_name}, ${req.school_id})`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
