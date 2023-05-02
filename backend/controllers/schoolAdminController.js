@@ -75,6 +75,220 @@ exports.selectAllBooks = async (req, res, next) => {
   }
 };
 
+exports.deleteBook = async (req, res, next) => {
+  try {
+    
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      // `SELECT delBook(${req.params.bookID}, ${req.school_id}) as answer;`,
+      `SELECT delBook(${req.params.bookID}, 1) as answer;`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+      
+        if (results[0]["answer"] == "NO BOOK") {
+          return res.status(401).json({
+            status: "failed",
+            message: "There is no book with this ID!",
+            });
+        } else if (results[0]["answer"] == "NOT OK"){
+          return res.status(403).json({
+            status: "failed",
+            message: "You don't have permission to perform this action!",
+          });
+        } else {
+          return res.status(200).json({
+            status: "success",
+            message: "This book was deleted successfully"
+          });
+        }
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.selectAllReservations = async (req, res, next) => {
+  try {
+
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `CALL SelectReservations(${req.school_id});`,
+      //`CALL SelectReservations(${req.params.schoolID});`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        return res.status(200).json({
+          status: "success",
+          reservations: results[0],
+        });
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.selectAllLendings = async (req, res, next) => {
+  try {
+
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `CALL SelectLendings(${req.school_id});`,
+      //`CALL SelectLendings(${req.params.schoolID});`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        return res.status(200).json({
+          status: "success",
+          lendings: results[0],
+        });
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.selectResforUser = async (req, res, next) => {
+  try {
+
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT checkUser(1, ${req.params.userID}) as answer;`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        if (results[0]["answer"] == "NO USER") {
+          return res.status(401).json({
+            status: "failed",
+            message: "There is no user with this ID!",
+          });
+        } else if (results[0]["answer"] == "NOT OK"){
+          return res.status(403).json({
+            status: "failed",
+            message: "You don't have permission to perform this action!",
+          });
+        } else {
+          let connection1 = sql.createConnection(config);
+          connection1.connect();
+          connection1.query(
+            `CALL SelectReservationsfromUser(${req.params.userID});`,
+            async function (error, results, fields) {
+              if (error)
+                return res.status(500).json({
+                  status: "failed",
+                  message: error.message,
+                });
+                return res.status(200).json({
+                 status: "success",
+                  reservations: results[0],
+                });
+            }  
+          )
+          connection1.end();
+        }
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.selectLenforUser = async (req, res, next) => {
+  try {
+
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT checkUser(1, ${req.params.userID}) as answer;`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        if (results[0]["answer"] == "NO USER") {
+          return res.status(401).json({
+            status: "failed",
+            message: "There is no user with this ID!",
+          });
+        } else if (results[0]["answer"] == "NOT OK"){
+          return res.status(403).json({
+            status: "failed",
+            message: "You don't have permission to perform this action!",
+          });
+        } else {
+          let connection1 = sql.createConnection(config);
+          connection1.connect();
+          connection1.query(
+            `CALL SelectLendingsfromUser(${req.params.userID});`,
+            async function (error, results, fields) {
+              if (error)
+                return res.status(500).json({
+                  status: "failed",
+                  message: error.message,
+                });
+                return res.status(200).json({
+                 status: "success",
+                 lendigs: results[0],
+                });
+            }  
+          )
+          connection1.end();
+        }
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
 ///////////////////////////////////////// school admin ////////////////////////////////////////////
 
 // exports.selectAllBooks = async (req, res, next) => {

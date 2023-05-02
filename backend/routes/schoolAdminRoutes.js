@@ -24,6 +24,46 @@ var schoolAdminController = require("../controllers/schoolAdminController");
 //     "/school/:schoolName",
 //     superAdminController.deleteSchool
 //   );
+
+// router.get(
+//     "/reservations/:schoolID",
+//     schoolAdminController.selectAllReservations
+//   );
+
+//   router.get(
+//     "/lendings/:schoolID",
+//     schoolAdminController.selectAllLendings
+//   );
+router.get(
+  "/reservations",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  schoolAdminController.selectAllReservations
+);
+
+router.get(
+  "/lendings",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  schoolAdminController.selectAllLendings
+);
+
+router.get(
+    "/reservations/:userID",
+    schoolAdminController.selectResforUser
+  );
+
+  router.get(
+    "/lendings/:userID",
+    schoolAdminController.selectLenforUser
+  );
+
+  router.delete(
+    "/book/:bookID",
+    // authController.protect,
+    // authController.restrictTo("school-admin"),
+    schoolAdminController.deleteBook
+  );
   
 //////////////////////////////  school admin /////////////////////////////////////
 
