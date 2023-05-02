@@ -75,11 +75,7 @@
     box-shadow: 0 2px 5px rgba(124, 77, 255, 0.2);
   } 
   
-  @media (max-width:668px){
-    #search-bar {
-      width: 80%;
-    }
-  }
+  
 
   .bookInfoDiv {
     display: flex;
@@ -88,7 +84,7 @@
     position: relative;
     margin: auto;
     margin-top: 10%;
-    max-width: 70%;
+    max-width: 50%;
     max-height: 100%;
     padding: 20px;
     background-color: rgba(255, 255, 255);
@@ -102,8 +98,8 @@
       text-align: center;
     }
     .bookInfoDiv p{
-      margin-left: 15%;
-      margin-right: 15%;
+      margin-left: 5%;
+      margin-right: 5%;
     }
     .bookInfoDiv strong, h2{
       color: #482c62;
@@ -119,7 +115,7 @@
     margin: auto;
     width: 100%;
     height: 100%;
-    background-color: #d2c3fa7b;
+    background-color: #d2c3fabc;
     border: none;
     z-index: 9999;
     display: none;
@@ -139,4 +135,50 @@
   }
   .del:hover{
     background-color: #fc9b9b;
+  }
+
+  .book-body form {
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .book-body input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  .book-body input:focus {
+    outline: none;
+    border-color: #af92ff;
+    box-shadow: 0 2px 5px rgba(124, 77, 255, 0.2);
+  } 
+
+  .book-body button[type="submit"] {
+    padding: 10px;
+    background-color: #482c62;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .book-body button[type="submit"]:hover {
+    color: #482c62;
+    background-color: #d2c3fabc;
+  }
+
+  @media (max-width:668px){
+    #search-bar {
+      width: 80%;
+    }
+
+    .book-body form {
+      display: block;
+      max-width: 70%;
+      margin-left: 15%;
+      margin-bottom: 20px;
+    }
   }
