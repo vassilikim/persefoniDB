@@ -50,18 +50,29 @@ router.get(
 
 router.get(
     "/reservations/:userID",
+    authController.protect,
+    authController.restrictTo("school-admin"),
     schoolAdminController.selectResforUser
   );
 
   router.get(
     "/lendings/:userID",
+    authController.protect,
+    authController.restrictTo("school-admin"),
     schoolAdminController.selectLenforUser
+  );
+
+  router.get(
+    "/delayed_lendings",
+    authController.protect,
+    authController.restrictTo("school-admin"),
+    schoolAdminController.selectDelayedLen
   );
 
   router.delete(
     "/book/:bookID",
-    // authController.protect,
-    // authController.restrictTo("school-admin"),
+    authController.protect,
+    authController.restrictTo("school-admin"),
     schoolAdminController.deleteBook
   );
   

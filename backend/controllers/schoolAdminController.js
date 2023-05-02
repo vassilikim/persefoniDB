@@ -83,7 +83,7 @@ exports.deleteBook = async (req, res, next) => {
 
     connection.query(
       // `SELECT delBook(${req.params.bookID}, ${req.school_id}) as answer;`,
-      `SELECT delBook(${req.params.bookID}, 1) as answer;`,
+      `SELECT delBook(${req.params.bookID}, ${req.school_id}) as answer;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -187,7 +187,7 @@ exports.selectResforUser = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT checkUser(1, ${req.params.userID}) as answer;`,
+      `SELECT checkUser(${req.school_id}, ${req.params.userID}) as answer;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -242,7 +242,7 @@ exports.selectLenforUser = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT checkUser(1, ${req.params.userID}) as answer;`,
+      `SELECT checkUser(${req.school_id}, ${req.params.userID}) as answer;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -279,6 +279,36 @@ exports.selectLenforUser = async (req, res, next) => {
           )
           connection1.end();
         }
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.selectDelayedLen = async (req, res, next) => {
+  try {
+    
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `select * from lending where must_be_returned_at < now() and was_returned_at is null and book_ID IN (select ID from book where school_ID = ${req.school_id});`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        return res.status(200).json({
+          status: "success",
+          delayed_lendings: results,
+        });
       }
     );
     connection.end();
