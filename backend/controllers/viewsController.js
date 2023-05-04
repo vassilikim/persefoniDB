@@ -6,11 +6,33 @@ exports.getMainPage = async (req, res, next) => {
     res.status(200).render("super-admin");
   } else if (req.role == "school-admin"){
     res.status(200).render("school-admin");
+  } else if (req.role == "teacher" || req.role == "student") {
+    res.status(200).render("users");
   }
+};
+
+exports.getSignUp = async (req, res, next) => {
+  res.status(200).render('signup');
 };
 
 exports.getLoginPage = async (req, res, next) => {
   res.status(200).render("login");
+};
+
+exports.getChangePassword = async (req, res, next) => {
+  res.status(200).render("change-password");
+};
+
+exports.getSchools = async (req, res, next) => {
+  res.status(200).render("schools");
+};
+
+exports.getEditProfile = async (req, res, next) => {
+  res.status(200).render("edit-profile");
+};
+
+exports.getNotVerifiedSchoolAdmins = async (req, res, next) => {
+  res.status(200).render("verify-admin");
 };
 
 exports.getProfile=async(req,res,next)=>{

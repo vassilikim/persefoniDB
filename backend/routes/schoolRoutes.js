@@ -5,8 +5,6 @@ var schoolController = require("../controllers/schoolController");
 
 router.get(
   "/",
-  authController.protect,
-  authController.restrictTo("super-admin"),
   schoolController.selectAllSchools
 );
 

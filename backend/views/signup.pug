@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+   
+    <!-- form for signup -->
+
+    <form class="form-signup" id="signup">
+      <h1>Signup</h1>
+      <div id="form-signup">
+
+      </div>
+        <div >
+          <label>First name</label><input placeholder="Type here your First Name" type="text" id="first_name">
+        </div>
+        <div >
+          <label>Last name</label><input placeholder="Type here your Last Name" type="text" id="last_name">
+        </div>
+        <div >
+            <label>Username</label><input placeholder="Type here your username" type="text" id="username">
+        </div>
+        <div>
+            <label>Password</label><input placeholder="Type here your password" type="password" id="password">
+        </div>
+        <div>
+          <label>Role</label><input placeholder="Type here your Role like super-admin or school-admin or student" type="text" id="role">
+        </div>
+        <div>
+          <label>Birth Date</label><input placeholder="Type here your birth date (ex 2023-08-10)" type="text" id="birth_date">
+        </div>
+        <button id="signup-btn" class="button-login"><input type="submit" value="Signup" ></button>
+    </form> 
+  <div class="footer">
+    <h3>Copyright © 2023</h3>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type=module src="javascripts/signup.js"> </script>
+  </body>
+</html>
