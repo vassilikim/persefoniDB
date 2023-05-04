@@ -10,10 +10,10 @@ var schoolAdminController = require("../controllers/schoolAdminController");
     schoolAdminController.selectAllBooks
   );
   
-  // router.post(
-  //   "/book",
-  //   schoolAdminController.addBook
-  // );
+  router.post(
+    "/book",
+    schoolAdminController.addBook
+  );
   
 //   router.patch(
 //     "/book/:schoolName",

@@ -352,46 +352,46 @@ exports.selectDelayedLen = async (req, res, next) => {
 //   }
 // };
 
-// exports.addBook = async (req, res, next) => {
-//   try {
+exports.addBook = async (req, res, next) => {
+  try {
 
-//     if (!req.body.title || !req.body.publisher || !req.body.ISBN || !req.body.page_number || !req.body.summary || !req.body.copies || !req.body.image || !req.body.lang || !req.body.keywords || !req.body.school_ID || !req.body.genre || !req.body.first_name || !req.body.last_name) {
-//       return res.status(500).json({
-//         status: "failed",
-//         message: "Please provide all the required parameters.",
-//       });
-//     }
+    if (!req.body.title || !req.body.publisher || !req.body.ISBN || !req.body.page_number || !req.body.summary || !req.body.copies || !req.body.image || !req.body.lang || !req.body.keywords || !req.body.genre || !req.body.writer_name) {
+      return res.status(500).json({
+        status: "failed",
+        message: "Please provide all the required parameters.",
+      });
+    }
     
-//     let connection = sql.createConnection(config);
-//     connection.connect();
+    let connection = sql.createConnection(config);
+    connection.connect();
 
     
-//     connection.query(
-//       `INSERT INTO book (title, publisher, ISBN, page_number, summary, copies, image, lang, keywords, school_ID)` + `VALUES ('${req.body.title}', '${req.body.publisher}', '${req.body.ISBN}', ${req.body.page_number}, '${req.body.summary}', ${req.body.copies}, '${req.body.image}', '${req.body.lang}', '${req.body.keywords}', ${req.body.school_ID});` +
-//       //`SELECT ID FROM book WHERE ID = LAST_INSERT_ID();`,
-//       `SET @bookID=(SELECT ID FROM book WHERE ID = LAST_INSERT_ID());` +
-//       `INSERT INTO genre (book_ID, genre)` + `VALUES (@bookID, '${req.body.genre}');` +
-//       `INSERT INTO writer (first_name, last_name)` + `VALUES ('${req.body.first_name}', '${req.body.last_name}');` +
-//       `SET @writerID=(SELECT ID FROM writer WHERE ID = LAST_INSERT_ID());` +
-//       `INSERT INTO writes (writer_ID, book_ID)` + `VALUES (@writerID, @bookID);`,
-//       async function (error, results, fields) {
-//         if (error)
-//           return res.status(500).json({
-//             status: "failed",
-//             message: error.message,
-//           });
+    connection.query(
+      `INSERT INTO book (title, publisher, ISBN, page_number, summary, copies, image, lang, keywords, school_ID)` + `VALUES ('${req.body.title}', '${req.body.publisher}', '${req.body.ISBN}', ${req.body.page_number}, '${req.body.summary}', ${req.body.copies}, '${req.body.image}', '${req.body.lang}', '${req.body.keywords}', 1);` +
+      `SET @bookID=(SELECT ID FROM book WHERE ID = LAST_INSERT_ID());` +
+      `CALL extract_names_genre('${req.body.writer_name}', '${req.body.genre}', @bookID)`,
+      // `INSERT INTO genre (book_ID, genre)` + `VALUES (@bookID, '${req.body.genre}');` +
+      // `INSERT INTO writer (first_name, last_name)` + `VALUES ('${req.body.first_name}', '${req.body.last_name}');` +
+      // `SET @writerID=(SELECT ID FROM writer WHERE ID = LAST_INSERT_ID());` +
+      // `INSERT INTO writes (writer_ID, book_ID)` + `VALUES (@writerID, @bookID);`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
 
-//         return res.status(200).json({
-//           status: "success",
-//           message: "New book added successfully",
-//         });
-//       }
-//     );
-//     connection.end();
-//   } catch (err) {
-//     return res.status(500).json({
-//       status: "failed",
-//       message: err.message,
-//     });
-//   }
-// };
+        return res.status(200).json({
+          status: "success",
+          message: "New book added successfully",
+        });
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
