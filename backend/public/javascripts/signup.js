@@ -15,7 +15,15 @@ const getSchools = async () => {
   }
 };
 
-const signup = async (username, password, role, first_name, last_name, school, birth_date) => {
+const signup = async (
+  username,
+  password,
+  role,
+  first_name,
+  last_name,
+  school,
+  birth_date
+) => {
   try {
     const res = await axios({
       method: "POST",
@@ -27,14 +35,14 @@ const signup = async (username, password, role, first_name, last_name, school, b
         first_name,
         last_name,
         school,
-        birth_date
+        birth_date,
       },
     });
 
     if (res.status == 200) {
       showAlert("success", res.data.message);
       window.setTimeout(() => {
-        location.assign("/");
+        location.replace("/");
       }, 1500);
     }
   } catch (err) {
@@ -52,30 +60,46 @@ signupForm.addEventListener("submit", async function (event) {
   const role = document.getElementById("role").value;
   const first_name = document.getElementById("first_name").value;
   const last_name = document.getElementById("last_name").value;
-  const school = document.getElementById("sch").value;
+  let school = document.getElementById("sch").value;
   const birth_date = document.getElementById("birth_date").value;
 
-  await signup(username, password, role, first_name, last_name, school, birth_date);
+  if (school == "Please choose your school." && role != "super-admin") {
+    showAlert("error", "Please provide all the required parameters.");
+  } else {
+    await signup(
+      username,
+      password,
+      role,
+      first_name,
+      last_name,
+      school,
+      birth_date
+    );
+  }
 });
 
-
-const schoolList = document.getElementById('form-signup');
-const myselect = document.createElement('select');
-myselect.id = 'sch';
+const schoolList = document.getElementById("form-signup");
+const myselect = document.createElement("select");
+myselect.id = "sch";
 
 function renderSchools(schools) {
-  schoolList.innerHTML = '';
-  schools.forEach(school => {
-    const options = document.createElement('option');
+  schoolList.innerHTML = "";
+  const options = document.createElement("option");
+  options.textContent = "Please choose your school.";
+  options.value = "Please choose your school.";
+
+  myselect.appendChild(options);
+  schoolList.appendChild(myselect);
+
+  schools.forEach((school) => {
+    const options = document.createElement("option");
 
     options.textContent = school.school_name;
     options.value = school.school_name;
-    
+
     myselect.appendChild(options);
     schoolList.appendChild(myselect);
   });
 }
 
-  renderSchools(await getSchools());
-
-
+renderSchools(await getSchools());

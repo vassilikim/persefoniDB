@@ -53,37 +53,61 @@ export const hideAlert = () => {
 
   // If the login button is disabled and has the loading class, remove it and enable it again
   const loginButton = document.getElementById("login-btn");
-  if (loginButton && loginButton.disabled && loginButton.classList.contains("loading")) {
+  if (
+    loginButton &&
+    loginButton.disabled &&
+    loginButton.classList.contains("loading")
+  ) {
     loginButton.classList.remove("loading");
     loginButton.disabled = false;
   }
 
   const signupButton = document.getElementById("signup-btn");
-  if (signupButton && signupButton.disabled && signupButton.classList.contains("loading")) {
+  if (
+    signupButton &&
+    signupButton.disabled &&
+    signupButton.classList.contains("loading")
+  ) {
     signupButton.classList.remove("loading");
     signupButton.disabled = false;
   }
 
   const changePasswordButton = document.getElementById("change-password-btn");
-  if (changePasswordButton && changePasswordButton.disabled && changePasswordButton.classList.contains("loading")) {
+  if (
+    changePasswordButton &&
+    changePasswordButton.disabled &&
+    changePasswordButton.classList.contains("loading")
+  ) {
     changePasswordButton.classList.remove("loading");
     changePasswordButton.disabled = false;
   }
 
   const editProfileBtn = document.getElementById("edit-btn");
-  if (editProfileBtn && editProfileBtn.disabled && editProfileBtn.classList.contains("loading")) {
+  if (
+    editProfileBtn &&
+    editProfileBtn.disabled &&
+    editProfileBtn.classList.contains("loading")
+  ) {
     editProfileBtn.classList.remove("loading");
     editProfileBtn.disabled = false;
   }
 
   const backupBtn = document.getElementById("backup");
-  if (backupBtn && backupBtn.disabled && backupBtn.classList.contains("loading")) {
+  if (
+    backupBtn &&
+    backupBtn.disabled &&
+    backupBtn.classList.contains("loading")
+  ) {
     backupBtn.classList.remove("loading");
     backupBtn.disabled = false;
   }
 
   const restoreBtn = document.getElementById("restore");
-  if (restoreBtn && restoreBtn.disabled && restoreBtn.classList.contains("loading")) {
+  if (
+    restoreBtn &&
+    restoreBtn.disabled &&
+    restoreBtn.classList.contains("loading")
+  ) {
     restoreBtn.classList.remove("loading");
     restoreBtn.disabled = false;
   }
@@ -92,7 +116,7 @@ export const hideAlert = () => {
 export const showAlert = (type, msg, time = 7) => {
   // Hide previous alerts
   hideAlert();
-  
+
   // Put the HTML code for the alert in the beginning of the body
   const markup = `<div class="alert alert--${type}">${msg}</div>`;
   document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
@@ -135,7 +159,7 @@ export const showAlert = (type, msg, time = 7) => {
       restoreBtn.disabled = true;
     }
   }
-  
+
   // Close the alert after a given time
   window.setTimeout(hideAlert, time * 1000);
 };
