@@ -86,7 +86,7 @@ font-weight: bold;
     width: 5%;
 }
 
-/* menu -> logout button and profil image*/
+/* menu -> logout button and profile image*/
 .menu{
   display: flex;
   justify-content: space-between;
@@ -113,8 +113,8 @@ font-weight: bold;
   cursor:pointer;
   }
 
-/* card for profil */
-.card-profil {
+/* card for profile */
+.card-profile {
   display: flex;
   gap: 65px;
   background-color: white;
@@ -127,13 +127,13 @@ font-weight: bold;
   padding: 25px;
 }
 
-.card-profil img {
+.card-profile img {
   width: 250px;
   height: 250px;
   margin-left: 10px;
 }
 
-.card-profil a {
+.card-profile a {
   display: block;
   font-size: 15px;
   text-align: center;
@@ -146,29 +146,29 @@ font-weight: bold;
   border: 2px solid #534caf;
 }
 
-.card-profil a:hover {
+.card-profile a:hover {
   background-color: #573478;
   color: white;
 }
-.card-profil .add-margin{
+.card-profile .add-margin{
   margin-left: 25%;
 }
-.card-profil .editprofile {
+.card-profile .editprofile {
   display: block;
   
 }
 
-.card-profil .hide-link {
+.card-profile .hide-link {
   display: none;
 }
 
-.card-profil .links{
+.card-profile .links{
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.card-profil .editpassword{
+.card-profile .editpassword{
   display: block;
 }
 
@@ -406,8 +406,8 @@ font-weight: bold;
     width: 100%;
   }
 
-  /* card for profil */
-.card-profil{
+  /* card for profile */
+.card-profile{
   display:block;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgb(0, 0, 0,0.2);
@@ -418,17 +418,17 @@ font-weight: bold;
   padding: 25px;
 
   }
-  .card-profil img{
+  .card-profile img{
     margin-bottom: 25px;
     margin-left: auto;
   }
 
-  .card-profil .links{
+  .card-profilee .links{
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .card-profil .add-margin{
+  .card-profile .add-margin{
     margin-left: 20%;
   }
 }
@@ -472,3 +472,266 @@ font-weight: bold;
   margin-top: 5%;
  }
 
+ /* restore and backup btn */
+.restore{
+  background: none;
+  border: none;
+  width: 100%;
+}
+
+/* schools card for super-admin */
+
+.sch-card{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+.sch-card .schOfone{
+  position: relative;
+  padding: 10px;
+  width: 50%;
+  height: 50%;
+  background-color: aliceblue;
+  margin: 10px;
+  border-radius: 10px;
+  padding-bottom:20px;
+}
+.sch-card .schOfone h2{
+  text-align: center;
+}
+.sch-card .schOfone h3{
+  text-align: left;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+.sch-card .sch-edit{
+  position:absolute;
+  top:0;
+  right: 0;
+  /* margin: 15px; */
+  font-size: 15px;
+  background-color: #534caf;
+  border: 2px solid #534caf;
+  border-radius:0 10px;
+  color:white;
+}
+.sch-card .sch-edit:hover{
+  background-color:white;
+  border: 2px solid #534caf;
+  border-radius: 0 12px;
+  color:#573478;
+  cursor: pointer;
+}
+.sch-card .schOfone h2{
+  font-size: 30px;
+  color: #573478;
+}
+.sch-card .schOfone strong ,h2{
+  font-size: 21px;
+  color: #573478;
+}
+
+/* all books */
+
+
+#book-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  position: relative;
+  margin: 10px;
+  padding: 2.2%;
+  background-color: #e2daf9;
+  border-radius: 5px;
+  width: 250px;
+  text-align: center;
+}
+
+.info{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+}
+
+
+.book_image {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+button {
+  background-color: #f0f0f0;
+  border: none;
+  /* padding: 10px; */
+  border-radius: 0 5px;
+  /* margin: 5px; */
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #482c62;
+  color:white;
+}
+
+.lend{
+  background-color: rgb(123, 193, 18);
+}
+
+.del{
+  background-color: rgb(189, 64, 64);
+}
+
+.book-body{
+  margin-bottom: 20%;
+  text-align: center;
+}
+
+#search-bar {
+  padding: 10px;
+  border: 1px solid #ffffff;
+  border-radius: 20px;
+  font-size: 15px;
+  width: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 35px;
+}
+
+#search-bar:focus {
+  outline: none;
+  border-color: #af92ff;
+  box-shadow: 0 2px 5px rgba(124, 77, 255, 0.2);
+} 
+
+
+
+.bookInfoDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: auto;
+  margin-top: 10%;
+  max-width: 50%;
+  max-height: 100%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255);
+  border: 0.5px none #482c62;
+  border-radius: 5px;
+  z-index: 9999;
+  display: none;
+
+  }
+  .bookInfoDiv h2{
+    text-align: center;
+  }
+  .bookInfoDiv p{
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .bookInfoDiv strong, h2{
+    color: #482c62;
+  }
+
+.conteiner {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  background-color: #d2c3fabc;
+  border: none;
+  z-index: 9999;
+  display: none;
+  text-align: left;
+}
+
+  
+.del{
+  background-color: white;
+  border: 2px solid #fc9b9b;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.del:hover{
+  background-color: #fc9b9b;
+}
+
+.book-body form {
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.book-body input[type="text"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+.book-body input:focus {
+  outline: none;
+  border-color: #af92ff;
+  box-shadow: 0 2px 5px rgba(124, 77, 255, 0.2);
+} 
+
+.book-body button[type="submit"] {
+  padding: 10px;
+  background-color: #482c62;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.book-body button[type="submit"]:hover {
+  color: #482c62;
+  background-color: #d2c3fabc;
+}
+
+@media (max-width:668px){
+  #search-bar {
+    width: 80%;
+  }
+
+  .book-body form {
+    display: block;
+    max-width: 70%;
+    margin-left: 15%;
+    margin-bottom: 20px;
+  }
+}
+
+/* add-sch btn in super admin */
+.add-sch{
+  background-color: #482c62;
+  font-size: 15px;
+  border: 2px solid #482c62;
+  border-radius: 15px;
+  padding: 5px;
+  color: white;
+}
+
+.add-sch:hover{
+  background-color: #874fbc;
+  border: 2px solid #874fbc;
+}

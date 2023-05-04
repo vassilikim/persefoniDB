@@ -11,7 +11,6 @@ const login = async (username, password) => {
       },
     });
 
-    console.log(res);
 
     if (res.status == 200) {
       showAlert("success", "Logged in successfully!");

@@ -17,4 +17,18 @@ router.patch(
   schoolAdminController.verifyTeacherStudent
 );
 
+router.get(
+  "/users-delayed-lending",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  schoolAdminController.getUsersWithDelayedLending
+);
+
+router.get(
+  "/average-rating-genres-users",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  schoolAdminController.getAverageRatingPerGenreAndUser
+);
+
 module.exports = router;
