@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Super Admin</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
@@ -10,17 +10,15 @@
   
   <div class="menu">
     <div>
-      <button class="profile-btn" id="profile-btn"><img src="images/id-card-solid.svg" alt="id card"></button>
-      //- <a class="" href="profil.html">
-      //-   <img src="images/id-card-solid.svg" alt="id card">
-      //- </a>
+      <a href="profil.html">
+        <img src="images/id-card-solid.svg" alt="id card">
+      </a>
     </div>
 
-
     <div>
-   
-        <button id="logout-button" class="logout-button">Logout</button>
-  
+      <a href="login.html">
+        <button class="logout-button">Logout</button>
+      </a>
     </div>
     
   </div>
@@ -34,7 +32,7 @@
             <div class="card-content">
               <h3>Schools</h3>
               <!-- <p>With this option you can add new School</p> -->
-              <a href="/schools">Let's start!</a>
+              <a href="#">Let's start!</a>
             </div>
         </div>
         <div class="card">
@@ -42,7 +40,7 @@
           <div class="card-content">
             <h3>Verify School Admin's request</h3>
             <!-- <p>With this option you can verify the registration request of the school-admin</p> -->
-            <a href="/verify-admin">Let's start!</a>
+            <a href="#">Let's start!</a>
           </div>
         </div>
         <div class="card">
@@ -50,7 +48,7 @@
           <div class="card-content">
             <h3>Backup</h3>
             <!-- <p>With this option the user can do sth</p> -->
-            <button id="backup" class="restore"><a href="#">Let's start!</a></button>
+            <a href="#">Let's start!</a>
           </div>
         </div>
         <div class="card">
@@ -58,18 +56,15 @@
           <div class="card-content">
             <h3>Restore</h3>
             <!-- <p>With this option the user can do sth</p> -->
-            <button id="restore" class="restore"><a href="#">Let's start!</a></button>
+            <a href="#">Let's start!</a>
           </div>
-        </div>
+       </div>
 
-    </div>
+     </div>
 
   <div class="footer">
     <h3>Copyright © 2023</h3>
   </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type=module src="javascripts/profileButton.js"> </script>
-    <script type=module src="javascripts/logout.js"> </script>
-    <script type=module src="javascripts/backup-restore.js"> </script>
+    
   </body>
 </html>

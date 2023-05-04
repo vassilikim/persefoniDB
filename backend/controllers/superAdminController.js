@@ -32,7 +32,7 @@ exports.getNotVerifiedSchoolAdmins = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT * FROM activeUsers WHERE user_role='school-admin' AND verified=0;`,
+      `SELECT u.*, s.school_name FROM activeUsers u JOIN School s ON u.school_ID=s.ID WHERE user_role='school-admin' AND verified=0;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
