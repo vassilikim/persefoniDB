@@ -63,7 +63,7 @@ function renderAccount(info) {
   firstName.value = info.first_name;
   lastName.value = info.last_name;
   username.value = info.username;
-  birthDate.value = info.birth_date;
+  birthDate.value = info.birth_date.split("T")[0];
 }
 
 renderAccount(await getProfile());

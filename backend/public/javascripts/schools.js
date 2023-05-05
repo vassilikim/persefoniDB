@@ -15,6 +15,24 @@ const getSchools = async () => {
   }
 };
 
+const deleteSchool = async (id) => {
+  try {
+    const res = await axios({
+      method: "DELETE",
+      url: `/api/library/schools/${id}`,
+    });
+
+    if (res.status == 200) {
+      showAlert("success", res.data.message);
+      window.setTimeout(() => {
+        location.replace("/schools");
+      }, 1500);
+    }
+  } catch (err) {
+    showAlert("error", err.response.data.message);
+  }
+};
+
 const schoolList = document.getElementById("sch-card");
 
 function renderSchools(schools) {
@@ -22,6 +40,7 @@ function renderSchools(schools) {
   schools.forEach((school) => {
     const schoolDiv = document.createElement("div");
     const buttonInfo = document.createElement("button");
+    const buttonDel = document.createElement("button");
     const title = document.createElement("h2");
     const address = document.createElement("h3");
     const city = document.createElement("h3");
@@ -32,6 +51,12 @@ function renderSchools(schools) {
     schoolDiv.className = "schOfone";
     buttonInfo.className = "sch-edit";
     buttonInfo.textContent = "Edit";
+    buttonDel.className = "sch-delete";
+    buttonDel.textContent = "Delete";
+    buttonDel.dataset.id = school.ID;
+    buttonDel.onclick = function () {
+      confirmDelete(buttonDel.dataset.id);
+    };
     buttonInfo.dataset.school_name = school.school_name;
     buttonInfo.dataset.address = school.address;
     buttonInfo.dataset.city = school.city;
@@ -47,6 +72,7 @@ function renderSchools(schools) {
     principal.innerHTML = `<strong>Principal: </strong>${school.principal}`;
 
     schoolDiv.appendChild(buttonInfo);
+    schoolDiv.appendChild(buttonDel);
     schoolDiv.appendChild(title);
     schoolDiv.appendChild(address);
     schoolDiv.appendChild(city);
@@ -78,3 +104,10 @@ editSchBtns.forEach((editSchBtn) => {
     location.replace("/edit-school?" + queryString);
   });
 });
+
+async function confirmDelete(school_id) {
+  if (confirm("Are you sure you want to delete this school?")) {
+    await deleteSchool(school_id);
+  } else {
+  }
+}

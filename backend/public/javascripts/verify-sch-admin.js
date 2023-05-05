@@ -37,7 +37,9 @@ function renderAdmins(admins) {
     first_name.innerHTML = `<strong>First Name: </strong>${admin.first_name}`;
     last_name.innerHTML = `<strong>Last Name: </strong>${admin.last_name}`;
     username.innerHTML = `<strong>Username: </strong>${admin.username}`;
-    birth_date.innerHTML = `<strong>Birth Date: </strong>${admin.birth_date}`;
+    birth_date.innerHTML = `<strong>Birth Date: </strong>${
+      admin.birth_date.split("T")[0]
+    }`;
     school_name.innerHTML = `<strong>School: </strong>${admin.school_name}`;
 
     adminDiv.appendChild(buttonInfo);

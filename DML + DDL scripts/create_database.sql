@@ -189,6 +189,26 @@ CREATE TRIGGER hash_password_before_update BEFORE UPDATE ON Users
   END;//
 DELIMITER ;
 
+DELIMITER $$
+CREATE TRIGGER add_three_hours_to_birth_date_insert
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    SET NEW.birth_date = DATE_ADD(NEW.birth_date, INTERVAL 3 HOUR);
+END$$
+
+CREATE TRIGGER add_three_hours_to_birth_date_update
+BEFORE UPDATE ON users
+FOR EACH ROW
+BEGIN
+    IF NEW.birth_date <> OLD.birth_date THEN
+        SET NEW.birth_date = DATE_ADD(NEW.birth_date, INTERVAL 3 HOUR);
+    END IF;
+END$$
+DELIMITER ;
+
+
+
 DELIMITER //
 CREATE FUNCTION change_password(user_username VARCHAR(255), old_password VARCHAR(255), new_password VARCHAR(255)) 
 RETURNS VARCHAR(255) DETERMINISTIC
