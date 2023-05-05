@@ -42,5 +42,35 @@ router.get(
   authController.restrictTo("super-admin"),
   viewsController.getAddSchool
 );
+router.get(
+  "/lending-requests",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getLendingRequests
+);
+router.get(
+  "/teachers-students",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getNotVerifiedTeachersStudents
+);
+router.get(
+  "/pending-reservations",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getPendingReservations
+);
+router.get(
+  "/lendings",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getLendings
+);
+router.get(
+  "/borrow-in-school",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getBorrowInSchool
+);
 
 module.exports = router;

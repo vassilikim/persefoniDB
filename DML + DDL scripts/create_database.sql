@@ -278,7 +278,7 @@ BEGIN
     
     SET @userrole = (SELECT user_role FROM verifiedUsers WHERE username = u_username AND school_ID = school);
     
-    IF (SELECT COUNT(*) FROM Reservation WHERE user_ID=@libraryuser AND book_ID=@book AND reservation_status=0) = 0 THEN
+    IF (SELECT COUNT(*) FROM Reservation WHERE user_ID=@libraryuser AND book_ID=@book AND (reservation_status=0 OR reservation_status=1)) = 0 THEN
 		SET @original = true;
 	ELSE 
 		SET @original = false;

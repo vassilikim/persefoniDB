@@ -25,6 +25,13 @@ router.get(
 );
 
 router.get(
+  "/alllendings",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  reservationController.getAllLendings
+);
+
+router.get(
   "/pendingreservations",
   authController.protect,
   authController.restrictTo("school-admin"),

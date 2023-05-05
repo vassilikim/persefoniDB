@@ -35,12 +35,32 @@ exports.getNotVerifiedSchoolAdmins = async (req, res, next) => {
   res.status(200).render("verify-admin");
 };
 
+exports.getNotVerifiedTeachersStudents = async (req, res, next) => {
+  res.status(200).render("verify-teachers-students");
+};
+
 exports.getEditSchool = async (req, res, next) => {
   res.status(200).render("edit-school", req.query);
 };
 
 exports.getAddSchool = async (req, res, next) => {
   res.status(200).render("add-school");
+};
+
+exports.getLendingRequests = async (req, res, next) => {
+  res.status(200).render("lending-requests");
+};
+
+exports.getLendings = async (req, res, next) => {
+  res.status(200).render("lendings");
+};
+
+exports.getPendingReservations = async (req, res, next) => {
+  res.status(200).render("pending-reservations");
+};
+
+exports.getBorrowInSchool = async (req, res, next) => {
+  res.status(200).render("borrow-in-school");
 };
 
 exports.getProfile = async (req, res, next) => {
