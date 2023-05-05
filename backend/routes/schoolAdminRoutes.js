@@ -12,28 +12,17 @@ var schoolAdminController = require("../controllers/schoolAdminController");
   
   router.post(
     "/book",
+    authController.protect,
+    authController.restrictTo("school-admin"),
     schoolAdminController.addBook
   );
   
-//   router.patch(
-//     "/book/:schoolName",
-//     schoolAdminController.updateBook
-//   );
-  
-//   router.delete(
-//     "/school/:schoolName",
-//     superAdminController.deleteSchool
-//   );
-
-// router.get(
-//     "/reservations/:schoolID",
-//     schoolAdminController.selectAllReservations
-//   );
-
-//   router.get(
-//     "/lendings/:schoolID",
-//     schoolAdminController.selectAllLendings
-//   );
+  router.patch(
+    "/book/:bookID",
+    authController.protect,
+    authController.restrictTo("school-admin"),
+    schoolAdminController.updateBook
+  );
 router.get(
   "/reservations",
   authController.protect,
@@ -76,22 +65,6 @@ router.get(
     schoolAdminController.deleteBook
   );
   
-//////////////////////////////  school admin /////////////////////////////////////
-
-// router.get(
-//   "/books:schoolName",
-//   schoolAdminController.selectAllBooks
-// );
-
-// router.get(
-//   "/books/:schoolID",
-//   superAdminController.selectAllBooks
-// );
-
-// router.post(
-//   "/book",
-//   superAdminController.addBook
-// );
   module.exports = router;
   
   

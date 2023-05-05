@@ -82,7 +82,6 @@ exports.deleteBook = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      // `SELECT delBook(${req.params.bookID}, ${req.school_id}) as answer;`,
       `SELECT delBook(${req.params.bookID}, ${req.school_id}) as answer;`,
       async function (error, results, fields) {
         if (error)
@@ -126,7 +125,6 @@ exports.selectAllReservations = async (req, res, next) => {
 
     connection.query(
       `CALL SelectReservations(${req.school_id});`,
-      //`CALL SelectReservations(${req.params.schoolID});`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -157,7 +155,6 @@ exports.selectAllLendings = async (req, res, next) => {
 
     connection.query(
       `CALL SelectLendings(${req.school_id});`,
-      //`CALL SelectLendings(${req.params.schoolID});`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -221,7 +218,7 @@ exports.selectResforUser = async (req, res, next) => {
                   reservations: results[0],
                 });
             }  
-          )
+          );
           connection1.end();
         }
       }
@@ -276,7 +273,7 @@ exports.selectLenforUser = async (req, res, next) => {
                  lendigs: results[0],
                 });
             }  
-          )
+          );
           connection1.end();
         }
       }
@@ -319,38 +316,7 @@ exports.selectDelayedLen = async (req, res, next) => {
     });
   }
 };
-///////////////////////////////////////// school admin ////////////////////////////////////////////
 
-// exports.selectAllBooks = async (req, res, next) => {
-//   try {
-    
-//     let connection = sql.createConnection(config);
-//     connection.connect();
-
-//     connection.query(
-//       // `SELECT title FROM book WHERE school_ID=${req.school_id};`,
-//       `SELECT * FROM book WHERE school_ID=${req.params.schoolID};`,
-//       async function (error, results, fields) {
-//         if (error)
-//           return res.status(500).json({
-//             status: "failed",
-//             message: error.message,
-//           });
-
-//         return res.status(200).json({
-//           status: "success",
-//           books: results,
-//         });
-//       }
-//     );
-//     connection.end();
-//   } catch (err) {
-//     return res.status(500).json({
-//       status: "failed",
-//       message: err.message,
-//     });
-//   }
-// };
 
 exports.addBook = async (req, res, next) => {
   try {
@@ -367,13 +333,9 @@ exports.addBook = async (req, res, next) => {
 
     
     connection.query(
-      `INSERT INTO book (title, publisher, ISBN, page_number, summary, copies, image, lang, keywords, school_ID)` + `VALUES ('${req.body.title}', '${req.body.publisher}', '${req.body.ISBN}', ${req.body.page_number}, '${req.body.summary}', ${req.body.copies}, '${req.body.image}', '${req.body.lang}', '${req.body.keywords}', 1);` +
+      `INSERT INTO book (title, publisher, ISBN, page_number, summary, copies, image, lang, keywords, school_ID)` + `VALUES ('${req.body.title}', '${req.body.publisher}', '${req.body.ISBN}', ${req.body.page_number}, '${req.body.summary}', ${req.body.copies}, '${req.body.image}', '${req.body.lang}', '${req.body.keywords}', ${req.school_id});` +
       `SET @bookID=(SELECT ID FROM book WHERE ID = LAST_INSERT_ID());` +
       `CALL extract_names_genre('${req.body.writer_name}', '${req.body.genre}', @bookID)`,
-      // `INSERT INTO genre (book_ID, genre)` + `VALUES (@bookID, '${req.body.genre}');` +
-      // `INSERT INTO writer (first_name, last_name)` + `VALUES ('${req.body.first_name}', '${req.body.last_name}');` +
-      // `SET @writerID=(SELECT ID FROM writer WHERE ID = LAST_INSERT_ID());` +
-      // `INSERT INTO writes (writer_ID, book_ID)` + `VALUES (@writerID, @bookID);`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -388,6 +350,68 @@ exports.addBook = async (req, res, next) => {
       }
     );
     connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+
+exports.updateBook = async (req, res, next) => {
+  try {
+
+    if (!req.body.publisher || !req.body.ISBN || !req.body.page_number || !req.body.summary || !req.body.copies || !req.body.image || !req.body.lang || !req.body.keywords || !req.body.genre || !req.body.writer_name) {
+      return res.status(500).json({
+        status: "failed",
+        message: "Please provide all the required parameters.",
+      });
+    }
+    
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT UpdateBook(${req.params.bookID}, ${req.school_id}, '${req.body.publisher}', '${req.body.ISBN}', ${req.body.page_number}, '${req.body.summary}', ${req.body.copies}, '${req.body.image}', '${req.body.lang}', '${req.body.keywords}') as answer;`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+          if (results[0]["answer"] == "NO BOOK") {
+            return res.status(401).json({
+              status: "failed",
+              message: "There is no book with this ID!",
+            });
+          } else if (results[0]["answer"] == "NOT OK"){
+            return res.status(403).json({
+              status: "failed",
+              message: "You don't have permission to perform this action!",
+            });
+          } else {
+            let connection1 = sql.createConnection(config);
+            connection1.connect();
+            connection1.query(
+              `CALL extract_names_genre('${req.body.writer_name}', '${req.body.genre}', ${req.params.bookID})`,
+              async function (error, results, fields) {
+                if (error)
+                  return res.status(500).json({
+                    status: "failed",
+                    message: error.message,
+                  });
+                  return res.status(200).json({
+                   status: "success",
+                   message: "The book was updated successfully!"
+                  });
+              }  
+            );
+            connection1.end();
+          }
+        }
+      );
+      connection.end();
   } catch (err) {
     return res.status(500).json({
       status: "failed",
