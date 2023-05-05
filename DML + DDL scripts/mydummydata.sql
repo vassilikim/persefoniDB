@@ -92,7 +92,7 @@ INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (8, 2);
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (9, 3);
 INSERT INTO `Reservation` (`user_ID`, `book_ID`) VALUES (5, 2);
 
-INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (5, 1);
+INSERT INTO `Lending` (`user_ID`, `book_ID`, `must_be_returned_at`) VALUES (5, 1, '2022-07-09');
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (6, 3);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (7, 5);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (8, 4);

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delayed Users</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="book-body">
+      <h1>Delayed Users</h1>
+    <!-- <input type="text" id="search-bar" placeholder="Search book by title, authors and keywords ..."> -->
+        <form>
+            <input id= "first_name" type="text" placeholder="Search for first name...">
+            <input id= "last_name" type="text" placeholder="Search for last name...">
+            <input id= "delay" type="text" placeholder="Search for days of delay...">
+            <button id="search-btn" type="submit">Search</button>
+        </form>
+        <div id="admin-card" class="sch-card">
+
+        </div>
+    
+    </div>
+      <div class="footer">
+        <h3>Copyright © 2023</h3>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script type=module src="javascripts/delayed-users.js"> </script>
+  </body>
+</html>
