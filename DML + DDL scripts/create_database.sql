@@ -490,3 +490,163 @@ on final.book_id = book.ID;
 END//
 
 DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SelectReservations(IN  schoolID INT)
+BEGIN
+	SELECT * FROM reservation WHERE user_ID IN (SELECT ID FROM users WHERE school_ID = schoolID);
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SelectLendings(IN  schoolID INT)
+BEGIN
+	SELECT * FROM lending WHERE user_ID IN (SELECT ID FROM users WHERE school_ID = schoolID);
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE FUNCTION checkUser(schoolID INT, userID INT)
+RETURNS VARCHAR(255) DETERMINISTIC
+#RETURNS INT DETERMINISTIC
+BEGIN
+DECLARE userSchID INT;
+SELECT school_ID into userSchID FROM users WHERE ID = userID;
+
+IF userSchID IS NULL THEN RETURN  "NO USER";
+ELSEIF (userSchID <> schoolID) then return "NOT OK";
+ELSE
+	return "OK";
+END IF;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SelectReservationsfromUser(IN  userID INT)
+BEGIN
+	SELECT * FROM reservation WHERE user_ID = userID;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SelectLendingsfromUser(IN  userID INT)
+BEGIN
+	SELECT * FROM lending WHERE user_ID = userID;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE FUNCTION DelBook(bookID INT, userSchID INT)
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+
+DECLARE schID INT;
+select school_ID into schID from book where ID = bookID;
+IF schID is NULL then return "NO BOOK";
+ELSEIF (userSchID <> schID) then return "NOT OK";
+ELSE 
+	CREATE TEMPORARY TABLE delWriters(
+		writerid INT primary key
+	);
+    INSERT INTO delWriters(writerid)
+	SELECT DISTINCT writer_ID
+	FROM writes
+	WHERE book_ID = bookID;
+    
+	DELETE FROM writes WHERE book_ID = bookID;
+    DELETE FROM writer WHERE ID IN (SELECT writerid FROM delWriters WHERE writerid NOT IN (SELECT writer_ID FROM writes )); 
+	DELETE FROM reservation WHERE book_ID = bookID;
+    DELETE FROM lending WHERE book_ID = bookID;
+    DELETE FROM review WHERE book_ID = bookID;
+    DELETE FROM genre WHERE book_ID = bookID;
+    DELETE FROM book WHERE ID = bookID;
+    return "OK";
+    
+END IF;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE extract_names_genre(in name_string varchar(250), in genre_string varchar(250), in book_id int)
+BEGIN
+
+declare str1 varchar(250);
+declare sub_str1 varchar(250);
+declare str2 varchar(250);
+declare sub_str2 varchar(250);
+declare f_name varchar(250);
+declare l_name varchar(250);
+declare writer_id int;
+
+set str1 = name_string;
+set str2 = genre_string;
+
+while (SELECT LENGTH(str1)) > 0 DO
+	set sub_str1 = (SELECT SUBSTRING_INDEX(str1, ",", 1));
+    set f_name = (SELECT SUBSTRING_INDEX(sub_str1, " ", 1));
+    set l_name = (SELECT SUBSTRING_INDEX(sub_str1, " ", -1));
+    set writer_id = (select ID from writer where first_name = f_name and last_name = l_name);
+    if (writer_id) is null then 
+		select writer_id;
+		insert into writer (first_name, last_name) values (f_name, l_name);
+        SET writer_id = (SELECT ID FROM writer WHERE ID = LAST_INSERT_ID());
+	end if;
+	insert into writes (writer_ID, book_ID) values (writer_id, book_id);
+    set str1 = (select replace(str1, (select concat("", sub_str1, ",")), ""));
+end while;
+
+while (SELECT LENGTH(str2)) > 0 DO
+	set sub_str2 = (SELECT SUBSTRING_INDEX(str2, ",", 1));
+    insert into genre(book_ID, genre) values (book_id, sub_str2);
+    set str2 = (select replace(str2, (select concat("", sub_str2, ",")), ""));
+end while;
+
+
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE FUNCTION UpdateBook(bookID INT, schoolID int, publisher_ varchar(255), ISBN_ varchar(255), page_number_ int, summary_ varchar(255), copies_ int, image_ varchar(255), lang_ varchar(255), keywords_ varchar(255))
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+
+DECLARE schID INT;
+select school_ID into schID from book where ID = bookID;
+if schID is NULL then return "NO BOOK";
+elseif (schID <> schoolID) then return "NOT OK";
+else
+	CREATE TEMPORARY TABLE delWriters(
+		writerid INT primary key
+	);
+    INSERT INTO delWriters(writerid)
+	SELECT DISTINCT writer_ID
+	FROM writes
+	WHERE book_ID = bookID;
+    
+	update book
+    set publisher = publisher_, ISBN = ISBN_, page_number = page_number_, summary = summary_, copies = copies_, image = image_, lang = lang_, keywords = keywords_
+	where ID = bookID;
+    
+    DELETE FROM writes WHERE book_ID = bookID;
+    DELETE FROM writer WHERE ID IN (SELECT writerid FROM delWriters WHERE writerid NOT IN (SELECT writer_ID FROM writes )); 
+    DELETE FROM genre WHERE book_ID = bookID;
+    return "OK";
+end if;
+END //
+
+DELIMITER ;
