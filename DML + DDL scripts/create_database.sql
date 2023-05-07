@@ -900,5 +900,40 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE extract_names_genre(IN name_string VARCHAR(255), IN genre_string VARCHAR(255), IN book_id INT)
+BEGIN
+	DECLARE str1 VARCHAR(255);
+	DECLARE sub_str1 VARCHAR(255);
+	DECLARE str2 VARCHAR(255);
+	DECLARE sub_str2 VARCHAR(255);
+	DECLARE f_name VARCHAR(255);
+	DECLARE l_name VARCHAR(255);
+	DECLARE writer_id INT;
+
+	SET str1 = name_string;
+	SET str2 = genre_string;
+
+	WHILE (SELECT LENGTH(str1)) > 0 DO
+		SET sub_str1 = (SELECT SUBSTRING_INDEX(str1, ",", 1));
+		SET f_name = (SELECT SUBSTRING_INDEX(sub_str1, " ", 1));
+		SET l_name = (SELECT SUBSTRING_INDEX(sub_str1, " ", -1));
+		SET writer_id = (SELECT ID FROM writer WHERE first_name = f_name AND last_name = l_name);
+		IF (writer_id) IS NULL THEN 
+			INSERT INTO writer (first_name, last_name) VALUES (f_name, l_name);
+			SET writer_id = (SELECT ID FROM writer WHERE ID = LAST_INSERT_ID());
+		END IF;
+		INSERT INTO writes (writer_ID, book_ID) VALUES (writer_id, book_id);
+		SET str1 = (SELECT REPLACE(str1, (SELECT CONCAT("", sub_str1, ",")), ""));
+	END WHILE;
+
+	WHILE (SELECT LENGTH(str2)) > 0 DO
+		SET sub_str2 = (SELECT SUBSTRING_INDEX(str2, ",", 1));
+		INSERT INTO genre(book_ID, genre) VALUES (book_id, sub_str2);
+		SET str2 = (SELECT REPLACE(str2, (SELECT CONCAT("", sub_str2, ",")), ""));
+	END WHILE;
+END //
+DELIMITER ;
+
 
 
