@@ -25,6 +25,13 @@ router.get(
 );
 
 router.get(
+  "/alllendings",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  reservationController.getAllLendings
+);
+
+router.get(
   "/pendingreservations",
   authController.protect,
   authController.restrictTo("school-admin"),
@@ -43,6 +50,20 @@ router.patch(
   authController.protect,
   authController.restrictTo("student", "teacher"),
   reservationController.cancelReservation
+);
+
+router.get(
+  "/myreservations",
+  authController.protect,
+  authController.restrictTo("teacher", "student"),
+  reservationController.getUserReservations
+);
+
+router.get(
+  "/mylendings",
+  authController.protect,
+  authController.restrictTo("teacher", "student"),
+  reservationController.getUserLendings
 );
 
 module.exports = router;

@@ -14,7 +14,14 @@ changedPasswordAfter = function (JWTTimestamp, passwordChangedAt) {
 
 exports.signup = async (req, res) => {
   try {
-    if (!req.body.password) {
+    if (
+      !req.body.password ||
+      !req.body.first_name ||
+      !req.body.last_name ||
+      !req.body.username ||
+      !req.body.role ||
+      !req.body.birth_date
+    ) {
       return res.status(400).json({
         status: "failed",
         message: "Please provide all the required parameters",
@@ -23,7 +30,7 @@ exports.signup = async (req, res) => {
     if (req.body.password.length < 8) {
       return res.status(400).json({
         status: "failed",
-        message: "Password cannot have less than 8 characters",
+        message: "Password cannot have less than 8 characters.",
       });
     }
 

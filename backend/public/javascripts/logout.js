@@ -7,11 +7,10 @@ const logout = async () => {
       url: "/api/library/auth/logout",
     });
 
-
     if (res.status == 200) {
       showAlert("success", res.data.message);
       window.setTimeout(() => {
-        location.assign("/");
+        location.replace("/");
       }, 1500);
     }
   } catch (err) {
@@ -19,8 +18,7 @@ const logout = async () => {
   }
 };
 
-
-const logoutBtn = document.getElementById('logout-button');
+const logoutBtn = document.getElementById("logout-button");
 
 logoutBtn.addEventListener("click", async function (event) {
   event.preventDefault();

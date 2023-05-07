@@ -1,5 +1,4 @@
-1	School 1	173 Marcelina Brooks Apt. 914\
-Geneville, WI 34212	Athens	1-554-212-9610	gislason.carlo@example.net	Prof. Charlie Wolff	
+1	School 1	173 Marcelina Brooks Apt. 914Geneville, WI 34212	Athens	1-554-212-9610	gislason.carlo@example.net	Prof. Charlie Wolff	
 2	School 2	5895 Gerlach Walks Apt. 705\
 South D'angelo, ME 44771	Thessaloniki	1-866-563-7370x2346	ernestina.dubuque@example.net	Armando Barrows II	
 3	School 3	12517 Berge Shore\

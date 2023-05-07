@@ -107,12 +107,12 @@ CREATE TABLE Review (
     user_ID INT NOT NULL,
     book_ID INT NOT NULL,
     review VARCHAR(255) NOT NULL,
-    rating FLOAT NOT NULL,
+    rating INT NOT NULL,
     verified BIT NOT NULL DEFAULT(0),
     PRIMARY KEY (user_ID, book_ID),
     FOREIGN KEY (user_ID) REFERENCES Users(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (book_ID) REFERENCES Book(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
-    CHECK (rating<=5.0 AND rating>=0.0),
+    CHECK (rating<=5 AND rating>=0),
     INDEX index_review_user (user_ID),
     INDEX index_review_book (book_ID)
 );
@@ -189,6 +189,26 @@ CREATE TRIGGER hash_password_before_update BEFORE UPDATE ON Users
   END;//
 DELIMITER ;
 
+DELIMITER $$
+CREATE TRIGGER add_three_hours_to_birth_date_insert
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    SET NEW.birth_date = DATE_ADD(NEW.birth_date, INTERVAL 3 HOUR);
+END$$
+
+CREATE TRIGGER add_three_hours_to_birth_date_update
+BEFORE UPDATE ON users
+FOR EACH ROW
+BEGIN
+    IF NEW.birth_date <> OLD.birth_date THEN
+        SET NEW.birth_date = DATE_ADD(NEW.birth_date, INTERVAL 3 HOUR);
+    END IF;
+END$$
+DELIMITER ;
+
+
+
 DELIMITER //
 CREATE FUNCTION change_password(user_username VARCHAR(255), old_password VARCHAR(255), new_password VARCHAR(255)) 
 RETURNS VARCHAR(255) DETERMINISTIC
@@ -258,7 +278,7 @@ BEGIN
     
     SET @userrole = (SELECT user_role FROM verifiedUsers WHERE username = u_username AND school_ID = school);
     
-    IF (SELECT COUNT(*) FROM Reservation WHERE user_ID=@libraryuser AND book_ID=@book AND reservation_status=0) = 0 THEN
+    IF (SELECT COUNT(*) FROM Reservation WHERE user_ID=@libraryuser AND book_ID=@book AND (reservation_status=0 OR reservation_status=1)) = 0 THEN
 		SET @original = true;
 	ELSE 
 		SET @original = false;
@@ -561,44 +581,52 @@ DELIMITER //
 CREATE PROCEDURE get_users_delayed_return(IN f_name VARCHAR(255), IN l_name VARCHAR(255), IN delay_days INT, IN school_id INT)
 BEGIN
     IF f_name IS NULL AND l_name IS NULL AND delay_days IS NULL THEN
-        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+        SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id;
     ELSEIF f_name IS NOT NULL AND l_name IS NULL AND delay_days IS NULL THEN
-        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+        SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name;
     ELSEIF f_name IS NULL AND l_name IS NOT NULL AND delay_days IS NULL THEN
-        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+        SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.last_name=l_name;
 	ELSEIF f_name IS NULL AND l_name IS NULL AND delay_days IS NOT NULL THEN
-		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
     ELSEIF f_name IS NOT NULL AND l_name IS NOT NULL AND delay_days IS NULL THEN
-		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND u.last_name=l_name;
     ELSEIF f_name IS NOT NULL AND l_name IS NULL AND delay_days IS NOT NULL THEN
-		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
     ELSEIF f_name IS NULL AND l_name IS NOT NULL AND delay_days IS NOT NULL THEN
-		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.last_name=l_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
     ELSE
-        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+        SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND u.last_name=l_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
     END IF;
 END //
@@ -880,5 +908,95 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE extract_names_genre(IN name_string VARCHAR(255), IN genre_string VARCHAR(255), IN book_id INT)
+BEGIN
+	DECLARE str1 VARCHAR(255);
+	DECLARE sub_str1 VARCHAR(255);
+	DECLARE str2 VARCHAR(255);
+	DECLARE sub_str2 VARCHAR(255);
+	DECLARE f_name VARCHAR(255);
+	DECLARE l_name VARCHAR(255);
+	DECLARE writer_id INT;
+
+	SET str1 = name_string;
+	SET str2 = genre_string;
+
+	WHILE (SELECT LENGTH(str1)) > 0 DO
+		SET sub_str1 = (SELECT SUBSTRING_INDEX(str1, ",", 1));
+		SET f_name = (SELECT SUBSTRING_INDEX(sub_str1, " ", 1));
+		SET l_name = (SELECT SUBSTRING_INDEX(sub_str1, " ", -1));
+		SET writer_id = (SELECT ID FROM writer WHERE first_name = f_name AND last_name = l_name);
+		IF (writer_id) IS NULL THEN 
+			INSERT INTO writer (first_name, last_name) VALUES (f_name, l_name);
+			SET writer_id = (SELECT ID FROM writer WHERE ID = LAST_INSERT_ID());
+		END IF;
+		INSERT INTO writes (writer_ID, book_ID) VALUES (writer_id, book_id);
+		SET str1 = (SELECT REPLACE(str1, (SELECT CONCAT("", sub_str1, ",")), ""));
+	END WHILE;
+
+	WHILE (SELECT LENGTH(str2)) > 0 DO
+		SET sub_str2 = (SELECT SUBSTRING_INDEX(str2, ",", 1));
+		INSERT INTO genre(book_ID, genre) VALUES (book_id, sub_str2);
+		SET str2 = (SELECT REPLACE(str2, (SELECT CONCAT("", sub_str2, ",")), ""));
+	END WHILE;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION UpdateBook(bookID INT, schoolID INT, publisher_ VARCHAR(255), ISBN_ VARCHAR(255), page_number_ INT, summary_ VARCHAR(255), copies_ INT, image_ VARCHAR(255), lang_ VARCHAR(255), keywords_ VARCHAR(255))
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	DECLARE schID INT;
+	SELECT school_ID INTO schID FROM Book WHERE ID = bookID AND school_ID = schoolID;
+	IF schID IS NULL THEN RETURN "NO BOOK";
+	ELSE
+		CREATE TEMPORARY TABLE delWriters(
+			writerid INT PRIMARY KEY
+		);
+		INSERT INTO delWriters(writerid)
+		SELECT DISTINCT writer_ID
+		FROM writes
+		WHERE book_ID = bookID;
+    
+		UPDATE Book
+		SET publisher = publisher_, ISBN = ISBN_, page_number = page_number_, summary = summary_, copies = copies_, image = image_, lang = lang_, keywords = keywords_
+		WHERE ID = bookID;
+    
+		DELETE FROM writes WHERE book_ID = bookID;
+		DELETE FROM writer WHERE ID IN (SELECT writerid FROM delWriters WHERE writerid NOT IN (SELECT writer_ID FROM writes )); 
+		DELETE FROM genre WHERE book_ID = bookID;
+		RETURN "OK";
+	END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION DelBook(bookID INT, userSchID INT)
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	DECLARE schID INT;
+	SELECT school_ID INTO schID FROM book WHERE ID = bookID AND school_ID = userSchID;
+	IF schID IS NULL THEN RETURN "NO BOOK";
+	ELSE 
+		CREATE TEMPORARY TABLE delWriters(
+			writerid INT PRIMARY KEY
+		);
+		INSERT INTO delWriters(writerid)
+		SELECT DISTINCT writer_ID
+		FROM writes
+		WHERE book_ID = bookID;
+    
+		DELETE FROM writes WHERE book_ID = bookID;
+		DELETE FROM writer WHERE ID IN (SELECT writerid FROM delWriters WHERE writerid NOT IN (SELECT writer_ID FROM writes )); 
+		DELETE FROM reservation WHERE book_ID = bookID;
+		DELETE FROM lending WHERE book_ID = bookID;
+		DELETE FROM review WHERE book_ID = bookID;
+		DELETE FROM genre WHERE book_ID = bookID;
+		DELETE FROM book WHERE ID = bookID;
+		RETURN "OK";
+	END IF;
+END //
+DELIMITER ;
 
 

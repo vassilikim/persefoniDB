@@ -11,11 +11,11 @@ const login = async (username, password) => {
       },
     });
 
-
     if (res.status == 200) {
       showAlert("success", "Logged in successfully!");
       window.setTimeout(() => {
-        location.assign("/main-screen");
+        // location.assign("/main-screen");
+        location.replace("/main-screen");
       }, 1500);
     }
   } catch (err) {

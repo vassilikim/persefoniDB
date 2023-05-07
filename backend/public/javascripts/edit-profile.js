@@ -24,14 +24,14 @@ const editProfile = async (username, first_name, last_name, birth_date) => {
         username,
         first_name,
         last_name,
-        birth_date
+        birth_date,
       },
     });
 
     if (res.status == 200) {
       showAlert("success", res.data.message);
       window.setTimeout(() => {
-        location.assign("/profile");
+        location.replace("/profile");
       }, 1500);
     }
   } catch (err) {
@@ -52,21 +52,18 @@ editForm.addEventListener("submit", async function (event) {
   await editProfile(username, first_name, last_name, birth_date);
 });
 
-
 function renderAccount(info) {
-    const firstName = document.getElementById("first_name");
-    const lastName = document.getElementById("last_name");
-    const username = document.getElementById("username");
-    const birthDate = document.getElementById("birth_date");
+  const firstName = document.getElementById("first_name");
+  const lastName = document.getElementById("last_name");
+  const username = document.getElementById("username");
+  const birthDate = document.getElementById("birth_date");
 
-    console.log(info);
+  console.log(info);
 
-    firstName.value = info.first_name;
-    lastName.value = info.last_name;
-    username.value = info.username;
-    birthDate.value = info.birth_date;
+  firstName.value = info.first_name;
+  lastName.value = info.last_name;
+  username.value = info.username;
+  birthDate.value = info.birth_date.split("T")[0];
 }
 
-  renderAccount(await getProfile());
-
-
+renderAccount(await getProfile());
