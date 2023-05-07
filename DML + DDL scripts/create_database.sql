@@ -581,44 +581,52 @@ DELIMITER //
 CREATE PROCEDURE get_users_delayed_return(IN f_name VARCHAR(255), IN l_name VARCHAR(255), IN delay_days INT, IN school_id INT)
 BEGIN
     IF f_name IS NULL AND l_name IS NULL AND delay_days IS NULL THEN
-        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+        SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id;
     ELSEIF f_name IS NOT NULL AND l_name IS NULL AND delay_days IS NULL THEN
-        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+        SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name;
     ELSEIF f_name IS NULL AND l_name IS NOT NULL AND delay_days IS NULL THEN
-        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+        SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.last_name=l_name;
 	ELSEIF f_name IS NULL AND l_name IS NULL AND delay_days IS NOT NULL THEN
-		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
     ELSEIF f_name IS NOT NULL AND l_name IS NOT NULL AND delay_days IS NULL THEN
-		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND u.last_name=l_name;
     ELSEIF f_name IS NOT NULL AND l_name IS NULL AND delay_days IS NOT NULL THEN
-		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
     ELSEIF f_name IS NULL AND l_name IS NOT NULL AND delay_days IS NOT NULL THEN
-		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+		SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.last_name=l_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
     ELSE
-        SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name
+        SELECT b.title, u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, l.must_be_returned_at
 		FROM activeUsers u
 		JOIN Lending l ON u.ID=l.user_ID
+        JOIN Book b ON b.ID=l.book_ID
 		WHERE l.must_be_returned_at<NOW() AND l.was_returned_at IS NULL AND u.school_ID=school_id AND u.first_name=f_name AND u.last_name=l_name AND TIMESTAMPDIFF(day, l.must_be_returned_at, NOW())=delay_days;
     END IF;
 END //

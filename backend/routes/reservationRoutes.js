@@ -52,4 +52,18 @@ router.patch(
   reservationController.cancelReservation
 );
 
+router.get(
+  "/myreservations",
+  authController.protect,
+  authController.restrictTo("teacher", "student"),
+  reservationController.getUserReservations
+);
+
+router.get(
+  "/mylendings",
+  authController.protect,
+  authController.restrictTo("teacher", "student"),
+  reservationController.getUserLendings
+);
+
 module.exports = router;
