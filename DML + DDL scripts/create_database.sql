@@ -935,5 +935,60 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE FUNCTION UpdateBook(bookID INT, schoolID INT, publisher_ VARCHAR(255), ISBN_ VARCHAR(255), page_number_ INT, summary_ VARCHAR(255), copies_ INT, image_ VARCHAR(255), lang_ VARCHAR(255), keywords_ VARCHAR(255))
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	DECLARE schID INT;
+	SELECT school_ID INTO schID FROM Book WHERE ID = bookID AND school_ID = schoolID;
+	IF schID IS NULL THEN RETURN "NO BOOK";
+	ELSE
+		CREATE TEMPORARY TABLE delWriters(
+			writerid INT PRIMARY KEY
+		);
+		INSERT INTO delWriters(writerid)
+		SELECT DISTINCT writer_ID
+		FROM writes
+		WHERE book_ID = bookID;
+    
+		UPDATE Book
+		SET publisher = publisher_, ISBN = ISBN_, page_number = page_number_, summary = summary_, copies = copies_, image = image_, lang = lang_, keywords = keywords_
+		WHERE ID = bookID;
+    
+		DELETE FROM writes WHERE book_ID = bookID;
+		DELETE FROM writer WHERE ID IN (SELECT writerid FROM delWriters WHERE writerid NOT IN (SELECT writer_ID FROM writes )); 
+		DELETE FROM genre WHERE book_ID = bookID;
+		RETURN "OK";
+	END IF;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE FUNCTION DelBook(bookID INT, userSchID INT)
+RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+	DECLARE schID INT;
+	SELECT school_ID INTO schID FROM book WHERE ID = bookID AND school_ID = userSchID;
+	IF schID IS NULL THEN RETURN "NO BOOK";
+	ELSE 
+		CREATE TEMPORARY TABLE delWriters(
+			writerid INT PRIMARY KEY
+		);
+		INSERT INTO delWriters(writerid)
+		SELECT DISTINCT writer_ID
+		FROM writes
+		WHERE book_ID = bookID;
+    
+		DELETE FROM writes WHERE book_ID = bookID;
+		DELETE FROM writer WHERE ID IN (SELECT writerid FROM delWriters WHERE writerid NOT IN (SELECT writer_ID FROM writes )); 
+		DELETE FROM reservation WHERE book_ID = bookID;
+		DELETE FROM lending WHERE book_ID = bookID;
+		DELETE FROM review WHERE book_ID = bookID;
+		DELETE FROM genre WHERE book_ID = bookID;
+		DELETE FROM book WHERE ID = bookID;
+		RETURN "OK";
+	END IF;
+END //
+DELIMITER ;
 
 
