@@ -28,14 +28,19 @@ function renderLendings(lendings) {
     const lending_date = document.createElement("h3");
     const return_date = document.createElement("h3");
 
+    buttonInfo.className = "sch-edit";
+    buttonInfo.textContent = "Return Book";
+    buttonInfo.dataset.book = lending.title;
+    buttonInfo.dataset.username = lending.username;
+    buttonInfo.id = "verify-user-btn";
     lendDiv.className = "schOfone";
     book.innerHTML = `<strong>Book: </strong>${lending.title}`;
     username.innerHTML = `<strong>Username: </strong>${lending.username}`;
     role.innerHTML = `<strong>Role: </strong>${lending.user_role}`;
-    lending_date.innerHTML = `<strong>Request Date: </strong>${
+    lending_date.innerHTML = `<strong>Lending Date: </strong>${
       lending.lending_date.split("T")[0]
     }`;
-    return_date.innerHTML = `<strong>Reservation Date: </strong>${
+    return_date.innerHTML = `<strong>Return Date: </strong>${
       lending.must_be_returned_at.split("T")[0]
     }`;
 
@@ -50,3 +55,38 @@ function renderLendings(lendings) {
 }
 
 renderLendings(await getLendings());
+
+const returnBook = async (book, username) => {
+  try {
+    const res = await axios({
+      method: "PATCH",
+      url: "/api/library/reservations/returnbook",
+      data: {
+        book,
+        username,
+      },
+    });
+
+    if (res.status == 200) {
+      showAlert("success", res.data.message);
+      window.setTimeout(() => {
+        location.reload();
+      }, 1500);
+    }
+  } catch (err) {
+    showAlert("error", err.response.data.message);
+  }
+};
+
+const returnBookBtns = document.querySelectorAll(".sch-edit");
+
+returnBookBtns.forEach((returnBookBtn) => {
+  returnBookBtn.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    const username = returnBookBtn.dataset.username;
+    const book = returnBookBtn.dataset.book;
+
+    await returnBook(book, username);
+  });
+});

@@ -63,8 +63,8 @@ exports.getBorrowInSchool = async (req, res, next) => {
   res.status(200).render("borrow-in-school");
 };
 
-exports.getDelayedUsers = async (req, res, next) => {
-  res.status(200).render("delayed-users");
+exports.getDelayedLendings = async (req, res, next) => {
+  res.status(200).render("delayed-lendings");
 };
 
 exports.getProfile = async (req, res, next) => {

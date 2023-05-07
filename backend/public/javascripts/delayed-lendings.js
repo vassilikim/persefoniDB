@@ -27,13 +27,21 @@ function renderDelayedUsers(rets) {
     const retDiv = document.createElement("div");
     const username = document.createElement("h3");
     const full_name = document.createElement("h3");
+    const book = document.createElement("h3");
+    const return_date = document.createElement("h3");
 
     retDiv.className = "schOfone";
     username.innerHTML = `<strong>Username: </strong>${ret.username}`;
     full_name.innerHTML = `<strong>Full Name: </strong>${ret.full_name}`;
+    book.innerHTML = `<strong>Book: </strong>${ret.title}`;
+    return_date.innerHTML = `<strong>Return Date: </strong>${
+      ret.must_be_returned_at.split("T")[0]
+    }`;
 
     retDiv.appendChild(username);
     retDiv.appendChild(full_name);
+    retDiv.appendChild(book);
+    retDiv.appendChild(return_date);
     delayedList.appendChild(retDiv);
   });
 }

@@ -74,9 +74,9 @@ const verifyTeacherStudent = async (username) => {
   }
 };
 
-const verifyUserBtn = document.querySelectorAll(".sch-edit");
+const verifyUserBtns = document.querySelectorAll(".sch-edit");
 
-verifyUserBtn.forEach((verifyUserBtn) => {
+verifyUserBtns.forEach((verifyUserBtn) => {
   verifyUserBtn.addEventListener("click", async function (event) {
     event.preventDefault();
 
