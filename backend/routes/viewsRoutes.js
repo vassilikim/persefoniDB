@@ -84,5 +84,11 @@ router.get(
   authController.restrictTo("school-admin"),
   viewsController.getUsers
 );
+router.get(
+  "/verify-reviews",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getStudentReviews
+);
 
 module.exports = router;

@@ -103,9 +103,9 @@ INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (6, 8);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (8, 2);
 INSERT INTO `Lending` (`user_ID`, `book_ID`) VALUES (9, 8);
 
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (5, 1, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4.0);
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (6, 6, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4.5);
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (7, 5, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 3.5);
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (8, 4, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 3.0);
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (9, 3, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4.2);
-INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (10, 5, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 5.0);
+INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (5, 1, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4);
+INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (6, 6, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4);
+INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (7, 5, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 3);
+INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (8, 4, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 3);
+INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (9, 3, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 4);
+INSERT INTO `Review` (`user_ID`, `book_ID`, `review`, `rating`) VALUES (10, 5, 'Dolorum laborum quibusdam quos sed. Impedit et est incidunt itaque. Earum earum possimus debitis animi autem laborum. Atque eius et sapiente omnis iste et.', 5);

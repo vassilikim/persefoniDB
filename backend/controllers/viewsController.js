@@ -71,6 +71,10 @@ exports.getUsers = async (req, res, next) => {
   res.status(200).render("handle-users");
 };
 
+exports.getStudentReviews = async (req, res, next) => {
+  res.status(200).render("verify-reviews");
+};
+
 exports.getProfile = async (req, res, next) => {
   try {
     let connection = sql.createConnection(config);

@@ -107,12 +107,12 @@ CREATE TABLE Review (
     user_ID INT NOT NULL,
     book_ID INT NOT NULL,
     review VARCHAR(255) NOT NULL,
-    rating FLOAT NOT NULL,
+    rating INT NOT NULL,
     verified BIT NOT NULL DEFAULT(0),
     PRIMARY KEY (user_ID, book_ID),
     FOREIGN KEY (user_ID) REFERENCES Users(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (book_ID) REFERENCES Book(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
-    CHECK (rating<=5.0 AND rating>=0.0),
+    CHECK (rating<=5 AND rating>=0),
     INDEX index_review_user (user_ID),
     INDEX index_review_book (book_ID)
 );
