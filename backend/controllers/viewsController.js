@@ -67,6 +67,10 @@ exports.getDelayedLendings = async (req, res, next) => {
   res.status(200).render("delayed-lendings");
 };
 
+exports.getUsers = async (req, res, next) => {
+  res.status(200).render("handle-users");
+};
+
 exports.getProfile = async (req, res, next) => {
   try {
     let connection = sql.createConnection(config);

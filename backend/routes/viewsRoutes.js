@@ -78,5 +78,11 @@ router.get(
   authController.restrictTo("school-admin"),
   viewsController.getDelayedLendings
 );
+router.get(
+  "/users",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getUsers
+);
 
 module.exports = router;
