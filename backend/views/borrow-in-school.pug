@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Edit profile</title>
+    <title>Borrow in School</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,18 +9,14 @@
   </head>
   
   <body>
-    <h1>Change your personal information</h1>
+    <h1>Borrow Book</h1>
     <div class="change-form">
     <form id="edit-form">
-        <label for="first-Name">First Name:</label>
-        <input type="text" id="first_name" name="first-name" value=""><br>
-        <label for="last-name">Last Name:</label>
-        <input type="text" id="last_name" name="last-name" value=""><br>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" value=""><br>
-        <label for="birth_date">Birth date:</label>
-        <input type="text" id="birth_date" name="birth_date" value=""><br>
-        <button id="edit-btn" class="button-login"><input type="submit" value="Submit" ></button>
+        <label for="book">Book:</label>
+        <input type="text" id="book" name="book" value=""><br>
+        <button id="edit-btn" class="button-login"><input type="submit" value="Borrow" ></button>
     </form>
                 
     </div>
@@ -29,6 +25,6 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type=module src="javascripts/edit-profile.js"> </script>
+    <script type=module src="javascripts/borrow-in-school.js"> </script>
   </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add School</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+  </head>
+  
+  <body>
+    <h1>Add School</h1>
+    <div class="change-form">
+    <form id="edit-form">
+        <label for="school_name">School Name:</label>
+        <input type="text" id="school_name" name="school_name" value=""><br>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" value=""><br>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" value=""><br>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" value=""><br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" value=""><br>
+        <label for="principal">Principal:</label>
+        <input type="text" id="principal" name="principal" value=""><br>
+        <button id="edit-sch-btn" class="button-login"><input type="submit" value="Submit" ></button>
+    </form>
+                
+    </div>
+    <div class="footer">
+      <h3>Copyright © 2023</h3>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type=module src="javascripts/add-school.js"> </script>
+  </body>
+</html>

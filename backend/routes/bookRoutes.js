@@ -10,6 +10,27 @@ router.get(
   bookController.selectAllBooks
 );
 
+router.post(
+  "/create",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  bookController.addBook
+);
+
+router.patch(
+  "/:bookID",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  bookController.updateBook
+);
+
+router.delete(
+  "/:bookID",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  bookController.deleteBook
+);
+
 router.get(
   "/lended",
   authController.protect,

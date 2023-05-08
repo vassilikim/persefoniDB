@@ -4,7 +4,7 @@ const sql = require("mysql");
 exports.getMainPage = async (req, res, next) => {
   if (req.role == "super-admin") {
     res.status(200).render("super-admin");
-  } else if (req.role == "school-admin"){
+  } else if (req.role == "school-admin") {
     res.status(200).render("school-admin");
   } else if (req.role == "teacher" || req.role == "student") {
     res.status(200).render("users");
@@ -12,7 +12,7 @@ exports.getMainPage = async (req, res, next) => {
 };
 
 exports.getSignUp = async (req, res, next) => {
-  res.status(200).render('signup');
+  res.status(200).render("signup");
 };
 
 exports.getLoginPage = async (req, res, next) => {
@@ -35,7 +35,47 @@ exports.getNotVerifiedSchoolAdmins = async (req, res, next) => {
   res.status(200).render("verify-admin");
 };
 
-exports.getProfile=async(req,res,next)=>{
+exports.getNotVerifiedTeachersStudents = async (req, res, next) => {
+  res.status(200).render("verify-teachers-students");
+};
+
+exports.getEditSchool = async (req, res, next) => {
+  res.status(200).render("edit-school", req.query);
+};
+
+exports.getAddSchool = async (req, res, next) => {
+  res.status(200).render("add-school");
+};
+
+exports.getLendingRequests = async (req, res, next) => {
+  res.status(200).render("lending-requests");
+};
+
+exports.getLendings = async (req, res, next) => {
+  res.status(200).render("lendings");
+};
+
+exports.getPendingReservations = async (req, res, next) => {
+  res.status(200).render("pending-reservations");
+};
+
+exports.getBorrowInSchool = async (req, res, next) => {
+  res.status(200).render("borrow-in-school");
+};
+
+exports.getDelayedLendings = async (req, res, next) => {
+  res.status(200).render("delayed-lendings");
+};
+
+exports.getUsers = async (req, res, next) => {
+  res.status(200).render("handle-users");
+};
+
+exports.getStudentReviews = async (req, res, next) => {
+  res.status(200).render("verify-reviews");
+};
+
+exports.getProfile = async (req, res, next) => {
   try {
     let connection = sql.createConnection(config);
     connection.connect();
@@ -49,13 +89,13 @@ exports.getProfile=async(req,res,next)=>{
             message: error.message,
           });
 
-          res.status(200).render("profile",{
-            firstname:req.first_name,
-            lastname:req.last_name,
-            username:req.username,
-            role:req.role,
-            school:results[0] ?results[0]['school_name']:"NULL"
-          });
+        res.status(200).render("profile", {
+          firstname: req.first_name,
+          lastname: req.last_name,
+          username: req.username,
+          role: req.role,
+          school: results[0] ? results[0]["school_name"] : "NULL",
+        });
       }
     );
     connection.end();
@@ -66,4 +106,3 @@ exports.getProfile=async(req,res,next)=>{
     });
   }
 };
-

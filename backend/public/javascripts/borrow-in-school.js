@@ -1,20 +1,19 @@
 import { showAlert } from "./alerts.js";
 
-const login = async (username, password) => {
+const borrowInSchool = async (username, book) => {
   try {
     const res = await axios({
       method: "POST",
-      url: "/api/library/auth/login",
+      url: "/api/library/reservations/handlereservation",
       data: {
         username,
-        password,
+        book,
       },
     });
 
     if (res.status == 200) {
-      showAlert("success", "Logged in successfully!");
+      showAlert("success", res.data.message);
       window.setTimeout(() => {
-        // location.assign("/main-screen");
         location.replace("/main-screen");
       }, 1500);
     }
@@ -23,13 +22,13 @@ const login = async (username, password) => {
   }
 };
 
-const loginForm = document.getElementById("form-login");
+const editForm = document.getElementById("edit-form");
 
-loginForm.addEventListener("submit", async function (event) {
+editForm.addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+  const book = document.getElementById("book").value;
 
-  await login(username, password);
+  await borrowInSchool(username, book);
 });

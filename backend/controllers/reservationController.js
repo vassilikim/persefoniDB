@@ -103,6 +103,72 @@ exports.getAllReservations = async (req, res, next) => {
   }
 };
 
+exports.getUserReservations = async (req, res, next) => {
+  try {
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT r.*, b.title 
+      FROM Reservation r
+      JOIN Book b 
+      ON r.book_ID=b.ID 
+      WHERE r.user_ID=${req.user_id};`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        return res.status(200).json({
+          status: "success",
+          data: results,
+        });
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.getUserLendings = async (req, res, next) => {
+  try {
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT l.*, b.title 
+      FROM Lending l
+      JOIN Book b 
+      ON l.book_ID=b.ID 
+      WHERE l.user_ID=${req.user_id};`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        return res.status(200).json({
+          status: "success",
+          data: results,
+        });
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
 exports.getAllPendingReservations = async (req, res, next) => {
   try {
     let connection = sql.createConnection(config);
@@ -308,6 +374,40 @@ exports.cancelReservation = async (req, res, next) => {
             message: "The book title does not exist in your school library!",
           });
         }
+      }
+    );
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({
+      status: "failed",
+      message: err.message,
+    });
+  }
+};
+
+exports.getAllLendings = async (req, res, next) => {
+  try {
+    let connection = sql.createConnection(config);
+    connection.connect();
+
+    connection.query(
+      `SELECT l.*, v.username, v.user_role, b.title 
+      FROM Lending l 
+      JOIN verifiedUsers v
+      JOIN Book b 
+      ON l.user_ID=v.ID AND l.book_ID=b.ID 
+      WHERE l.was_returned_at IS NULL AND v.school_ID=${req.school_id};`,
+      async function (error, results, fields) {
+        if (error)
+          return res.status(500).json({
+            status: "failed",
+            message: error.message,
+          });
+
+        return res.status(200).json({
+          status: "success",
+          data: results,
+        });
       }
     );
     connection.end();

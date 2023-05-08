@@ -111,7 +111,7 @@ exports.updateSchool = async (req, res, next) => {
 
         return res.status(200).json({
           status: "success",
-          schools: "The school was updated successfully!",
+          message: "The school was updated successfully!",
         });
       }
     );

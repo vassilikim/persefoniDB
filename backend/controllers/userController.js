@@ -8,7 +8,7 @@ exports.getAllTeachersStudents = async (req, res, next) => {
     connection.connect();
 
     connection.query(
-      `SELECT * FROM verifiedUsers WHERE (user_role='teacher' OR user_role='student') AND school_ID=${req.school_id} ORDER BY user_role;`,
+      `SELECT * FROM activeUsers WHERE (user_role='teacher' OR user_role='student') AND school_ID=${req.school_id} ORDER BY user_role;`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
