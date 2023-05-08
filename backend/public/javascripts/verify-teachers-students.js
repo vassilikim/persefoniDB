@@ -1,5 +1,20 @@
 import { showAlert } from "./alerts.js";
 
+document.addEventListener("DOMContentLoaded", function() {
+  const loader = document.createElement("div");
+  const loader_element = document.createElement("div");
+  loader.className = "loader-div";
+  loader_element.className ='loading';
+  loader.appendChild(loader_element); 
+  document.body.appendChild(loader);
+  setTimeout(function() {
+    loader.remove();
+  }, 2000);
+});
+
+
+
+
 const getNotVerifiedTeachersStudents = async () => {
   try {
     const res = await axios({
@@ -85,3 +100,12 @@ verifyUserBtns.forEach((verifyUserBtn) => {
     await verifyTeacherStudent(username);
   });
 });
+
+function checkDiv() {
+  var myDiv = document.getElementById("admin-card");
+  if (myDiv.childElementCount <= 0) {
+    myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+  }
+}
+
+checkDiv()
