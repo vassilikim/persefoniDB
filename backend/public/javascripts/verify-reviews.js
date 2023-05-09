@@ -82,3 +82,12 @@ verifyReviewBtns.forEach((verifyReviewBtn) => {
     await verifyReview(book, username);
   });
 });
+
+function checkDiv() {
+  var myDiv = document.getElementById("admin-card");
+  if (myDiv.childElementCount <= 0) {
+    myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+  }
+}
+
+checkDiv()
