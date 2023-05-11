@@ -535,10 +535,11 @@ BEGIN
 		WHERE u.user_role='school-admin'
 		GROUP BY u.username, YEAR(l.lending_date)
 	)
-	SELECT DISTINCT sc1.username AS schooladmin1, sc2.username AS schooladmin2, sc1.lendings AS lendings
-	FROM schooladmin_lendings sc1
-	JOIN schooladmin_lendings sc2 ON sc1.lendings=sc2.lendings AND sc1.username<sc2.username AND sc1.year=sc2.year
-	WHERE sc1.lendings>20;
+	SELECT GROUP_CONCAT(sc.username SEPARATOR ', ') AS schooladmins, sc.lendings AS lendings
+	FROM schooladmin_lendings sc
+    WHERE sc.lendings > 20
+	GROUP BY sc.lendings
+	HAVING COUNT(*) >= 2;
 END //
 DELIMITER ;
 

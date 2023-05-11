@@ -67,6 +67,10 @@ exports.getDelayedLendings = async (req, res, next) => {
   res.status(200).render("delayed-lendings");
 };
 
+exports.getBooks = async (req, res, next) => {
+  res.status(200).render("books");
+};
+
 exports.getUsers = async (req, res, next) => {
   res.status(200).render("handle-users");
 };

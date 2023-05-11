@@ -90,5 +90,11 @@ router.get(
   authController.restrictTo("school-admin"),
   viewsController.getStudentReviews
 );
+router.get(
+  "/books",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getBooks
+);
 
 module.exports = router;
