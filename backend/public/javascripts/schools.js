@@ -82,8 +82,18 @@ function renderSchools(schools) {
     schoolList.appendChild(schoolDiv);
   });
 }
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  
 
-renderSchools(await getSchools());
+
+  const schools = await getSchools();
+  renderSchools(schools);
+
+  loader.style.display = "none";
+}, 3000);
+
 
 const editSchBtns = document.querySelectorAll(".sch-edit");
 

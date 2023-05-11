@@ -95,7 +95,10 @@ label {
   margin: 20px;
 }
 .menu img {
-  width: 18%;
+  width: 100%;
+}
+.menu .div-menu{
+  width: 5%;
 }
 
 /* Logout Button */
@@ -326,13 +329,15 @@ label {
   visibility: visible;
 } */
 /* profile btn */
-.profile-btn {
+.menu .profile-btn {
   display: flex;
   border: none;
   background: none;
 }
-.profile-btn:hover {
+.menu .profile-btn:hover {
+  border: none;
   cursor: pointer;
+  background-color:#e9e8f9;
 }
 
 /* into profile for the name of the School*/
@@ -969,3 +974,25 @@ h2 {
     margin-bottom: 20px;
   }
 }
+
+/* load when i go to page */
+.load {
+  position: relative;
+}
+
+#loader{
+  margin: 0 0 15% calc(50% - 50px);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #482c62;
+  border-top-color: transparent;
+  animation: spin 0.85s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
