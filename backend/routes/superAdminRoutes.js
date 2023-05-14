@@ -40,8 +40,8 @@ router.patch(
 
 router.delete(
   "/school/:schoolID",
-  authController.protect,
-  authController.restrictTo("super-admin"),
+  // authController.protect,
+  // authController.restrictTo("super-admin"),
   superAdminController.deleteSchool
 );
 
