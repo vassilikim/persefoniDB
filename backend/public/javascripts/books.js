@@ -26,6 +26,9 @@ function renderBooks(books) {
   bookList.innerHTML = '';
   books.forEach(book => {
     const button_info = document.createElement('button');
+    const book_del = document.createElement('button');
+    const book_edit = document.createElement('button');
+    const add_book = document.createElement('button');
     const li = document.createElement('li');
     const title = document.createElement('h2');
     const authors = document.createElement('h3');
@@ -48,6 +51,10 @@ function renderBooks(books) {
     keywords.textContent = `Keywords: ${book.keywords}`;
     button_info.textContent ='Info';
     button_info.className = 'info';
+    book_del.textContent='Delete';
+    book_del.className='delete';
+    book_edit.textContent='Edit';
+    book_edit.className='edit';
     button_lend.textContent = 'Lend';
     button_lend.className = 'lend';
     button_del.innerHTML = '<span>x</span>';
@@ -84,17 +91,25 @@ function renderBooks(books) {
       conteiner.style.display = 'none';
     });
 
+    li.appendChild(book_del);
     li.appendChild(button_info);
     li.appendChild(title);
     li.appendChild(authors);
     div_pop.appendChild(button_del);
+    div_pop.appendChild(book_edit);
     conteiner.appendChild(div_pop);
     li.appendChild(conteiner);
     bookList.appendChild(li);
   });
 }
 
-renderBooks(await getBooks(null,null,null,null));
+
+
+
+const loader = document.getElementById("loader_book");
+loader.style.display = "block";
+setTimeout(async () => {
+  renderBooks(await getBooks(null,null,null,null));
 
 
 const searchBtn = document.getElementById("search-btn");
@@ -110,4 +125,6 @@ searchBtn.addEventListener("click", async function (event) {
   renderBooks(await getBooks(title,genre,author,copies));
 });
 
-
+  loader.style.display = "none";
+  
+}, 1500);

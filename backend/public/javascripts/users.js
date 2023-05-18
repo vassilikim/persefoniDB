@@ -105,7 +105,12 @@ function renderUsers(users) {
   });
 }
 
-renderUsers(await getUsers());
+
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  
+  renderUsers(await getUsers());
 
 const deactivateUserBtns = document.querySelectorAll(".sch-edit");
 
@@ -116,6 +121,21 @@ deactivateUserBtns.forEach((deactivateUserBtn) => {
     await deactivateUser(deactivateUserBtn.dataset.username);
   });
 });
+  
+
+  function checkDiv() {
+    var myDiv = document.getElementById("sch-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+    }
+  }
+  
+  checkDiv()
+  
+  
+  loader.style.display = "none";
+}, 1500);
+
 
 async function confirmDelete(username) {
   if (confirm("Are you sure you want to delete this user?")) {

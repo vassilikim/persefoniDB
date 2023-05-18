@@ -9,9 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
   </head>
   <body>
-
+    <button class="add-sch" onclick="location.assign('#')">Add Book</button>  
     <div class="book-body">
       <h1>Books</h1>
+
     <form>
       <input id="title" type="text" placeholder="Search for title...">
       <input id="genre" type="text" placeholder="Search for genre...">
@@ -22,6 +23,7 @@
     
     <ul id="book-list"></ul>
     </div>
+    <div class="load"><div id="loader_book"></div></div>
         
     <div class="footer">
       <h3>Copyright © 2023</h3>

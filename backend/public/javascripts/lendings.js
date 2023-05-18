@@ -54,7 +54,12 @@ function renderLendings(lendings) {
   });
 }
 
-renderLendings(await getLendings());
+
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  
+  renderLendings(await getLendings());
 
 const returnBook = async (book, username) => {
   try {
@@ -91,12 +96,17 @@ returnBookBtns.forEach((returnBookBtn) => {
   });
 });
 
+  
 
-function checkDiv() {
-  var myDiv = document.getElementById("admin-card");
-  if (myDiv.childElementCount <= 0) {
-    myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+  function checkDiv() {
+    var myDiv = document.getElementById("admin-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+    }
   }
-}
-
-checkDiv()
+  
+  checkDiv()
+  
+  
+  loader.style.display = "none";
+}, 1500);

@@ -35,7 +35,26 @@ function renderReviews(reviews) {
     username.innerHTML = `<strong>Username: </strong>${review.username}`;
     book.innerHTML = `<strong>Book: </strong>${review.title}`;
     text.innerHTML = `<strong>Review: </strong>${review.review}`;
-    rating.innerHTML = `<strong>Rating: </strong>${review.rating}`;
+    rating.innerHTML = '<strong>Rating: </strong> ';
+
+    const starContainer = document.createElement("div");
+    starContainer.className = "star-rating";
+    const ratingValue = (review.rating);
+
+    for (let i = 0; i < 5; i++) {
+      if (i<ratingValue){
+        const star = document.createElement("span");
+        star.className = "yellow-icon full-star";
+        starContainer.appendChild(star);
+      }
+      else{
+        const star = document.createElement("span");
+        star.className = "black-star full-star";
+        starContainer.appendChild(star);
+      }
+    }
+
+    rating.appendChild(starContainer);
 
     reviewDiv.appendChild(buttonInfo);
     reviewDiv.appendChild(username);
@@ -46,7 +65,14 @@ function renderReviews(reviews) {
   });
 }
 
-renderReviews(await getNotVerifiedReviews());
+
+
+
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  
+  renderReviews(await getNotVerifiedReviews());
 
 const verifyReview = async (book, student) => {
   try {
@@ -83,11 +109,17 @@ verifyReviewBtns.forEach((verifyReviewBtn) => {
   });
 });
 
-function checkDiv() {
-  var myDiv = document.getElementById("admin-card");
-  if (myDiv.childElementCount <= 0) {
-    myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
-  }
-}
+  
 
-checkDiv()
+  function checkDiv() {
+    var myDiv = document.getElementById("admin-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+    }
+  }
+  
+  checkDiv()
+  
+  
+  loader.style.display = "none";
+}, 1500);
