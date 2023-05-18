@@ -82,38 +82,38 @@ function renderSchools(schools) {
     schoolList.appendChild(schoolDiv);
   });
 }
+
+function registerEditButtonListeners() {
+  const editSchBtns = document.querySelectorAll(".sch-edit");
+
+  editSchBtns.forEach((editSchBtn) => {
+    editSchBtn.addEventListener("click", async function (event) {
+      event.preventDefault();
+
+      const queryString = new URLSearchParams({
+        id: editSchBtn.dataset.id,
+        school_name: editSchBtn.dataset.school_name,
+        address: editSchBtn.dataset.address,
+        city: editSchBtn.dataset.city,
+        phone: editSchBtn.dataset.phone,
+        email: editSchBtn.dataset.email,
+        principal: editSchBtn.dataset.principal,
+      }).toString();
+
+      location.replace("/edit-school?" + queryString);
+    });
+  });
+}
+
 const loader = document.getElementById("loader");
 loader.style.display = "block";
 setTimeout(async () => {
-  
-
-
   const schools = await getSchools();
+  loader.style.display = "none";
   renderSchools(schools);
 
-  loader.style.display = "none";
-}, 3000);
-
-
-const editSchBtns = document.querySelectorAll(".sch-edit");
-
-editSchBtns.forEach((editSchBtn) => {
-  editSchBtn.addEventListener("click", async function (event) {
-    event.preventDefault();
-
-    const queryString = new URLSearchParams({
-      id: editSchBtn.dataset.id,
-      school_name: editSchBtn.dataset.school_name,
-      address: editSchBtn.dataset.address,
-      city: editSchBtn.dataset.city,
-      phone: editSchBtn.dataset.phone,
-      email: editSchBtn.dataset.email,
-      principal: editSchBtn.dataset.principal,
-    }).toString();
-
-    location.replace("/edit-school?" + queryString);
-  });
-});
+  registerEditButtonListeners();
+}, 1500);
 
 async function confirmDelete(school_id) {
   if (confirm("Are you sure you want to delete this school?")) {

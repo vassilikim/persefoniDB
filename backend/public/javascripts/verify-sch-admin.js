@@ -96,3 +96,13 @@ function checkDiv() {
 }
 
 checkDiv()
+
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  const schools = await getSchools();
+  loader.style.display = "none";
+  renderSchools(schools);
+
+  registerEditButtonListeners();
+}, 3000);

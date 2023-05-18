@@ -240,7 +240,24 @@ label {
 .loading:before {
   content: "";
   position: absolute;
-  top: 39%;
+  top: 20%;
+  left: 65%;
+  width: 15px;
+  height: 15px;
+  border-radius: 52%;
+  border: 2.5px solid #fff;
+  border-top-color: transparent;
+  animation: spin 0.85s linear infinite;
+}
+
+.loading_login {
+  position: relative;
+}
+
+.loading_login:before{
+  content: "";
+  position: absolute;
+  top: 37%;
   left: 60%;
   width: 15px;
   height: 15px;
@@ -249,6 +266,7 @@ label {
   border-top-color: transparent;
   animation: spin 0.85s linear infinite;
 }
+
 
 @keyframes spin {
   to {
@@ -333,6 +351,7 @@ label {
   display: flex;
   border: none;
   background: none;
+  width: 60px;
 }
 .menu .profile-btn:hover {
   border: none;
@@ -520,6 +539,11 @@ label {
   border: none;
   width: 100%;
 }
+
+.card-content button.restore:hover {
+  background-color: white;
+}
+
 
 /* schools card for super-admin */
 
