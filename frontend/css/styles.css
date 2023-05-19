@@ -1002,3 +1002,39 @@ h2 {
   }
 }
 
+/* styles for the table of the queries */
+.the_table {
+  margin: 60px auto 325px;
+  display: flex;
+  justify-content: center;
+}
+
+.content-table {
+  border-collapse: collapse;
+
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+  background-color: #534caf;
+  color: white;
+  text-align: left;
+}
+
+.content-table th,
+.content-table td {
+  padding: 20px 32px;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+  background-color: white;
+  border-color: white;
+}
+
+.content-table tbody tr:last-of-type {
+  border-bottom: 2px solid #534caf;
+}
+
+
