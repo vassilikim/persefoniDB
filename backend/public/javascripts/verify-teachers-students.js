@@ -1,20 +1,5 @@
 import { showAlert } from "./alerts.js";
 
-document.addEventListener("DOMContentLoaded", function() {
-  const loader = document.createElement("div");
-  const loader_element = document.createElement("div");
-  loader.className = "loader-div";
-  loader_element.className ='loading';
-  loader.appendChild(loader_element); 
-  document.body.appendChild(loader);
-  setTimeout(function() {
-    loader.remove();
-  }, 2000);
-});
-
-
-
-
 const getNotVerifiedTeachersStudents = async () => {
   try {
     const res = await axios({
@@ -66,46 +51,58 @@ function renderUsers(users) {
   });
 }
 
-renderUsers(await getNotVerifiedTeachersStudents());
 
-const verifyTeacherStudent = async (username) => {
-  try {
-    const res = await axios({
-      method: "PATCH",
-      url: "/api/library/school-admin/verifyteacherstudent",
-      data: {
-        username,
-      },
-    });
 
-    if (res.status == 200) {
-      showAlert("success", res.data.message);
-      window.setTimeout(() => {
-        location.reload();
-      }, 1500);
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  
+  renderUsers(await getNotVerifiedTeachersStudents());
+
+  const verifyTeacherStudent = async (username) => {
+    try {
+      const res = await axios({
+        method: "PATCH",
+        url: "/api/library/school-admin/verifyteacherstudent",
+        data: {
+          username,
+        },
+      });
+
+      if (res.status == 200) {
+        showAlert("success", res.data.message);
+        window.setTimeout(() => {
+          location.reload();
+        }, 1500);
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
     }
-  } catch (err) {
-    showAlert("error", err.response.data.message);
-  }
-};
+  };
 
-const verifyUserBtns = document.querySelectorAll(".sch-edit");
+  const verifyUserBtns = document.querySelectorAll(".sch-edit");
 
-verifyUserBtns.forEach((verifyUserBtn) => {
-  verifyUserBtn.addEventListener("click", async function (event) {
-    event.preventDefault();
+  verifyUserBtns.forEach((verifyUserBtn) => {
+    verifyUserBtn.addEventListener("click", async function (event) {
+      event.preventDefault();
 
-    const username = verifyUserBtn.dataset.username;
+      const username = verifyUserBtn.dataset.username;
 
-    await verifyTeacherStudent(username);
+      await verifyTeacherStudent(username);
+    });
   });
-});
 
-function checkDiv() {
-  var myDiv = document.getElementById("admin-card");
-  if (myDiv.childElementCount <= 0) {
-    myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+  function checkDiv() {
+    var myDiv = document.getElementById("admin-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+    }
   }
-}
+  
+  checkDiv()
+  
+  
+  loader.style.display = "none";
+}, 1500);
 
-checkDiv()
+

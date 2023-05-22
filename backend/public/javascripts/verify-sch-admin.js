@@ -52,47 +52,57 @@ function renderAdmins(admins) {
   });
 }
 
-renderAdmins(await getNotVerifiedSchoolAdmins());
-
-const verifySchAdmin = async (school_admin) => {
-  try {
-    const res = await axios({
-      method: "PATCH",
-      url: "/api/library/super-admin/verifyschadmin",
-      data: {
-        school_admin,
-      },
-    });
-
-    if (res.status == 200) {
-      showAlert("success", res.data.message);
-      window.setTimeout(() => {
-        location.reload();
-      }, 1500);
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  
+  function checkDiv() {
+    var myDiv = document.getElementById("admin-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
     }
-  } catch (err) {
-    showAlert("error", err.response.data.message);
   }
-};
+  
+  checkDiv()
 
-const verifyAdminBtns = document.querySelectorAll(".sch-edit");
+  renderAdmins(await getNotVerifiedSchoolAdmins());
 
-verifyAdminBtns.forEach((verifyAdminBtn) => {
-  verifyAdminBtn.addEventListener("click", async function (event) {
-    event.preventDefault();
-
-    const username = verifyAdminBtn.dataset.username;
-
-    await verifySchAdmin(username);
+  const verifySchAdmin = async (school_admin) => {
+    try {
+      const res = await axios({
+        method: "PATCH",
+        url: "/api/library/super-admin/verifyschadmin",
+        data: {
+          school_admin,
+        },
+      });
+  
+      if (res.status == 200) {
+        showAlert("success", res.data.message);
+        window.setTimeout(() => {
+          location.reload();
+        }, 1500);
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
+    }
+  };
+  
+  const verifyAdminBtns = document.querySelectorAll(".sch-edit");
+  
+  verifyAdminBtns.forEach((verifyAdminBtn) => {
+    verifyAdminBtn.addEventListener("click", async function (event) {
+      event.preventDefault();
+  
+      const username = verifyAdminBtn.dataset.username;
+  
+      await verifySchAdmin(username);
+    });
   });
-});
+  
+  
+  
+  loader.style.display = "none";
+}, 1500);
 
 
-function checkDiv() {
-  var myDiv = document.getElementById("admin-card");
-  if (myDiv.childElementCount <= 0) {
-    myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
-  }
-}
-
-checkDiv()

@@ -97,4 +97,11 @@ router.get(
   viewsController.getBooks
 );
 
+router.get(
+  "/queries",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  viewsController.getQueries
+)
+
 module.exports = router;

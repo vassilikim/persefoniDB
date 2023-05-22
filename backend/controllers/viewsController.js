@@ -79,6 +79,10 @@ exports.getStudentReviews = async (req, res, next) => {
   res.status(200).render("verify-reviews");
 };
 
+exports.getQueries = async (req, res, next) => {
+  res.status(200).render("superAdminQueries");
+};
+
 exports.getProfile = async (req, res, next) => {
   try {
     let connection = sql.createConnection(config);

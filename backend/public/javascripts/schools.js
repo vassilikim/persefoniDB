@@ -105,10 +105,22 @@ function registerEditButtonListeners() {
   });
 }
 
+
+
 const loader = document.getElementById("loader");
 loader.style.display = "block";
 setTimeout(async () => {
   const schools = await getSchools();
+  
+  function checkDiv() {
+    var myDiv = document.getElementById("admin-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+    }
+  }
+    
+  checkDiv()
+
   loader.style.display = "none";
   renderSchools(schools);
 

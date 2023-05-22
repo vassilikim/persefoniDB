@@ -54,7 +54,12 @@ function renderPendingReservations(reservs) {
   });
 }
 
-renderPendingReservations(await getPendingReservations());
+
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  
+  renderPendingReservations(await getPendingReservations());
 
 const handleRequest = async (username, book) => {
   try {
@@ -91,12 +96,17 @@ handleRequestBtn.forEach((handleRequestBtn) => {
   });
 });
 
-function checkDiv() {
-  var myDiv = document.getElementById("admin-card");
-  if (myDiv.childElementCount <= 0) {
-    myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+  
+
+  function checkDiv() {
+    var myDiv = document.getElementById("admin-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+    }
   }
-}
-
-checkDiv()
-
+  
+  checkDiv()
+  
+  
+  loader.style.display = "none";
+}, 1500);

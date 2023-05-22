@@ -46,6 +46,13 @@ function renderDelayedUsers(rets) {
   });
 }
 
+
+
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  
+  
 renderDelayedUsers(await getDelayedUsers(null, null, null));
 
 const searchBtn = document.getElementById("search-btn");
@@ -61,11 +68,14 @@ searchBtn.addEventListener("click", async function (event) {
 });
 
 
-function checkDiv() {
-  var myDiv = document.getElementById("admin-card");
-  if (myDiv.childElementCount <= 0) {
-    myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+  function checkDiv() {
+    var myDiv = document.getElementById("admin-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+    }
   }
-}
-
-checkDiv()
+    
+  checkDiv()
+  
+  loader.style.display = "none";
+}, 1500);
