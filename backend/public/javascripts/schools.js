@@ -105,27 +105,26 @@ function registerEditButtonListeners() {
   });
 }
 
-
-
 const loader = document.getElementById("loader");
 loader.style.display = "block";
 setTimeout(async () => {
   const schools = await getSchools();
-  
+
   function checkDiv() {
     var myDiv = document.getElementById("admin-card");
     if (myDiv.childElementCount <= 0) {
-      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+      myDiv.innerHTML =
+        '<p class="no-items-message"><strong>This page is empty!</strong></p>';
     }
   }
-    
-  checkDiv()
+
+  checkDiv();
 
   loader.style.display = "none";
   renderSchools(schools);
 
   registerEditButtonListeners();
-}, 1500);
+}, 1000);
 
 async function confirmDelete(school_id) {
   if (confirm("Are you sure you want to delete this school?")) {
