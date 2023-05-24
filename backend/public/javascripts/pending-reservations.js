@@ -54,59 +54,55 @@ function renderPendingReservations(reservs) {
   });
 }
 
-
 const loader = document.getElementById("loader");
 loader.style.display = "block";
 setTimeout(async () => {
-  
   renderPendingReservations(await getPendingReservations());
 
-const handleRequest = async (username, book) => {
-  try {
-    const res = await axios({
-      method: "POST",
-      url: "/api/library/reservations/handlereservation",
-      data: {
-        username,
-        book,
-      },
-    });
+  const handleRequest = async (username, book) => {
+    try {
+      const res = await axios({
+        method: "POST",
+        url: "/api/library/reservations/handlereservation",
+        data: {
+          username,
+          book,
+        },
+      });
 
-    if (res.status == 200) {
-      showAlert("success", res.data.message);
-      window.setTimeout(() => {
-        location.reload();
-      }, 1500);
+      if (res.status == 200) {
+        showAlert("success", res.data.message);
+        window.setTimeout(() => {
+          location.reload();
+        }, 1500);
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
     }
-  } catch (err) {
-    showAlert("error", err.response.data.message);
-  }
-};
+  };
 
-const handleRequestBtn = document.querySelectorAll(".sch-edit");
+  const handleRequestBtn = document.querySelectorAll(".sch-edit");
 
-handleRequestBtn.forEach((handleRequestBtn) => {
-  handleRequestBtn.addEventListener("click", async function (event) {
-    event.preventDefault();
+  handleRequestBtn.forEach((handleRequestBtn) => {
+    handleRequestBtn.addEventListener("click", async function (event) {
+      event.preventDefault();
 
-    const username = handleRequestBtn.dataset.username;
-    const book = handleRequestBtn.dataset.book;
+      const username = handleRequestBtn.dataset.username;
+      const book = handleRequestBtn.dataset.book;
 
-    await handleRequest(username, book);
+      await handleRequest(username, book);
+    });
   });
-});
-
-  
 
   function checkDiv() {
     var myDiv = document.getElementById("admin-card");
     if (myDiv.childElementCount <= 0) {
-      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+      myDiv.innerHTML =
+        '<p class="no-items-message"><strong>This page is empty!</strong></p>';
     }
   }
-  
-  checkDiv()
-  
-  
+
+  checkDiv();
+
   loader.style.display = "none";
-}, 1500);
+}, 1000);

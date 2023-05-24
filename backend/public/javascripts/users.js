@@ -105,37 +105,33 @@ function renderUsers(users) {
   });
 }
 
-
 const loader = document.getElementById("loader");
 loader.style.display = "block";
 setTimeout(async () => {
-  
   renderUsers(await getUsers());
 
-const deactivateUserBtns = document.querySelectorAll(".sch-edit");
+  const deactivateUserBtns = document.querySelectorAll(".sch-edit");
 
-deactivateUserBtns.forEach((deactivateUserBtn) => {
-  deactivateUserBtn.addEventListener("click", async function (event) {
-    event.preventDefault();
+  deactivateUserBtns.forEach((deactivateUserBtn) => {
+    deactivateUserBtn.addEventListener("click", async function (event) {
+      event.preventDefault();
 
-    await deactivateUser(deactivateUserBtn.dataset.username);
+      await deactivateUser(deactivateUserBtn.dataset.username);
+    });
   });
-});
-  
 
   function checkDiv() {
     var myDiv = document.getElementById("sch-card");
     if (myDiv.childElementCount <= 0) {
-      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+      myDiv.innerHTML =
+        '<p class="no-items-message"><strong>This page is empty!</strong></p>';
     }
   }
-  
-  checkDiv()
-  
-  
-  loader.style.display = "none";
-}, 1500);
 
+  checkDiv();
+
+  loader.style.display = "none";
+}, 1000);
 
 async function confirmDelete(username) {
   if (confirm("Are you sure you want to delete this user?")) {

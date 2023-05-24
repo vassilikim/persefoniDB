@@ -83,6 +83,10 @@ exports.getQueries = async (req, res, next) => {
   res.status(200).render("superAdminQueries");
 };
 
+exports.getLendingsPerSchool = async (req, res, next) => {
+  res.status(200).render("lendings-per-school");
+};
+
 exports.getProfile = async (req, res, next) => {
   try {
     let connection = sql.createConnection(config);

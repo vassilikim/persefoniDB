@@ -35,19 +35,18 @@ function renderReviews(reviews) {
     username.innerHTML = `<strong>Username: </strong>${review.username}`;
     book.innerHTML = `<strong>Book: </strong>${review.title}`;
     text.innerHTML = `<strong>Review: </strong>${review.review}`;
-    rating.innerHTML = '<strong>Rating: </strong> ';
+    rating.innerHTML = "<strong>Rating: </strong> ";
 
     const starContainer = document.createElement("div");
     starContainer.className = "star-rating";
-    const ratingValue = (review.rating);
+    const ratingValue = review.rating;
 
     for (let i = 0; i < 5; i++) {
-      if (i<ratingValue){
+      if (i < ratingValue) {
         const star = document.createElement("span");
         star.className = "yellow-icon full-star";
         starContainer.appendChild(star);
-      }
-      else{
+      } else {
         const star = document.createElement("span");
         star.className = "black-star full-star";
         starContainer.appendChild(star);
@@ -65,61 +64,55 @@ function renderReviews(reviews) {
   });
 }
 
-
-
-
 const loader = document.getElementById("loader");
 loader.style.display = "block";
 setTimeout(async () => {
-  
   renderReviews(await getNotVerifiedReviews());
 
-const verifyReview = async (book, student) => {
-  try {
-    const res = await axios({
-      method: "PATCH",
-      url: "/api/library/reviews/verify",
-      data: {
-        book,
-        student,
-      },
-    });
+  const verifyReview = async (book, student) => {
+    try {
+      const res = await axios({
+        method: "PATCH",
+        url: "/api/library/reviews/verify",
+        data: {
+          book,
+          student,
+        },
+      });
 
-    if (res.status == 200) {
-      showAlert("success", res.data.message);
-      window.setTimeout(() => {
-        location.reload();
-      }, 1500);
+      if (res.status == 200) {
+        showAlert("success", res.data.message);
+        window.setTimeout(() => {
+          location.reload();
+        }, 1500);
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
     }
-  } catch (err) {
-    showAlert("error", err.response.data.message);
-  }
-};
+  };
 
-const verifyReviewBtns = document.querySelectorAll(".sch-edit");
+  const verifyReviewBtns = document.querySelectorAll(".sch-edit");
 
-verifyReviewBtns.forEach((verifyReviewBtn) => {
-  verifyReviewBtn.addEventListener("click", async function (event) {
-    event.preventDefault();
+  verifyReviewBtns.forEach((verifyReviewBtn) => {
+    verifyReviewBtn.addEventListener("click", async function (event) {
+      event.preventDefault();
 
-    const username = verifyReviewBtn.dataset.username;
-    const book = verifyReviewBtn.dataset.book;
+      const username = verifyReviewBtn.dataset.username;
+      const book = verifyReviewBtn.dataset.book;
 
-    await verifyReview(book, username);
+      await verifyReview(book, username);
+    });
   });
-});
-
-  
 
   function checkDiv() {
     var myDiv = document.getElementById("admin-card");
     if (myDiv.childElementCount <= 0) {
-      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+      myDiv.innerHTML =
+        '<p class="no-items-message"><strong>This page is empty!</strong></p>';
     }
   }
-  
-  checkDiv()
-  
-  
+
+  checkDiv();
+
   loader.style.display = "none";
-}, 1500);
+}, 1000);

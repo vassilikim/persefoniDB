@@ -1112,3 +1112,6 @@ h2 {
   border-bottom: 2px solid #534caf;
 }
 
+#none_table{
+  display: none;
+}

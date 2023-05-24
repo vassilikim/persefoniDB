@@ -46,36 +46,32 @@ function renderDelayedUsers(rets) {
   });
 }
 
-
-
 const loader = document.getElementById("loader");
 loader.style.display = "block";
 setTimeout(async () => {
-  
-  
-renderDelayedUsers(await getDelayedUsers(null, null, null));
+  renderDelayedUsers(await getDelayedUsers(null, null, null));
 
-const searchBtn = document.getElementById("search-btn");
+  const searchBtn = document.getElementById("search-btn");
 
-searchBtn.addEventListener("click", async function (event) {
-  event.preventDefault();
+  searchBtn.addEventListener("click", async function (event) {
+    event.preventDefault();
 
-  const first_name = document.getElementById("first_name").value;
-  const last_name = document.getElementById("last_name").value;
-  const delay = document.getElementById("delay").value;
+    const first_name = document.getElementById("first_name").value;
+    const last_name = document.getElementById("last_name").value;
+    const delay = document.getElementById("delay").value;
 
-  renderDelayedUsers(await getDelayedUsers(first_name, last_name, delay));
-});
-
+    renderDelayedUsers(await getDelayedUsers(first_name, last_name, delay));
+  });
 
   function checkDiv() {
     var myDiv = document.getElementById("admin-card");
     if (myDiv.childElementCount <= 0) {
-      myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+      myDiv.innerHTML =
+        '<p class="no-items-message"><strong>This page is empty!</strong></p>';
     }
   }
-    
-  checkDiv()
-  
+
+  checkDiv();
+
   loader.style.display = "none";
-}, 1500);
+}, 1000);

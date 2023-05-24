@@ -104,4 +104,11 @@ router.get(
   viewsController.getQueries
 )
 
+router.get(
+  "/lendings-per-school",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  viewsController.getLendingsPerSchool
+)
+
 module.exports = router;
