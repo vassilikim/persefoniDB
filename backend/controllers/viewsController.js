@@ -111,6 +111,10 @@ exports.getWriters5LessThanMax = async (req, res, next) => {
   res.status(200).render("writers-5-less-than-max");
 };
 
+exports.getAverageRatingGenresUsers = async (req, res, next) => {
+  res.status(200).render("average-rating-genres-users");
+};
+
 
 exports.getProfile = async (req, res, next) => {
   try {

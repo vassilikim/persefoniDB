@@ -153,4 +153,11 @@ router.get(
   viewsController.getWriters5LessThanMax
 )
 
+router.get(
+  "/average-rating-genres-users",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getAverageRatingGenresUsers
+)
+
 module.exports = router;
