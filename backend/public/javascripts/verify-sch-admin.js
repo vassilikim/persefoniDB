@@ -55,15 +55,6 @@ function renderAdmins(admins) {
 const loader = document.getElementById("loader");
 loader.style.display = "block";
 setTimeout(async () => {
-  function checkDiv() {
-    var myDiv = document.getElementById("admin-card");
-    if (myDiv.childElementCount <= 0) {
-      myDiv.innerHTML =
-        '<p class="no-items-message"><strong>This page is empty!</strong></p>';
-    }
-  }
-
-  checkDiv();
 
   renderAdmins(await getNotVerifiedSchoolAdmins());
 
@@ -99,6 +90,16 @@ setTimeout(async () => {
       await verifySchAdmin(username);
     });
   });
+
+  function checkDiv() {
+    var myDiv = document.getElementById("admin-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML =
+        '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+    }
+  }
+
+  checkDiv();
 
   loader.style.display = "none";
 }, 1000);
