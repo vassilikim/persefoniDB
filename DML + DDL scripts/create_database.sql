@@ -534,12 +534,14 @@ BEGIN
 		LEFT JOIN Lending l ON l.book_ID=b.ID 
 		WHERE u.user_role='school-admin'
 		GROUP BY u.username, YEAR(l.lending_date)
+        HAVING year IS NOT NULL
 	)
-	SELECT GROUP_CONCAT(sc.username SEPARATOR ', ') AS schooladmins, sc.lendings AS lendings
+	SELECT GROUP_CONCAT(sc.username SEPARATOR ', ') AS schooladmins, sc.lendings AS lendings, sc.year
 	FROM schooladmin_lendings sc
     WHERE sc.lendings > 20
-	GROUP BY sc.lendings
+	GROUP BY sc.lendings, sc.year
 	HAVING COUNT(*) >= 2;
+    
 END //
 DELIMITER ;
 
