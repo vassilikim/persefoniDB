@@ -55,6 +55,18 @@ function renderBooks(books) {
     book_del.className = "delete";
     book_edit.textContent = "Edit";
     book_edit.className = "edit";
+    book_edit.dataset.ID = book.ID;
+    book_edit.dataset.title = book.title;
+    book_edit.dataset.publisher = book.publisher;
+    book_edit.dataset.ISBN = book.ISBN;
+    book_edit.dataset.page_number = book.page_number;
+    book_edit.dataset.summary = book.summary;
+    book_edit.dataset.image = book.image;
+    book_edit.dataset.copies = book.copies;
+    book_edit.dataset.lang = book.lang;
+    book_edit.dataset.keywords = book.keywords;
+    book_edit.dataset.genre = book.genres;
+    book_edit.dataset.writer_name = book.full_names;
     button_lend.textContent = "Lend";
     button_lend.className = "lend";
     button_del.innerHTML = "<span>x</span>";
@@ -119,6 +131,31 @@ setTimeout(async () => {
     const copies = document.getElementById("copies").value;
 
     renderBooks(await getBooks(title, genre, author, copies));
+  });
+
+  const editBtns = document.querySelectorAll(".edit");
+
+  editBtns.forEach((editBtn) => {
+    editBtn.addEventListener("click", async function (event) {
+      event.preventDefault();
+
+      const queryString = new URLSearchParams({
+        ID: editBtn.dataset.ID,
+        title: editBtn.dataset.title,
+        publisher: editBtn.dataset.publisher,
+        ISBN: editBtn.dataset.ISBN,
+        page_number: editBtn.dataset.page_number,
+        summary: editBtn.dataset.summary,
+        image: editBtn.dataset.image,
+        copies: editBtn.dataset.copies,
+        lang: editBtn.dataset.lang,
+        keywords: editBtn.dataset.keywords,
+        genre: editBtn.dataset.genre,
+        writer_name: editBtn.dataset.writer_name,
+      }).toString();
+
+      location.assign("/edit-book?" + queryString);
+    });
   });
 
   loader.style.display = "none";

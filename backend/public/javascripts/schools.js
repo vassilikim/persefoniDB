@@ -100,7 +100,7 @@ function registerEditButtonListeners() {
         principal: editSchBtn.dataset.principal,
       }).toString();
 
-      location.replace("/edit-school?" + queryString);
+      location.assign("/edit-school?" + queryString);
     });
   });
 }

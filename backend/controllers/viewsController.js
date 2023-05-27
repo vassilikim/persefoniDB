@@ -43,6 +43,10 @@ exports.getEditSchool = async (req, res, next) => {
   res.status(200).render("edit-school", req.query);
 };
 
+exports.getEditBook = async (req, res, next) => {
+  res.status(200).render("edit-book", req.query);
+};
+
 exports.getAddSchool = async (req, res, next) => {
   res.status(200).render("add-school");
 };
@@ -114,7 +118,6 @@ exports.getWriters5LessThanMax = async (req, res, next) => {
 exports.getAverageRatingGenresUsers = async (req, res, next) => {
   res.status(200).render("average-rating-genres-users");
 };
-
 
 exports.getProfile = async (req, res, next) => {
   try {
