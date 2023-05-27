@@ -83,6 +83,39 @@ exports.getQueries = async (req, res, next) => {
   res.status(200).render("superAdminQueries");
 };
 
+exports.getLendingsPerSchool = async (req, res, next) => {
+  res.status(200).render("lendings-per-school");
+};
+
+exports.getWritersTeachersGenre = async (req, res, next) => {
+  res.status(200).render("writers-teachers-genre");
+};
+
+exports.getYoungTeachersMaxBooks = async (req, res, next) => {
+  res.status(200).render("young-teachers-max-books");
+};
+
+exports.getWritersNoLendings = async (req, res, next) => {
+  res.status(200).render("writers-no-lendings");
+};
+
+exports.getSchoolAdminsSameLendings = async (req, res, next) => {
+  res.status(200).render("school-admins-same-lendings");
+};
+
+exports.getTop3GenrePairs = async (req, res, next) => {
+  res.status(200).render("top3-genre-pairs");
+};
+
+exports.getWriters5LessThanMax = async (req, res, next) => {
+  res.status(200).render("writers-5-less-than-max");
+};
+
+exports.getAverageRatingGenresUsers = async (req, res, next) => {
+  res.status(200).render("average-rating-genres-users");
+};
+
+
 exports.getProfile = async (req, res, next) => {
   try {
     let connection = sql.createConnection(config);

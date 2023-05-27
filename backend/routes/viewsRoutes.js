@@ -104,4 +104,60 @@ router.get(
   viewsController.getQueries
 )
 
+router.get(
+  "/lendings-per-school",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  viewsController.getLendingsPerSchool
+)
+
+router.get(
+  "/writers-teachers-genre",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  viewsController.getWritersTeachersGenre
+)
+
+router.get(
+  "/young-teachers-max-books",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  viewsController.getYoungTeachersMaxBooks
+)
+
+router.get(
+  "/writers-no-lendings",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  viewsController.getWritersNoLendings
+)
+
+router.get(
+  "/school-admins-same-lendings",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  viewsController.getSchoolAdminsSameLendings
+)
+
+router.get(
+  "/top3-genre-pairs",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  viewsController.getTop3GenrePairs
+)
+
+router.get(
+  "/writers-5-less-than-max",
+  authController.protect,
+  authController.restrictTo("super-admin"),
+  viewsController.getWriters5LessThanMax
+)
+
+router.get(
+  "/average-rating-genres-users",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getAverageRatingGenresUsers
+)
+
 module.exports = router;

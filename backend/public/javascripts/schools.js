@@ -110,8 +110,10 @@ loader.style.display = "block";
 setTimeout(async () => {
   const schools = await getSchools();
 
+  renderSchools(schools);
+  
   function checkDiv() {
-    var myDiv = document.getElementById("admin-card");
+    var myDiv = document.getElementById("sch-card");
     if (myDiv.childElementCount <= 0) {
       myDiv.innerHTML =
         '<p class="no-items-message"><strong>This page is empty!</strong></p>';
@@ -119,11 +121,10 @@ setTimeout(async () => {
   }
 
   checkDiv();
+  registerEditButtonListeners() 
 
   loader.style.display = "none";
-  renderSchools(schools);
 
-  registerEditButtonListeners();
 }, 1000);
 
 async function confirmDelete(school_id) {

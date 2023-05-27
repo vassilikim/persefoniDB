@@ -1112,3 +1112,17 @@ h2 {
   border-bottom: 2px solid #534caf;
 }
 
+#none_table{
+  display: none;
+}
+
+/* 3.1.2 */
+
+.gap-table{
+  gap:120px;
+}
+/* 
+
+.the_table .table1,.table2 {
+  align-self: stretch;
+} */
