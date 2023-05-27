@@ -55,7 +55,6 @@ function renderAdmins(admins) {
 const loader = document.getElementById("loader");
 loader.style.display = "block";
 setTimeout(async () => {
-
   renderAdmins(await getNotVerifiedSchoolAdmins());
 
   const verifySchAdmin = async (school_admin) => {
