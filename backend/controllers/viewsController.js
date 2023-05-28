@@ -51,6 +51,10 @@ exports.getAddSchool = async (req, res, next) => {
   res.status(200).render("add-school");
 };
 
+exports.getAddBook = async (req, res, next) => {
+  res.status(200).render("add-book");
+};
+
 exports.getLendingRequests = async (req, res, next) => {
   res.status(200).render("lending-requests");
 };

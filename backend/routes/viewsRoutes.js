@@ -167,4 +167,11 @@ router.get(
   viewsController.getEditBook
 );
 
+router.get(
+  "/add-book",
+  authController.protect,
+  authController.restrictTo("school-admin"),
+  viewsController.getAddBook
+);
+
 module.exports = router;

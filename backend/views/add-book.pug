@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Edit Book</title>
+    <title>Add Book</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,32 +9,31 @@
   </head>
   
   <body>
-    <h1>Edit Book</h1>
+    <h1>Add Book</h1>
     <div class="change-form">
     <form id="edit-form">
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" value="#{title}" readonly><br>
+        <input type="text" id="title" name="title" value=""><br>
         <label for="publisher">Publisher:</label>
-        <input type="text" id="publisher" name="publisher" value="#{publisher}"><br>
+        <input type="text" id="publisher" name="publisher" value=""><br>
         <label for="ISBN">ISBN:</label>
-        <input type="text" id="ISBN" name="ISBN" value="#{ISBN}"><br>
+        <input type="text" id="ISBN" name="ISBN" value=""><br>
         <label for="page_number">Page number:</label>
-        <input type="text" id="page_number" name="page_number" value="#{page_number}"><br>
+        <input type="text" id="page_number" name="page_number" value=""><br>
         <label for="summary">Summary:</label>
-        <input type="text" id="summary" name="summary" value="#{summary}"><br>
+        <input type="text" id="summary" name="summary" value=""><br>
         <label for="copies">Copies:</label>
-        <input type="text" id="copies" name="copies" value="#{copies}"><br>
+        <input type="text" id="copies" name="copies" value=""><br>
         <label for="image">Image:</label>
-        <input type="text" id="image" name="image" value="#{image}"><br>
+        <input type="text" id="image" name="image" value=""><br>
         <label for="lang">Language:</label>
-        <input type="text" id="lang" name="lang" value="#{lang}"><br>
+        <input type="text" id="lang" name="lang" value=""><br>
         <label for="keywords">Keywords:</label>
-        <input type="text" id="keywords" name="keywords" value="#{keywords}"><br>
+        <input type="text" id="keywords" name="keywords" value=""><br>
         <label for="genre">Genres:</label>
-        <input type="text" id="genre" name="genre" value="#{genre}"><br>
+        <input type="text" id="genre" name="genre" value=""><br>
         <label for="writer_name">Writers:</label>
-        <input type="text" id="writer_name" name="writer_name" value="#{writer_name}"><br>
-        <input type="hidden" id="id" name="id" value="#{ID}"><br>
+        <input type="text" id="writer_name" name="writer_name" value=""><br>
         <button id="edit-sch-btn" class="button-login"><input type="submit" value="Submit" ></button>
     </form>
                 
@@ -44,6 +43,6 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type=module src="javascripts/edit-book.js"> </script>
+    <script type=module src="javascripts/add-book.js"> </script>
   </body>
 </html>
