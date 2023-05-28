@@ -195,4 +195,11 @@ router.get(
   viewsController.getMakeReview
 );
 
+router.get(
+  "/user-books",
+  authController.protect,
+  authController.restrictTo("student", "teacher"),
+  viewsController.getUserBooks
+);
+
 module.exports = router;

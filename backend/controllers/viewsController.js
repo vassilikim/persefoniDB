@@ -91,6 +91,10 @@ exports.getBooks = async (req, res, next) => {
   res.status(200).render("books");
 };
 
+exports.getUserBooks = async (req, res, next) => {
+  res.status(200).render("user-books");
+};
+
 exports.getUsers = async (req, res, next) => {
   res.status(200).render("handle-users");
 };

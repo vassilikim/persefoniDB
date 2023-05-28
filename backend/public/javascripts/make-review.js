@@ -2,6 +2,7 @@ import { showAlert } from "./alerts.js";
 
 const makeReview = async (book, review, rating) => {
   try {
+    console.log(book, review, rating);
     const res = await axios({
       method: "POST",
       url: `/api/library/reviews/makereview`,
