@@ -59,6 +59,10 @@ exports.getLendingRequests = async (req, res, next) => {
   res.status(200).render("lending-requests");
 };
 
+exports.getMyLendingRequests = async (req, res, next) => {
+  res.status(200).render("my-lending-requests");
+};
+
 exports.getLendings = async (req, res, next) => {
   res.status(200).render("lendings");
 };

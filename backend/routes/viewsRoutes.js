@@ -174,4 +174,11 @@ router.get(
   viewsController.getAddBook
 );
 
+router.get(
+  "/my-lending-requests",
+  authController.protect,
+  authController.restrictTo("student", "teacher"),
+  viewsController.getMyLendingRequests
+);
+
 module.exports = router;
