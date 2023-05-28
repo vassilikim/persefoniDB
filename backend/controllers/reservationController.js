@@ -136,17 +136,13 @@ exports.getUserReservations = async (req, res, next) => {
   }
 };
 
-exports.getUserLendings = async (req, res, next) => {
+exports.selectLendedBooks = async (req, res, next) => {
   try {
     let connection = sql.createConnection(config);
     connection.connect();
 
     connection.query(
-      `SELECT l.*, b.title 
-      FROM Lending l
-      JOIN Book b 
-      ON l.book_ID=b.ID 
-      WHERE l.user_ID=${req.user_id};`,
+      `CALL selectLendedBooks(${req.user_id});`,
       async function (error, results, fields) {
         if (error)
           return res.status(500).json({
@@ -156,7 +152,7 @@ exports.getUserLendings = async (req, res, next) => {
 
         return res.status(200).json({
           status: "success",
-          data: results,
+          books: results[0],
         });
       }
     );
