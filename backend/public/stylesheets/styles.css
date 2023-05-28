@@ -1129,3 +1129,43 @@ h2 {
 .the_table .table1,.table2 {
   align-self: stretch;
 } */
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 25px;
+  color: gray;
+  cursor: pointer;
+}
+
+.star-rating label:before {
+  content: "\2605";
+}
+
+.star-rating input[type="radio"]:checked ~ label:before {
+  color: orange;
+}
+
+.star-rating {
+  direction: rtl;
+}
+
+.returned-label {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  width: 90px;
+  height: 80px;
+  background-color: purple;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-70%, -30%);
+  z-index: 1;
+}

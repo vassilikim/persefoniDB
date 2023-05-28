@@ -67,8 +67,16 @@ exports.getLendings = async (req, res, next) => {
   res.status(200).render("lendings");
 };
 
+exports.getMyLendings = async (req, res, next) => {
+  res.status(200).render("my-lendings");
+};
+
 exports.getPendingReservations = async (req, res, next) => {
   res.status(200).render("pending-reservations");
+};
+
+exports.getMakeReview = async (req, res, next) => {
+  res.status(200).render("make-review", req.query);
 };
 
 exports.getBorrowInSchool = async (req, res, next) => {

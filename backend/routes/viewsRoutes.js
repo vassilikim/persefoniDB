@@ -181,4 +181,18 @@ router.get(
   viewsController.getMyLendingRequests
 );
 
+router.get(
+  "/my-lendings",
+  authController.protect,
+  authController.restrictTo("student", "teacher"),
+  viewsController.getMyLendings
+);
+
+router.get(
+  "/review-book",
+  authController.protect,
+  authController.restrictTo("student", "teacher"),
+  viewsController.getMakeReview
+);
+
 module.exports = router;
