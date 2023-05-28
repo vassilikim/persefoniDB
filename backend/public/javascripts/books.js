@@ -20,6 +20,24 @@ const getBooks = async (title, genre, author, copies) => {
   }
 };
 
+const deleteBook = async (id) => {
+  try {
+    const res = await axios({
+      method: "DELETE",
+      url: `/api/library/books/${id}`,
+    });
+
+    if (res.status == 200) {
+      showAlert("success", res.data.message);
+      window.setTimeout(() => {
+        location.replace("/books");
+      }, 1500);
+    }
+  } catch (err) {
+    showAlert("error", err.response.data.message);
+  }
+};
+
 const bookList = document.getElementById("book-list");
 
 function renderBooks(books) {
@@ -53,6 +71,10 @@ function renderBooks(books) {
     button_info.className = "info";
     book_del.textContent = "Delete";
     book_del.className = "delete";
+    book_del.dataset.id = book.ID;
+    book_del.onclick = function () {
+      confirmDelete(book_del.dataset.id);
+    };
     book_edit.textContent = "Edit";
     book_edit.className = "edit";
     book_edit.dataset.ID = book.ID;
@@ -160,3 +182,10 @@ setTimeout(async () => {
 
   loader.style.display = "none";
 }, 1000);
+
+async function confirmDelete(book_id) {
+  if (confirm("Are you sure you want to delete this book?")) {
+    await deleteBook(book_id);
+  } else {
+  }
+}
