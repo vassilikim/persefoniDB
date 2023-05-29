@@ -31,11 +31,4 @@ router.delete(
   bookController.deleteBook
 );
 
-router.get(
-  "/lended",
-  authController.protect,
-  authController.restrictTo("teacher", "student"),
-  bookController.selectLendedBooks
-);
-
 module.exports = router;

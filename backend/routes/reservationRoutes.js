@@ -63,7 +63,7 @@ router.get(
   "/mylendings",
   authController.protect,
   authController.restrictTo("teacher", "student"),
-  reservationController.getUserLendings
+  reservationController.selectLendedBooks
 );
 
 module.exports = router;

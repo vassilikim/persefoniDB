@@ -97,7 +97,7 @@ label {
 .menu img {
   width: 100%;
 }
-.menu .div-menu{
+.menu .div-menu {
   width: 5%;
 }
 
@@ -254,7 +254,7 @@ label {
   position: relative;
 }
 
-.loading_login:before{
+.loading_login:before {
   content: "";
   position: absolute;
   top: 37%;
@@ -267,14 +267,13 @@ label {
   animation: spin 0.85s linear infinite;
 }
 
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-.loader-div{
+.loader-div {
   position: fixed;
   display: flex;
   top: 0;
@@ -291,13 +290,13 @@ label {
   text-align: left;
   justify-content: center;
 }
-.loader-div .loading{
+.loader-div .loading {
   position: fixed;
   top: 48%;
   left: calc(50% - 50px);
 }
 
-.loader-div .loading:before{
+.loader-div .loading:before {
   width: 100px;
   height: 100px;
   border: 3.5px solid #fff;
@@ -305,14 +304,13 @@ label {
   animation: spin 0.85s linear infinite;
 }
 
-
 .button-login {
   display: flex;
   width: 100%;
   border: none;
   background: none;
 }
-.button-login:hover{
+.button-login:hover {
   border: none;
   background: none;
 }
@@ -356,7 +354,7 @@ label {
 .menu .profile-btn:hover {
   border: none;
   cursor: pointer;
-  background-color:#e9e8f9;
+  background-color: #e9e8f9;
 }
 
 /* into profile for the name of the School*/
@@ -527,7 +525,7 @@ label {
   font-size: 0.9em;
   margin-top: 5%;
 }
-.no-items-message{
+.no-items-message {
   margin-top: 50px;
   font-size: 26px;
   margin-bottom: 250px;
@@ -544,11 +542,10 @@ label {
   background-color: white;
 }
 
-
 /* schools card for super-admin */
 
 .sch-card {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 10px;
@@ -649,7 +646,7 @@ li {
   padding: 5px;
 }
 
-.delete{
+.delete {
   position: absolute;
   top: 0;
   left: 0;
@@ -1023,7 +1020,7 @@ h2 {
   position: relative;
 }
 
-#loader{
+#loader {
   margin: 0 0 15% calc(50% - 50px);
   width: 100px;
   height: 100px;
@@ -1040,7 +1037,7 @@ h2 {
 }
 
 /* load when i go to book page */
-#loader_book{
+#loader_book {
   margin: -100px 0 15% calc(50% - 50px);
   width: 100px;
   height: 100px;
@@ -1049,7 +1046,6 @@ h2 {
   border-top-color: transparent;
   animation: spin 0.85s linear infinite;
 }
-
 
 /* ratings */
 .star-rating {
@@ -1060,7 +1056,7 @@ h2 {
   display: inline-block;
   width: 20px;
   height: 20px;
-  background-image: url('/images/star (1).png');
+  background-image: url("/images/star (1).png");
   background-size: cover;
 }
 
@@ -1072,10 +1068,9 @@ h2 {
   display: inline-block;
   width: 20px;
   height: 20px;
-  background-image: url('/images/star.png');
+  background-image: url("/images/star.png");
   background-size: cover;
 }
-
 
 /* styles for the table of the queries */
 .the_table {
@@ -1112,17 +1107,65 @@ h2 {
   border-bottom: 2px solid #534caf;
 }
 
-#none_table{
+#none_table {
+  display: none;
+}
+
+#none_table1 {
+  display: none;
+}
+
+#none_table2 {
   display: none;
 }
 
 /* 3.1.2 */
 
-.gap-table{
-  gap:120px;
+.gap-table {
+  gap: 120px;
 }
 /* 
 
 .the_table .table1,.table2 {
   align-self: stretch;
 } */
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 25px;
+  color: gray;
+  cursor: pointer;
+}
+
+.star-rating label:before {
+  content: "\2605";
+}
+
+.star-rating input[type="radio"]:checked ~ label:before {
+  color: orange;
+}
+
+.star-rating {
+  direction: rtl;
+}
+
+.returned-label {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  width: 90px;
+  height: 80px;
+  background-color: purple;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-70%, -30%);
+  z-index: 1;
+}

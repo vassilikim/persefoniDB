@@ -100,7 +100,7 @@ function registerEditButtonListeners() {
         principal: editSchBtn.dataset.principal,
       }).toString();
 
-      location.replace("/edit-school?" + queryString);
+      location.assign("/edit-school?" + queryString);
     });
   });
 }
@@ -111,7 +111,7 @@ setTimeout(async () => {
   const schools = await getSchools();
 
   renderSchools(schools);
-  
+
   function checkDiv() {
     var myDiv = document.getElementById("sch-card");
     if (myDiv.childElementCount <= 0) {
@@ -121,10 +121,9 @@ setTimeout(async () => {
   }
 
   checkDiv();
-  registerEditButtonListeners() 
+  registerEditButtonListeners();
 
   loader.style.display = "none";
-
 }, 1000);
 
 async function confirmDelete(school_id) {

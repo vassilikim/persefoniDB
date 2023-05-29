@@ -1,5 +1,4 @@
-1	Schmidt PLC	63838 White Mountain Suite 614\
-Port Michael, MA 68135	Port Laura	158-563-3037	graymichael@example.org	Elizabeth Ortega	
+1	Schmidt PLC	63838 White Mountain Suite 614Port Michael, MA 68135	Port Laura	158-563-3037	graymichael@example.org	Elizabeth Ortega	
 2	Rubio-Mitchell	93588 Joseph View Suite 450\
 Lake Joshua, MD 74998	Dorothyview	(297)109-3272	michael13@example.com	Linda Martin	
 3	James LLC	334 Aaron Vista\

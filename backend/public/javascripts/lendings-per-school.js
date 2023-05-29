@@ -20,36 +20,31 @@ const getData = async (month, year) => {
   }
 };
 
-
 const bodyTableList = document.getElementById("body_table");
 const none_table = document.getElementById("none_table");
 
 function renderBodyTable(data) {
   bodyTableList.innerHTML = "";
   data.forEach((Data) => {
-
     const tr = document.createElement("tr");
     const td1 = document.createElement("td");
     const td2 = document.createElement("td");
-    
 
     td1.textContent = Data.school_name;
     td2.textContent = Data.lendings;
-    
+
     tr.appendChild(td1);
     tr.appendChild(td2);
     bodyTableList.appendChild(tr);
   });
-  none_table.style.display="block";
+  none_table.style.display = "block";
 }
-
 
 const loader = document.getElementById("loader_book");
 
-
 loader.style.display = "block";
 setTimeout(async () => {
-    renderBodyTable(await getData(null, null));
+  renderBodyTable(await getData(null, null));
 
   const searchBtn = document.getElementById("search-btn");
 
@@ -59,7 +54,7 @@ setTimeout(async () => {
     const month = document.getElementById("month").value;
     const year = document.getElementById("year").value;
 
-    renderBodyTable(await getData(month,year));
+    renderBodyTable(await getData(month, year));
   });
 
   loader.style.display = "none";

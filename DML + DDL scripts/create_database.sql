@@ -894,7 +894,7 @@ BEGIN
 	FROM Writes
 	WHERE book_ID IN (SELECT book_id FROM Books);
 
-	SELECT b.ID, b.title, b.publisher, b.ISBN, b.page_number, b.summary, b.copies, b.image, b.lang, b.keywords, gen.genres, final.full_names, l.was_returned_at
+	SELECT b.ID, b.title, b.publisher, b.ISBN, b.page_number, b.summary, b.copies, b.image, b.lang, b.keywords, gen.genres, final.full_names, l.was_returned_at, l.must_be_returned_at, l.lending_date
 	FROM Book b
     JOIN Lending l ON l.book_ID = b.ID
 	JOIN (SELECT g.book_ID, GROUP_CONCAT(g.genre SEPARATOR ", ") AS genres

@@ -43,20 +43,40 @@ exports.getEditSchool = async (req, res, next) => {
   res.status(200).render("edit-school", req.query);
 };
 
+exports.getEditBook = async (req, res, next) => {
+  res.status(200).render("edit-book", req.query);
+};
+
 exports.getAddSchool = async (req, res, next) => {
   res.status(200).render("add-school");
+};
+
+exports.getAddBook = async (req, res, next) => {
+  res.status(200).render("add-book");
 };
 
 exports.getLendingRequests = async (req, res, next) => {
   res.status(200).render("lending-requests");
 };
 
+exports.getMyLendingRequests = async (req, res, next) => {
+  res.status(200).render("my-lending-requests");
+};
+
 exports.getLendings = async (req, res, next) => {
   res.status(200).render("lendings");
 };
 
+exports.getMyLendings = async (req, res, next) => {
+  res.status(200).render("my-lendings");
+};
+
 exports.getPendingReservations = async (req, res, next) => {
   res.status(200).render("pending-reservations");
+};
+
+exports.getMakeReview = async (req, res, next) => {
+  res.status(200).render("make-review", req.query);
 };
 
 exports.getBorrowInSchool = async (req, res, next) => {
@@ -69,6 +89,10 @@ exports.getDelayedLendings = async (req, res, next) => {
 
 exports.getBooks = async (req, res, next) => {
   res.status(200).render("books");
+};
+
+exports.getUserBooks = async (req, res, next) => {
+  res.status(200).render("user-books");
 };
 
 exports.getUsers = async (req, res, next) => {
@@ -114,7 +138,6 @@ exports.getWriters5LessThanMax = async (req, res, next) => {
 exports.getAverageRatingGenresUsers = async (req, res, next) => {
   res.status(200).render("average-rating-genres-users");
 };
-
 
 exports.getProfile = async (req, res, next) => {
   try {
