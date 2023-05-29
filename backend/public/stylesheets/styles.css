@@ -1160,8 +1160,9 @@ h2 {
   height: 80px;
   background-color: purple;
   color: white;
-  padding: 5px;
+  padding: 8px;
   border-radius: 50%;
+  font-size: 13px;
   font-weight: bold;
   display: flex;
   align-items: center;
