@@ -235,7 +235,8 @@ label {
 
 .gap_new{
   position: relative;
-  width: 50%;
+  width: 40%;
+  text-align: center;
 }
 
 .loading {
@@ -618,6 +619,80 @@ label {
   color: #573478;
 }
 .sch-card .schOfone strong,
+h2 {
+  font-size: 21px;
+  color: #573478;
+}
+
+#admin-card-lending {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+
+#admin-card-lending .schOfone {
+  position: relative;
+  padding: 10px;
+  width: 40%;
+  height: 50%;
+  background-color: aliceblue;
+  margin: 30px;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
+#admin-card-lending .schOfone h2 {
+  text-align: center;
+}
+#admin-card-lending .schOfone h3 {
+  text-align: left;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+#admin-card-lending .sch-edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* margin: 15px; */
+  font-size: 15px;
+  background-color: #534caf;
+  border: 2px solid #534caf;
+  border-radius: 0 10px;
+  color: white;
+}
+#admin-card-lending .sch-edit:hover {
+  background-color: white;
+  border: 2px solid #534caf;
+  border-radius: 0 12px;
+  color: #573478;
+  cursor: pointer;
+}
+
+#admin-card-lending .sch-delete {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* margin: 15px; */
+  font-size: 15px;
+  background-color: red;
+  border: 2px solid red;
+  border-radius: 10px 0;
+  color: white;
+}
+#admin-card-lending .sch-delete:hover {
+  background-color: white;
+  border: 2px solid red;
+  border-radius: 12px 0;
+  color: #573478;
+  cursor: pointer;
+}
+
+#admin-card-lending .schOfone h2 {
+  font-size: 30px;
+  color: #573478;
+}
+#admin-card-lending .schOfone strong,
 h2 {
   font-size: 21px;
   color: #573478;

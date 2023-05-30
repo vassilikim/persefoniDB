@@ -1,4 +1,5 @@
-import { showAlert } from "./alert-conteiner.js";
+import { showAlertconteiner } from "./alert-conteiner.js";
+import { showAlert } from "./alerts.js";
 
 const getBooks = async (title, genre, author) => {
   try {
@@ -19,7 +20,7 @@ const getBooks = async (title, genre, author) => {
   }
 };
 
-const makeReservation = async (book) => {
+const makeReservation = async (book,the_id) => {
   try {
     const res = await axios({
       method: "POST",
@@ -30,13 +31,13 @@ const makeReservation = async (book) => {
     });
 
     if (res.status == 200) {
-      showAlert("success", res.data.message);
+      showAlertconteiner("success", res.data.message,7, the_id);
       window.setTimeout(() => {
         location.replace("/user-books");
       }, 1500);
     }
   } catch (err) {
-    showAlert("error", err.response.data.message);
+    showAlertconteiner("error", err.response.data.message,7,the_id);
   }
 };
 
@@ -44,7 +45,7 @@ const bookList = document.getElementById("book-list");
 
 function renderBooks(books) {
   bookList.innerHTML = "";
-  books.forEach((book) => {
+  books.forEach((book,index) => {
     const button_info = document.createElement("button");
     const li = document.createElement("li");
     const title = document.createElement("h2");
@@ -65,9 +66,12 @@ function renderBooks(books) {
     button_lend.textContent = "Lend";
     button_lend.className = "edit";
     button_lend.dataset.title = book.title;
+    button_lend.dataset.the_id = index;
     button_del.innerHTML = "<span>x</span>";
     button_del.className = "del";
     conteiner.className = "conteiner";
+    conteiner.id = `conteiner-${index}`;
+
     div_pop.innerHTML = `
       <h2>${book.title}</h2>
       <p><strong>Authors:</strong> ${book.full_names}</p>
@@ -85,7 +89,7 @@ function renderBooks(books) {
     conteiner.style.display = "none";
 
     button_info.addEventListener("click", () => {
-      if (div_pop.style.display === "none") {
+      if (div_pop.style.display === "none" && conteiner.style.display === "none") {
         div_pop.style.display = "block";
         conteiner.style.display = "block";
       } else {
@@ -134,8 +138,9 @@ setTimeout(async () => {
       event.preventDefault();
 
       const title = editBtn.dataset.title;
+      const the_id = editBtn.dataset.the_id;
 
-      await makeReservation(title);
+      await makeReservation(title,the_id);
     });
   });
 

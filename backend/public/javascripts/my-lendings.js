@@ -15,7 +15,7 @@ const getMyLendings = async () => {
   }
 };
 
-const lendreqList = document.getElementById("admin-card");
+const lendreqList = document.getElementById("admin-card-lending");
 
 function renderLendingRequests(reqs) {
   lendreqList.innerHTML = "";
@@ -74,7 +74,7 @@ setTimeout(async () => {
   });
 
   function checkDiv() {
-    var myDiv = document.getElementById("admin-card");
+    var myDiv = document.getElementById("admin-card-lending");
     if (myDiv.childElementCount <= 0) {
       myDiv.innerHTML =
         '<p class="no-items-message"><strong>This page is empty!</strong></p>';
