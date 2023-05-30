@@ -5,15 +5,17 @@ export const hideAlert = () => {
   
   };
   
-  export const showAlert = (type, msg, time = 7) => {
-    // Hide previous alerts
+  export const showAlertconteiner = (type, msg, time = 7, the_id) => {
     hideAlert();
   
-    // Put the HTML code for the alert in the beginning of the body
     const markup = `<div class="alert gap_new alert--${type}">${msg}</div>`;
-    document.querySelector("div .conteiner").insertAdjacentHTML("afterbegin", markup);
   
-    // Close the alert after a given time
+    const bookInfoDiv = document.getElementById(`conteiner-${the_id}`);
+    if (bookInfoDiv) {
+      bookInfoDiv.insertAdjacentHTML("afterbegin", markup);
+    }
+  
     window.setTimeout(hideAlert, time * 1000);
   };
+  
   
