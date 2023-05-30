@@ -52,47 +52,53 @@ function renderAdmins(admins) {
   });
 }
 
-renderAdmins(await getNotVerifiedSchoolAdmins());
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  renderAdmins(await getNotVerifiedSchoolAdmins());
 
-const verifySchAdmin = async (school_admin) => {
-  try {
-    const res = await axios({
-      method: "PATCH",
-      url: "/api/library/super-admin/verifyschadmin",
-      data: {
-        school_admin,
-      },
-    });
+  const verifySchAdmin = async (school_admin) => {
+    try {
+      const res = await axios({
+        method: "PATCH",
+        url: "/api/library/super-admin/verifyschadmin",
+        data: {
+          school_admin,
+        },
+      });
 
-    if (res.status == 200) {
-      showAlert("success", res.data.message);
-      window.setTimeout(() => {
-        location.reload();
-      }, 1500);
+      if (res.status == 200) {
+        showAlert("success", res.data.message);
+        window.setTimeout(() => {
+          location.reload();
+        }, 1500);
+      }
+    } catch (err) {
+      showAlert("error", err.response.data.message);
     }
-  } catch (err) {
-    showAlert("error", err.response.data.message);
-  }
-};
+  };
 
-const verifyAdminBtns = document.querySelectorAll(".sch-edit");
+  const verifyAdminBtns = document.querySelectorAll(".sch-edit");
 
-verifyAdminBtns.forEach((verifyAdminBtn) => {
-  verifyAdminBtn.addEventListener("click", async function (event) {
-    event.preventDefault();
+  verifyAdminBtns.forEach((verifyAdminBtn) => {
+    verifyAdminBtn.addEventListener("click", async function (event) {
+      event.preventDefault();
 
-    const username = verifyAdminBtn.dataset.username;
+      const username = verifyAdminBtn.dataset.username;
 
-    await verifySchAdmin(username);
+      await verifySchAdmin(username);
+    });
   });
-});
 
-
-function checkDiv() {
-  var myDiv = document.getElementById("admin-card");
-  if (myDiv.childElementCount <= 0) {
-    myDiv.innerHTML = '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+  function checkDiv() {
+    var myDiv = document.getElementById("admin-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML =
+        '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+    }
   }
-}
 
-checkDiv()
+  checkDiv();
+
+  loader.style.display = "none";
+}, 1000);

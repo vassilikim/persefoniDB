@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Make Review</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+  </head>
+  
+  <body>
+    <h1>Make Review</h1>
+    <div class="change-form">
+    <form id="edit-form">
+        <label for="title">Book:</label>
+        <input type="text" id="title" name="title" value="#{title}" readonly><br>
+        <label for="review">Review:</label>
+        <input type="text" id="review" name="review" value=""><br>
+        <label for="rating">Rating:</label>
+        <div class="star-rating" id="rating">
+          <input type="radio" id="star5" name="rating" value="5">
+          <label for="star5"></label>
+          <input type="radio" id="star4" name="rating" value="4">
+          <label for="star4"></label>
+          <input type="radio" id="star3" name="rating" value="3">
+          <label for="star3"></label>
+          <input type="radio" id="star2" name="rating" value="2">
+          <label for="star2"></label>
+          <input type="radio" id="star1" name="rating" value="1">
+          <label for="star1"></label>
+        </div><br>
+        <button id="edit-sch-btn" class="button-login"><input type="submit" value="Submit" ></button>
+    </form>
+                
+    </div>
+    <div class="footer">
+      <h3>Copyright © 2023</h3>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type=module src="javascripts/make-review.js"> </script>
+  </body>
+</html>

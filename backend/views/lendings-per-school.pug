@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lendings Per School</title>
+  <link rel="stylesheet" href="stylesheets/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  
+  <div class="book-body">
+    <h1>Lendings Per School</h1>
+
+    <form>
+      <input id="year" type="text" placeholder="Search for year...">
+      <input id="month" type="text" placeholder="Search for month...">
+      <button id="search-btn" type="submit">Search</button>
+    </form>
+        
+    <div class="the_table" id="the_table">
+      <table class="content-table" id="none_table">
+        <thead>
+          <tr>
+            <th>School</th>
+            <th>Lendings</th>
+          </tr>
+        </thead>
+        <tbody id="body_table">
+          <tr id="first">
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="load"><div id="loader_book"></div></div>
+
+
+  <div class="footer">
+    <h3>Copyright © 2023</h3>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type=module src="javascripts/lendings-per-school.js"> </script>
+</body>
+</html>

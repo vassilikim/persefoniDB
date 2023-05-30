@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Average rating genres users</title>
+  <link rel="stylesheet" href="stylesheets/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  
+  <div class="book-body">
+    <h1>Average rating genres users</h1>
+
+    <form>
+      <input id="genre" type="text" placeholder="Search for genre...">
+      <input id="full_name" type="text" placeholder="Search for full name...">
+      <button id="search-btn" type="submit">Search</button>
+    </form>
+        
+    <div class="the_table gap-table" id="the_table">
+    <div>
+      <table class="content-table table1" id="none_table1">
+        <thead id="head1">
+          <tr>
+            <th>Genre</th>
+            <th>Average Rating</th>
+          </tr>
+        </thead>
+        <tbody id="body_table1">
+          <tr id="first1">
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <div>
+      <table class="content-table table2" id="none_table2">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Full Name</th>
+            <th>Average Rating</th>
+          </tr>
+        </thead>
+        <tbody id="body_table2">
+          <tr id="first2">
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>  
+    </div>
+  </div>
+
+  <div class="load"><div id="loader_book"></div></div>
+
+
+  <div class="footer">
+    <h3>Copyright © 2023</h3>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type=module src="javascripts/average-rating-genres-users.js"> </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Books</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <button class="add-sch" onclick="location.assign('/add-book')">Add Book</button>  
+    <div class="book-body">
+      <h1>Books</h1>
+
+    <form>
+      <input id="title" type="text" placeholder="Search for title...">
+      <input id="genre" type="text" placeholder="Search for genre...">
+      <input id="author" type="text" placeholder="Search for author...">
+      <input id="copies" type="text" placeholder="Search for copies...">
+      <button id="search-btn" type="submit">Search</button>
+    </form>
+    
+    <ul id="book-list"></ul>
+    </div>
+    <div class="load"><div id="loader_book"></div></div>
+        
+    <div class="footer">
+      <h3>Copyright © 2023</h3>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type=module src="javascripts/books.js"> </script>
+  </body>
+</html>

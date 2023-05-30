@@ -95,7 +95,10 @@ label {
   margin: 20px;
 }
 .menu img {
-  width: 18%;
+  width: 100%;
+}
+.menu .div-menu {
+  width: 5%;
 }
 
 /* Logout Button */
@@ -230,6 +233,12 @@ label {
   color: #004085;
 }
 
+.gap_new{
+  position: relative;
+  width: 40%;
+  text-align: center;
+}
+
 .loading {
   position: relative;
 }
@@ -237,7 +246,24 @@ label {
 .loading:before {
   content: "";
   position: absolute;
-  top: 39%;
+  top: 20%;
+  left: 65%;
+  width: 15px;
+  height: 15px;
+  border-radius: 52%;
+  border: 2.5px solid #fff;
+  border-top-color: transparent;
+  animation: spin 0.85s linear infinite;
+}
+
+.loading_login {
+  position: relative;
+}
+
+.loading_login:before {
+  content: "";
+  position: absolute;
+  top: 37%;
   left: 60%;
   width: 15px;
   height: 15px;
@@ -253,7 +279,7 @@ label {
   }
 }
 
-.loader-div{
+.loader-div {
   position: fixed;
   display: flex;
   top: 0;
@@ -270,13 +296,13 @@ label {
   text-align: left;
   justify-content: center;
 }
-.loader-div .loading{
+.loader-div .loading {
   position: fixed;
   top: 48%;
   left: calc(50% - 50px);
 }
 
-.loader-div .loading:before{
+.loader-div .loading:before {
   width: 100px;
   height: 100px;
   border: 3.5px solid #fff;
@@ -284,14 +310,13 @@ label {
   animation: spin 0.85s linear infinite;
 }
 
-
 .button-login {
   display: flex;
   width: 100%;
   border: none;
   background: none;
 }
-.button-login:hover{
+.button-login:hover {
   border: none;
   background: none;
 }
@@ -326,13 +351,16 @@ label {
   visibility: visible;
 } */
 /* profile btn */
-.profile-btn {
+.menu .profile-btn {
   display: flex;
   border: none;
   background: none;
+  width: 60px;
 }
-.profile-btn:hover {
+.menu .profile-btn:hover {
+  border: none;
   cursor: pointer;
+  background-color: #e9e8f9;
 }
 
 /* into profile for the name of the School*/
@@ -503,7 +531,7 @@ label {
   font-size: 0.9em;
   margin-top: 5%;
 }
-.no-items-message{
+.no-items-message {
   margin-top: 50px;
   font-size: 26px;
   margin-bottom: 250px;
@@ -516,6 +544,10 @@ label {
   width: 100%;
 }
 
+.card-content button.restore:hover {
+  background-color: white;
+}
+
 /* schools card for super-admin */
 
 .sch-card {
@@ -525,10 +557,11 @@ label {
   padding-top: 10px;
   padding-bottom: 100px;
 }
+
 .sch-card .schOfone {
   position: relative;
   padding: 10px;
-  width: 50%;
+  width: 40%;
   height: 50%;
   background-color: aliceblue;
   margin: 10px;
@@ -591,6 +624,80 @@ h2 {
   color: #573478;
 }
 
+#admin-card-lending {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+
+#admin-card-lending .schOfone {
+  position: relative;
+  padding: 10px;
+  width: 40%;
+  height: 50%;
+  background-color: aliceblue;
+  margin: 30px;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
+#admin-card-lending .schOfone h2 {
+  text-align: center;
+}
+#admin-card-lending .schOfone h3 {
+  text-align: left;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+#admin-card-lending .sch-edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* margin: 15px; */
+  font-size: 15px;
+  background-color: #534caf;
+  border: 2px solid #534caf;
+  border-radius: 0 10px;
+  color: white;
+}
+#admin-card-lending .sch-edit:hover {
+  background-color: white;
+  border: 2px solid #534caf;
+  border-radius: 0 12px;
+  color: #573478;
+  cursor: pointer;
+}
+
+#admin-card-lending .sch-delete {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* margin: 15px; */
+  font-size: 15px;
+  background-color: red;
+  border: 2px solid red;
+  border-radius: 10px 0;
+  color: white;
+}
+#admin-card-lending .sch-delete:hover {
+  background-color: white;
+  border: 2px solid red;
+  border-radius: 12px 0;
+  color: #573478;
+  cursor: pointer;
+}
+
+#admin-card-lending .schOfone h2 {
+  font-size: 30px;
+  color: #573478;
+}
+#admin-card-lending .schOfone strong,
+h2 {
+  font-size: 21px;
+  color: #573478;
+}
+
 /* all books */
 
 #book-list {
@@ -617,6 +724,14 @@ li {
   top: 0;
   right: 0;
   padding: 5px;
+}
+
+.delete {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  border-radius: 5px 0;
 }
 
 .book_image {
@@ -871,7 +986,7 @@ button:hover {
   justify-content: center;
   position: relative;
   margin: auto;
-  margin-top: 10%;
+  margin-top: 5%;
   max-width: 40%;
   max-height: 100%;
   padding: 20px;
@@ -924,6 +1039,16 @@ h2 {
   background-color: #fc9b9b;
 }
 
+.edit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px 0;
+}
+
 .book-body form {
   display: flex;
   align-items: center;
@@ -968,4 +1093,160 @@ h2 {
     margin-left: 15%;
     margin-bottom: 20px;
   }
+}
+
+/* load when i go to page */
+.load {
+  position: relative;
+}
+
+#loader {
+  margin: 0 0 15% calc(50% - 50px);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #482c62;
+  border-top-color: transparent;
+  animation: spin 0.85s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* load when i go to book page */
+#loader_book {
+  margin: -100px 0 15% calc(50% - 50px);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #482c62;
+  border-top-color: transparent;
+  animation: spin 0.85s linear infinite;
+}
+
+/* ratings */
+.star-rating {
+  display: inline-block;
+}
+
+.yellow-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("/images/star (1).png");
+  background-size: cover;
+}
+
+.full-star {
+  background-position: 0 0;
+}
+
+.black-star {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("/images/star.png");
+  background-size: cover;
+}
+
+/* styles for the table of the queries */
+.the_table {
+  margin: 60px auto 325px;
+  display: flex;
+  justify-content: center;
+}
+
+.content-table {
+  border-collapse: collapse;
+
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+  background-color: #534caf;
+  color: white;
+  text-align: left;
+}
+
+.content-table th,
+.content-table td {
+  padding: 20px 32px;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+  background-color: white;
+  border-color: white;
+}
+
+.content-table tbody tr:last-of-type {
+  border-bottom: 2px solid #534caf;
+}
+
+#none_table {
+  display: none;
+}
+
+#none_table1 {
+  display: none;
+}
+
+#none_table2 {
+  display: none;
+}
+
+/* 3.1.2 */
+
+.gap-table {
+  gap: 120px;
+}
+/* 
+
+.the_table .table1,.table2 {
+  align-self: stretch;
+} */
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 25px;
+  color: gray;
+  cursor: pointer;
+}
+
+.star-rating label:before {
+  content: "\2605";
+}
+
+.star-rating input[type="radio"]:checked ~ label:before {
+  color: orange;
+}
+
+.star-rating {
+  direction: rtl;
+}
+
+.returned-label {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  width: 70px;
+  height: 70px;
+  background-color: purple;
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-100%, -40%);
+  z-index: 1;
 }

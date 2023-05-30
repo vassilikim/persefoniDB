@@ -83,27 +83,48 @@ function renderSchools(schools) {
   });
 }
 
-renderSchools(await getSchools());
+function registerEditButtonListeners() {
+  const editSchBtns = document.querySelectorAll(".sch-edit");
 
-const editSchBtns = document.querySelectorAll(".sch-edit");
+  editSchBtns.forEach((editSchBtn) => {
+    editSchBtn.addEventListener("click", async function (event) {
+      event.preventDefault();
 
-editSchBtns.forEach((editSchBtn) => {
-  editSchBtn.addEventListener("click", async function (event) {
-    event.preventDefault();
+      const queryString = new URLSearchParams({
+        id: editSchBtn.dataset.id,
+        school_name: editSchBtn.dataset.school_name,
+        address: editSchBtn.dataset.address,
+        city: editSchBtn.dataset.city,
+        phone: editSchBtn.dataset.phone,
+        email: editSchBtn.dataset.email,
+        principal: editSchBtn.dataset.principal,
+      }).toString();
 
-    const queryString = new URLSearchParams({
-      id: editSchBtn.dataset.id,
-      school_name: editSchBtn.dataset.school_name,
-      address: editSchBtn.dataset.address,
-      city: editSchBtn.dataset.city,
-      phone: editSchBtn.dataset.phone,
-      email: editSchBtn.dataset.email,
-      principal: editSchBtn.dataset.principal,
-    }).toString();
-
-    location.replace("/edit-school?" + queryString);
+      location.assign("/edit-school?" + queryString);
+    });
   });
-});
+}
+
+const loader = document.getElementById("loader");
+loader.style.display = "block";
+setTimeout(async () => {
+  const schools = await getSchools();
+
+  renderSchools(schools);
+
+  function checkDiv() {
+    var myDiv = document.getElementById("sch-card");
+    if (myDiv.childElementCount <= 0) {
+      myDiv.innerHTML =
+        '<p class="no-items-message"><strong>This page is empty!</strong></p>';
+    }
+  }
+
+  checkDiv();
+  registerEditButtonListeners();
+
+  loader.style.display = "none";
+}, 1000);
 
 async function confirmDelete(school_id) {
   if (confirm("Are you sure you want to delete this school?")) {

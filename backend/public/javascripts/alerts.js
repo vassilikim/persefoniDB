@@ -56,9 +56,9 @@ export const hideAlert = () => {
   if (
     loginButton &&
     loginButton.disabled &&
-    loginButton.classList.contains("loading")
+    loginButton.classList.contains("loading_login")
   ) {
-    loginButton.classList.remove("loading");
+    loginButton.classList.remove("loading_login");
     loginButton.disabled = false;
   }
 
@@ -125,7 +125,7 @@ export const showAlert = (type, msg, time = 7) => {
   if (type === "success") {
     const loginButton = document.getElementById("login-btn");
     if (loginButton) {
-      loginButton.classList.add("loading");
+      loginButton.classList.add("loading_login");
       loginButton.disabled = true;
     }
 

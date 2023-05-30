@@ -3,7 +3,7 @@ const sql = require("mysql");
 
 exports.createReview = async (req, res, next) => {
   try {
-    if (!req.body.book || !req.body.review || !req.body.rating) {
+    if (!req.body.book || !req.body.review || req.body.rating == null) {
       return res.status(400).json({
         status: "failed",
         message: "The book title, review and rating can't be blank!",

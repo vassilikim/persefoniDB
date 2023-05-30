@@ -12,7 +12,7 @@ magazine, foreign', 3),
 ('Hold window toward.', 'Hernandez-Goodwin', '978-0-903283-48-9', 250, 'Pass them long. Probably issue check far candidate.
 Note similar property kind cultural.
 Cup actually TV need impact win. Sure answer mother apply.
-Protect detail black whether be summer imagine.', 1, 'https://picsum.photos/389/658', 'pl', 'ok, head, wide, might, per', 2),
+Protect detail black whether be summer imagine.', 0, 'https://picsum.photos/389/658', 'pl', 'ok, head, wide, might, per', 2),
 ('Four media treatment.', 'Bailey, Martin and Adkins', '978-1-4950-5361-0', 945, 'Community of measure join. Prepare campaign environmental American information until. Gun teacher there bed growth.
 Customer author only country money so those citizen. Although police experience book them cell choice. View least such imagine.', 6, 'https://placekitten.com/538/806', 'sc', 'voice, sure, morning, left, by', 3),
 ('Truth play customer let window.', 'Morales LLC', '978-1-59312-684-1', 468, 'Body since person mind attack former whom. Doctor matter push fast at evidence them. Show well physical may tonight.
@@ -44,18 +44,18 @@ Section southern young occur financial few social up. Turn sound who hair again.
 Themselves sort hundred simply. Development church hour social recently picture.', 8, 'https://placekitten.com/1023/277', 'gez', 'me, role, me, whole, simple', 2),
 ('Develop well.', 'Zuniga and Sons', '978-0-7201-0564-3', 360, 'Job surface area. Community kitchen miss particular finish control result.
 Capital whatever despite understand produce two case available. Help red conference space statement.
-Ago nothing those prevent. Him much especially tell top up.', 1, 'https://picsum.photos/1003/565', 'mi', 'child, and, security, already, just', 3),
+Ago nothing those prevent. Him much especially tell top up.', 0, 'https://picsum.photos/1003/565', 'mi', 'child, and, security, already, just', 3),
 ('Recently free scene.', 'Williams-Richardson', '978-1-56965-630-3', 596, 'Board away type worry himself head door. Some significant sing operation company. You which capital spend hour.
 Yes food care. Respond well air. You military why worry page might.', 8, 'https://dummyimage.com/273x637', 'kn', 'hospital, air, maintain, wait, street', 3), 
 ('South rule four heavy continue.', 'Myers-Hogan', '978-1-02-981361-1', 155, 'Smile money five manage. Alone turn likely challenge western few store.
 Dog somebody necessary people. Thing tonight relate wind shoulder practice. Leave treat yeah treatment cut street half.
 Break that already. Mention available rock guy why.', 9, 'https://picsum.photos/304/955', 'nl', 'surface, follow, before, your, director', 2),
 ('Over discuss design ball individual.', 'King PLC', '978-0-02-988596-3', 990, 'Treat dinner economic six father town. Thank item suddenly know record PM. Majority letter quite lot us.
-As occur certainly former. Indeed despite laugh leg.', 1, 'https://dummyimage.com/343x52', 'tk', 'walk, treat, arrive, down, specific', 2),
+As occur certainly former. Indeed despite laugh leg.', 0, 'https://dummyimage.com/343x52', 'tk', 'walk, treat, arrive, down, specific', 2),
 ('Learn never issue child.', 'Acosta-Ellis', '978-0-8356-5348-0', 120, 'Baby admit seven off economy fast. I land end once. Operation agent some it couple.   
 Usually determine energy share. Cell region reason detail tree it method. Against cell career wind talk choose ability. Both become car likely whole fund himself near.', 3, 'https://placekitten.com/758/242', 'am', 'everything, drug, actually, street, allow', 2),
 ('Why lot science central.', 'Tucker PLC', '978-1-175-58340-6', 420, 'Nature here commercial sit. Follow better heavy chair education. Century customer gun control party mouth.
-Each offer sing according particularly character four. Effort half education offer century.', 1, 'https://dummyimage.com/623x195', 'th', 'pretty, east, artist, same, put', 2),
+Each offer sing according particularly character four. Effort half education offer century.', 0, 'https://dummyimage.com/623x195', 'th', 'pretty, east, artist, same, put', 2),
 ('Management employee environmental himself.', 'Roman, Cannon and Leonard', '978-0-16-486680-3', 705, 'Maintain share power kid water order when. Decade work 
 drive technology operation over generation.
 Early goal prevent hit ever. Action address for value area gas once. Country wall fall three later hour. Allow loss into support arm.', 6, 'https://dummyimage.com/748x539', 'tt', 'program, buy, shake, cover, build', 3),
@@ -68,19 +68,19 @@ Three while full. Traditional blood recent risk manager.
 Make increase professor perhaps behind training. Space Republican bad rest control indeed speech.', 1, 'https://picsum.photos/11/852', 'ga', 'set, office, ready, TV, different', 2),
 ('Shoulder small rest.', 'James-Gordon', '978-1-941017-23-4', 58, 'Significant quickly any purpose person experience. Receive have glass politics former fine 
 military.
-Certainly matter level left. Scientist team audience score. Work world at produce. Data guy statement policy recently protect.', 1, 'https://picsum.photos/464/428', 'ja', 'behind, use, recent, message, cost', 3),
+Certainly matter level left. Scientist team audience score. Work world at produce. Data guy statement policy recently protect.', 0, 'https://picsum.photos/464/428', 'ja', 'behind, use, recent, message, cost', 3),
 ('Fill receive all article.', 'Griffith-Baker', '978-1-86036-108-1', 660, 'Author low begin nor everyone admit. Industry explain glass the use amount. Whatever north my use.
 Account lead describe young whom majority. Finish never just where responsibility each. Standard value entire song notice.', 10, 'https://picsum.photos/352/36', 'lv', 'consider, option, three, degree, him', 3),
 ('Who about.', 'Doyle-Zamora', '978-0-604-01151-0', 860, 'Cut scene defense table second increase floor. Half significant can deal.
 Water training pattern southern. Make shake exactly.
 Beautiful next significant. Whole really begin do. Happy fly star.', 3, 'https://dummyimage.com/1011x884', 'ig', 'structure, they, hour, raise, cut', 3),     
 ('Central dog.', 'Garza-Campbell', '978-0-87205-692-3', 245, 'Between sister according onto. Discussion pay church thing. Measure lose economic buy realize.  
-Herself wide nature need plant face participant. Child usually interview professional. Easy cup social method production.', 1, 'https://dummyimage.com/257x386', 'yi', 'hold, knowledge, important, suggest, decision', 2),
+Herself wide nature need plant face participant. Child usually interview professional. Easy cup social method production.', 0, 'https://dummyimage.com/257x386', 'yi', 'hold, knowledge, important, suggest, decision', 2),
 ('Forget election.', 'Garcia LLC', '978-0-9517787-4-6', 863, 'You small approach field drive according. Federal assume series sing place citizen.
 Picture plant only service involve condition. Able shake approach. Anyone that stay card three than action.
 Ago food involve how high. Recognize power four chair.', 5, 'https://picsum.photos/801/807', 'an', 'approach, art, wrong, success, like', 1),
 ('Answer else be sport open.', 'Petty, Lewis and Hernandez', '978-1-70488-989-4', 844, 'Artist part worker first fly plan religious. Cost table interesting.  
-Require between bag nothing appear. Kitchen image reality window. Administration lead safe toward a.', 3, 'https://dummyimage.com/322x651', 'ja', 'move, carry, institution, everybody, cell', 2),
+Require between bag nothing appear. Kitchen image reality window. Administration lead safe toward a.', 0, 'https://dummyimage.com/322x651', 'ja', 'move, carry, institution, everybody, cell', 2),
 ('Message owner old guy behavior.', 'Perez, Armstrong and Jones', '978-0-250-36302-5', 935, 'Risk source true our particular exactly. Write these process mind lawyer relate.
 Item recognize resource defense statement.
 Dinner election dinner fish our weight citizen them. Wonder off charge movie right environmental.', 4, 'https://picsum.photos/605/178', 'zu', 'benefit, program, thank, heavy, do', 2),
@@ -116,18 +116,18 @@ Short environment treat tree. Model various land beautiful world four billion. F
 ('Method bill group member course.', 'Stewart, Young and Carroll', '978-1-4643-3124-4', 608, 'Price perform want design very subject. Source others good including involve wish teacher. Together evidence herself that man guy.
 Mission develop significant in. Option always thousand check.', 7, 'https://placekitten.com/258/621', 'tcy', 'be, middle, heart, feel, feeling', 1),
 ('Nothing question cost along country.', 'Green-Wright', '978-0-89327-416-0', 569, 'Gas society specific beyond we hold no. Occur simply box structure space camera. Little explain trade operation hospital.
-Others chance goal believe and population.', 1, 'https://picsum.photos/679/525', 'sid', 'mouth, put, meeting, staff, perform', 1),
+Others chance goal believe and population.', 0, 'https://picsum.photos/679/525', 'sid', 'mouth, put, meeting, staff, perform', 1),
 ('Since majority major.', 'Lee LLC', '978-0-7222-9038-5', 896, 'Side any report painting already have first. Charge sing program research money area set. Marriage born new pay health use. Top choose employee executive.', 10, 'https://placekitten.com/400/537', 'pa', 'that, sing, member, within, attack', 1),
 ('Cup staff today.', 'Walls-Callahan', '978-0-909290-67-2', 80, 'Medical third watch still where. Culture middle particular impact plan soldier with training. Those computer speak home.
 Building less these despite ten. International maybe practice outside school. Term baby rule subject available compare.', 8, 'https://picsum.photos/919/272', 
 'mhr', 'leave, since, life, live, break', 1),
 ('Describe own possible office.', 'Hughes, Johnson and Cooper', '978-0-905791-17-3', 296, 'Spring else attention receive ball. Laugh why describe meeting. Any might doctor.
-Especially would run radio try close. Beat party evening tell technology long sister. Make fast strategy adult put investment second model.', 1, 'https://picsum.photos/920/77', 'pa', 'street, condition, along, young, in', 3),
+Especially would run radio try close. Beat party evening tell technology long sister. Make fast strategy adult put investment second model.', 0, 'https://picsum.photos/920/77', 'pa', 'street, condition, along, young, in', 3),
 ('Receive and center.', 'Brown-Savage', '978-1-114-22315-8', 421, 'Military strategy charge worker under blue. Standard newspaper wonder Mrs once. Factor course professor population represent assume affect.', 6, 'https://dummyimage.com/964x363', 'nso', 'room, though, smile, official, inside', 2),
 ('Computer morning police.', 'White, Mcgee and Carson', '978-1-218-99383-4', 525, 'Daughter official cut wall.
 Now go them argue. Face need so lay. Section avoid interest.
 Approach go challenge if fund also. Minute quickly team phone we.
-Could less lawyer add. Key future check watch various job.', 1, 'https://dummyimage.com/370x824', 'tn', 'professional, north, gun, claim, cell', 1),
+Could less lawyer add. Key future check watch various job.', 0, 'https://dummyimage.com/370x824', 'tn', 'professional, north, gun, claim, cell', 1),
 ('Leave friend compare.', 'Parker Group', '978-0-09-471796-1', 964, 'Spend sort actually say on one heavy. Republican difference character mission many of. Stuff general than tell still play.
 Election after reveal anyone. Find protect couple election choice these fine. Enjoy will idea source everybody piece my.', 8, 'https://placekitten.com/652/782', 'mt', 'main, result, treat, become, foot', 2),
 ('All final become involve.', 'Rodriguez, Ayala and Mccall', '978-1-72211-885-3', 937, 'Fly church without way space who chair. What blood sign out line produce admit professional.
@@ -209,7 +209,7 @@ Performance service find process. Actually future chair office few cut. Although
 Others treatment your per. Save help much note rather hot. Night first somebody control southern. Only require benefit far get both practice act.', 5, 'https://dummyimage.com/167x942', 'iu', 'tend, foot, walk, half, on', 2),
 ('Important should feeling.', 'Carpenter LLC', '978-1-4598-9313-9', 306, 'Why create white drug learn require wear. Surface take also war community car month 
 allow.
-Under while today able white. Finish question subject various recognize event region. Reality I exist memory task.', 2, 'https://placekitten.com/328/882', 'se', 'center, water, international, report, white', 1),
+Under while today able white. Finish question subject various recognize event region. Reality I exist memory task.', 0, 'https://placekitten.com/328/882', 'se', 'center, water, international, report, white', 1),
 ('Dog car around.', 'Lambert, Barnes and Castillo', '978-1-81743-705-0', 644, 'Begin star rich skin series focus seven. Poor knowledge pass understand yeah.  
 Despite ball herself art. Never matter few thing and politics. Doctor yard approach whole along certain central.', 5, 'https://dummyimage.com/500x48', 'pa', 'evidence, plant, trouble, far, leader', 2),
 ('Office team thus.', 'Stevenson, Walton and Kim', '978-0-488-57555-9', 360, 'Walk trip music check. Newspaper our bill.
@@ -249,54 +249,54 @@ Year hear laugh on. Control general TV a free wish respond night. Food understan
 ('Perhaps look billion.', 'Coleman-Pena', '978-0-255-49948-4', 620, 'Pull wrong talk simply run he without. For detail garden type. Others from your build.   
 Woman history visit sea. Report two company this foot big.', 1, 'https://picsum.photos/480/199', 'tg', 'have, who, large, benefit, teach', 2),
 ('Human purpose.', 'Holland PLC', '978-1-990747-15-1', 406, 'Investment season nature fund result share. Successful until garden father stay. Operation here may value.
-Budget gun ten fact site important huge. Deep bad myself.', 1, 'https://dummyimage.com/353x77', 'mai', 'quite, blood, president, thousand, goal', 3),
+Budget gun ten fact site important huge. Deep bad myself.', 0, 'https://dummyimage.com/353x77', 'mai', 'quite, blood, president, thousand, goal', 3),
 ('Hope per some indicate.', 'Schneider Ltd', '978-1-954135-44-4', 216, 'Job door message nor. Truth choice why especially other run.
 Guy could you main. Past bag probably speak.
 Drop order clearly radio suddenly. Billion fear assume enjoy grow. School particular lawyer word class cut truth.', 10, 'https://picsum.photos/230/999', 'ka', 'author, over, those, though, chance', 1);
 
 INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date) VALUES ('superadmin', 'test1234', 'super-admin', 'Super', 'Admin', '1975-06-23');
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('schooladmin1', 'test1234', 'school-admin', 'Mason', 'Evans', '1992-12-03', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('schooladmin2', 'test1234', 'school-admin', 'Bonnie', 'Olsen', '2001-01-12', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('schooladmin3', 'test1234', 'school-admin', 'Suzanne', 'Bishop', '1977-08-27', 3);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('teacher1', 'test1234', 'teacher', 'Veronica', 'Curtis', '2000-07-22', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('teacher2', 'test1234', 'teacher', 'Daniel', 'Allen', '2002-10-12', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('teacher3', 'test1234', 'teacher', 'Brenda', 'Stone', '2003-05-04', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('teacher4', 'test1234', 'teacher', 'Karen', 'Brown', '1999-09-28', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('teacher5', 'test1234', 'teacher', 'Bryan', 'Moore', '2004-01-20', 3);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('teacher6', 'test1234', 'teacher', 'Janice', 'Morrison', '2002-09-15', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('teacher7', 'test1234', 'teacher', 'Zachary', 'Richardson', '1997-06-06', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('teacher8', 'test1234', 'teacher', 'Kelly', 'Harris', '2003-02-26', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('teacher9', 'test1234', 'teacher', 'Curtis', 'White', '2002-11-22', 3);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('teacher10', 'test1234', 'teacher', 'Vanessa', 'Wallace', '1997-05-21', 3);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student1', 'test1234', 'student', 'Tracy', 'Castillo', '2014-07-23', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student2', 'test1234', 'student', 'John', 'Briggs', '2014-03-16', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student3', 'test1234', 'student', 'Steven', 'Carter', '2023-04-19', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student4', 'test1234', 'student', 'John', 'Murphy', '2005-07-21', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student5', 'test1234', 'student', 'Amy', 'Sharp', '2017-02-17', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student6', 'test1234', 'student', 'Gregory', 'Walters', '2021-07-17', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student7', 'test1234', 'student', 'Alex', 'Johnson', '2008-11-12', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student8', 'test1234', 'student', 'Margaret', 'Wagner', '2014-06-24', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student9', 'test1234', 'student', 'Olivia', 'Murphy', '2015-09-18', 3);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student10', 'test1234', 'student', 'Dawn', 'Elliott', '2010-05-30', 3);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student11', 'test1234', 'student', 'Jessica', 'Medina', '2021-10-08', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student12', 'test1234', 'student', 'Donna', 'Guzman', '2008-07-30', 3);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student13', 'test1234', 'student', 'Ana', 'Daugherty', '2016-05-05', 3);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student14', 'test1234', 'student', 'Dawn', 'Rowe', '2016-11-19', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student15', 'test1234', 'student', 'Nicole', 'Johnson', '2013-10-04', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student16', 'test1234', 'student', 'Corey', 'Hodges', '2014-11-28', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student17', 'test1234', 'student', 'Jeffrey', 'Lewis', '2013-09-09', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student18', 'test1234', 'student', 'Roberto', 'Gonzalez', '2021-07-14', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student19', 'test1234', 'student', 'Karen', 'Miller', '2013-05-10', 3);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student20', 'test1234', 'student', 'Mary', 'Holt', '2014-03-08', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student21', 'test1234', 'student', 'Joseph', 'Daniels', '2020-07-21', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student22', 'test1234', 'student', 'Thomas', 'Gonzalez', '2022-07-22', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student23', 'test1234', 'student', 'Daniel', 'Sullivan', '2013-05-01', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student24', 'test1234', 'student', 'Eric', 'Taylor', '2017-07-19', 1);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student25', 'test1234', 'student', 'Jessica', 'Rodgers', '2007-06-04', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student26', 'test1234', 'student', 'Karen', 'Stephens', '2015-08-25', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student27', 'test1234', 'student', 'Kyle', 'Campos', '2017-04-29', 2);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student28', 'test1234', 'student', 'James', 'Williams', '2018-09-21', 3);
-INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student29', 'test1234', 'student', 'Ryan', 'Snow', '2013-10-15', 2);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('schooladmin1', 'test1234', 'school-admin', 'Mason', 'Evans', '1980-12-03', 1, 0);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('schooladmin2', 'test1234', 'school-admin', 'Bonnie', 'Olsen', '1973-01-12', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('schooladmin3', 'test1234', 'school-admin', 'Suzanne', 'Bishop', '1977-08-27', 3, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('teacher1', 'test1234', 'teacher', 'Veronica', 'Curtis', '1985-07-22', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('teacher2', 'test1234', 'teacher', 'Daniel', 'Allen', '1990-10-12', 1, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('teacher3', 'test1234', 'teacher', 'Brenda', 'Stone', '1970-05-04', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('teacher4', 'test1234', 'teacher', 'Karen', 'Brown', '1968-09-28', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('teacher5', 'test1234', 'teacher', 'Bryan', 'Moore', '1983-01-20', 3, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('teacher6', 'test1234', 'teacher', 'Janice', 'Morrison', '1987-09-15', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('teacher7', 'test1234', 'teacher', 'Zachary', 'Richardson', '1995-06-06', 1, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('teacher8', 'test1234', 'teacher', 'Kelly', 'Harris', '1972-02-26', 1, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('teacher9', 'test1234', 'teacher', 'Curtis', 'White', '1979-11-22', 3, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('teacher10', 'test1234', 'teacher', 'Vanessa', 'Wallace', '1960-05-21', 3, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student1', 'test1234', 'student', 'Tracy', 'Castillo', '2005-07-23', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student2', 'test1234', 'student', 'John', 'Briggs', '2006-03-16', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student3', 'test1234', 'student', 'Steven', 'Carter', '2007-04-19', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student4', 'test1234', 'student', 'John', 'Murphy', '2008-07-21', 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student5', 'test1234', 'student', 'Amy', 'Sharp', '2009-02-17', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student6', 'test1234', 'student', 'Gregory', 'Walters', '2010-07-17', 1, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student7', 'test1234', 'student', 'Alex', 'Johnson', '2005-11-12', 1, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student8', 'test1234', 'student', 'Margaret', 'Wagner', '2006-06-24', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student9', 'test1234', 'student', 'Olivia', 'Murphy', '2007-09-18', 3, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student10', 'test1234', 'student', 'Dawn', 'Elliott', '2008-05-30', 3, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student11', 'test1234', 'student', 'Jessica', 'Medina', '2009-10-08', 1, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student12', 'test1234', 'student', 'Donna', 'Guzman', '2009-07-30', 3, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student13', 'test1234', 'student', 'Ana', 'Daugherty', '2006-05-05', 3, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student14', 'test1234', 'student', 'Dawn', 'Rowe', '2006-11-19', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student15', 'test1234', 'student', 'Nicole', 'Johnson', '2005-10-04', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student16', 'test1234', 'student', 'Corey', 'Hodges', '2007-11-28', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student17', 'test1234', 'student', 'Jeffrey', 'Lewis', '2008-09-09', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student18', 'test1234', 'student', 'Roberto', 'Gonzalez', '2009-07-14', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student19', 'test1234', 'student', 'Karen', 'Miller', '2010-05-10', 3, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student20', 'test1234', 'student', 'Mary', 'Holt', '2008-03-08', 1, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student21', 'test1234', 'student', 'Joseph', 'Daniels', '2010-07-21', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student22', 'test1234', 'student', 'Thomas', 'Gonzalez', '2005-07-22', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student23', 'test1234', 'student', 'Daniel', 'Sullivan', '2007-05-01', 1, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student24', 'test1234', 'student', 'Eric', 'Taylor', '2007-07-19', 1, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student25', 'test1234', 'student', 'Jessica', 'Rodgers', '2007-06-04', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student26', 'test1234', 'student', 'Karen', 'Stephens', '2005-08-25', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID, verified) VALUES ('student27', 'test1234', 'student', 'Kyle', 'Campos', '2009-04-29', 2, 1);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student28', 'test1234', 'student', 'James', 'Williams', '2008-09-21', 3);
+INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student29', 'test1234', 'student', 'Ryan', 'Snow', '2010-10-15', 2);
 INSERT INTO Users (username, user_password, user_role, first_name, last_name, birth_date, school_ID) VALUES ('student30', 'test1234', 'student', 'Ashley', 'Smith', '2007-11-09', 3);
 
 INSERT INTO Writer (first_name, last_name) VALUES ('Jennifer', 'Adams'); INSERT INTO Writer (first_name, last_name) VALUES ('Jason', 'Williams'); INSERT INTO 
@@ -308,6 +308,8 @@ INTO Writer (first_name, last_name) VALUES ('Clayton', 'Patel'); INSERT INTO Wri
 (first_name, last_name) VALUES ('Marissa', 'Ramirez'); INSERT INTO Writer (first_name, last_name) VALUES ('Michael', 'Cross'); INSERT INTO Writer (first_name, last_name) VALUES ('Joseph', 'Cohen'); INSERT INTO Writer (first_name, last_name) VALUES ('Anthony', 'Moore'); INSERT INTO Writer (first_name, last_name) VALUES ('Andrea', 'Camacho'); INSERT INTO Writer (first_name, last_name) VALUES ('Michael', 'Dixon'); INSERT INTO Writer (first_name, last_name) VALUES ('Kristina', 'Miller'); INSERT INTO Writer (first_name, last_name) VALUES ('Robert', 'Morales'); INSERT INTO Writer (first_name, last_name) VALUES ('Becky', 'Smith'); 
 INSERT INTO Writer (first_name, last_name) VALUES ('Emma', 'Rose'); INSERT INTO Writer (first_name, last_name) VALUES ('Michael', 'Anderson'); INSERT INTO Writer (first_name, last_name) VALUES ('Frank', 'Jennings'); INSERT INTO Writer (first_name, last_name) VALUES ('Peggy', 'Sutton'); INSERT INTO Writer (first_name, last_name) VALUES ('Christopher', 'Lozano'); INSERT INTO Writer (first_name, last_name) VALUES ('Derek', 'Robinson'); INSERT INTO Writer (first_name, last_name) VALUES ('Cameron', 'Wright'); INSERT INTO Writer (first_name, last_name) VALUES ('David', 'Baker'); INSERT INTO Writer (first_name, last_name) VALUES ('Kevin', 'Graham'); INSERT INTO Writer (first_name, last_name) VALUES ('Brett', 'Robinson'); INSERT INTO Writer (first_name, last_name) VALUES ('Jean', 'Patrick'); INSERT INTO Writer (first_name, last_name) VALUES ('Kevin', 'Wong'); INSERT INTO Writer (first_name, last_name) VALUES ('Jessica', 'Hunter'); INSERT INTO Writer (first_name, last_name) VALUES ('Geoffrey', 'Ortiz'); INSERT INTO Writer (first_name, last_name) VALUES ('Robert', 'Maldonado'); INSERT INTO Writer (first_name, last_name) VALUES ('Diane', 'Johnson'); INSERT INTO Writer (first_name, last_name) VALUES ('Leslie', 'Henry'); INSERT INTO Writer (first_name, last_name) VALUES ('Rachel', 'Delgado'); INSERT INTO Writer (first_name, last_name) VALUES ('Tammy', 'Adams'); INSERT INTO Writer (first_name, last_name) VALUES ('Kristen', 'White'); INSERT INTO Writer (first_name, last_name) VALUES ('Samantha', 'Orr'); INSERT INTO Writer (first_name, last_name) VALUES ('Sandra', 'Keller'); INSERT INTO Writer (first_name, last_name) VALUES ('Michael', 'Newman'); INSERT INTO Writer (first_name, last_name) VALUES ('Robin', 'Allen'); INSERT INTO Writer (first_name, last_name) VALUES ('Kathleen', 'Jackson'); INSERT INTO Writer (first_name, last_name) VALUES ('Daniel', 'Collins'); INSERT INTO Writer 
 (first_name, last_name) VALUES ('Sandra', 'Burke'); INSERT INTO Writer (first_name, last_name) VALUES ('Lisa', 'Krueger'); INSERT INTO Writer (first_name, last_name) VALUES ('Bradley', 'Perez'); INSERT INTO Writer (first_name, last_name) VALUES ('Christopher', 'Boyle'); INSERT INTO Writer (first_name, last_name) VALUES ('Cathy', 'Rodriguez'); INSERT INTO Writer (first_name, last_name) VALUES ('Stephanie', 'Cox'); INSERT INTO Writer (first_name, last_name) VALUES ('Greg', 'Frazier'); INSERT INTO Writer (first_name, last_name) VALUES ('Carly', 'Kelley'); INSERT INTO Writer (first_name, last_name) VALUES ('Martin', 'Smith'); INSERT INTO Writer (first_name, last_name) VALUES ('Thomas', 'Cobb'); INSERT INTO Writer (first_name, last_name) VALUES ('Spencer', 'Smith'); INSERT INTO Writer (first_name, last_name) VALUES ('Chloe', 'Reynolds'); INSERT INTO Writer (first_name, last_name) VALUES ('Nicholas', 'Wilson'); INSERT INTO Writer (first_name, last_name) VALUES ('Shawn', 'Brown'); INSERT INTO Writer (first_name, last_name) VALUES ('Jason', 'Frost'); INSERT INTO Writer (first_name, last_name) VALUES ('Adam', 'Herrera'); INSERT INTO Writer (first_name, last_name) VALUES ('Ashley', 'Shaw'); INSERT INTO Writer (first_name, last_name) VALUES ('Karen', 'Jackson'); INSERT INTO Writer (first_name, last_name) VALUES ('Joshua', 'Fisher'); INSERT INTO Writes (writer_ID, book_ID) VALUES (42, 1); INSERT INTO Writes (writer_ID, book_ID) VALUES (52, 1); INSERT INTO Writes (writer_ID, book_ID) VALUES (23, 1); INSERT INTO Writes (writer_ID, book_ID) VALUES (1, 1); INSERT INTO Writes (writer_ID, book_ID) VALUES (5, 1); INSERT INTO Writes (writer_ID, book_ID) VALUES (39, 1); INSERT INTO Genre (book_ID, genre) VALUES (1, 'Drama'); INSERT INTO Genre (book_ID, genre) VALUES (1, 'Horror'); INSERT INTO Genre (book_ID, genre) VALUES (1, 'Business');
+INSERT INTO Writes (writer_ID, book_ID) VALUES (93, 8);
+INSERT INTO Writes (writer_ID, book_ID) VALUES (97, 8);
 INSERT INTO Writes (writer_ID, book_ID) VALUES (98, 2); INSERT INTO Writes (writer_ID, book_ID) VALUES (85, 2); INSERT INTO Writes (writer_ID, book_ID) VALUES (26, 2); INSERT INTO Writes (writer_ID, book_ID) VALUES (54, 2); INSERT INTO Writes (writer_ID, book_ID) VALUES (61, 2); INSERT INTO Genre (book_ID, genre) VALUES (2, 'Art'); INSERT INTO Genre (book_ID, genre) VALUES (2, 'Travel'); INSERT INTO Genre (book_ID, genre) VALUES (2, 'Comics');
 INSERT INTO Writes (writer_ID, book_ID) VALUES (7, 3); INSERT INTO Writes (writer_ID, book_ID) VALUES (89, 3); INSERT INTO Genre (book_ID, genre) VALUES (3, 'Horror'); INSERT INTO Genre (book_ID, genre) VALUES (3, 'Business'); INSERT INTO Genre (book_ID, genre) VALUES (3, 'Cooking');
 INSERT INTO Writes (writer_ID, book_ID) VALUES (27, 4); INSERT INTO Genre (book_ID, genre) VALUES (4, 'Historical fiction');
@@ -426,117 +428,145 @@ INSERT INTO Writes (writer_ID, book_ID) VALUES (81, 100); INSERT INTO Writes (wr
 (100, 'Mystery'); INSERT INTO Genre (book_ID, genre) VALUES (100, 'Horror');
 
 INSERT INTO Reservation (user_ID, book_ID, request_date, pending_reservation_date, canceled_at, served_at, reservation_status) VALUES
-(6, 76, '2022-10-01 02:31:03', NULL, NULL, NULL, 0),
-(40, 78, '2022-09-08 02:31:03', NULL, '2022-09-20 02:31:03', NULL, 3),
-(10, 51, '2023-02-21 02:31:03', NULL, '2023-03-01 02:31:03', NULL, 3),
-(28, 23, '2022-09-07 02:31:03', '2022-09-10 02:31:03', NULL, NULL, 1),
-(17, 58, '2023-01-01 02:31:03', '2023-01-13 02:31:03', NULL, NULL, 1),
-(39, 94, '2022-05-12 02:31:03', NULL, NULL, NULL, 0),
-(32, 80, '2023-04-21 02:31:03', '2023-04-25 02:31:03', NULL, NULL, 1),
-(12, 79, '2022-08-01 02:31:03', NULL, '2022-08-04 02:31:03', NULL, 3),
-(24, 65, '2023-03-21 02:31:03', NULL, '2023-03-27 02:31:03', NULL, 3),
-(44, 45, '2022-08-12 02:31:03', NULL, NULL, '2022-08-18 02:31:03', 2),
-(33, 31, '2022-05-19 02:31:03', NULL, '2022-05-28 02:31:03', NULL, 3),
-(33, 11, '2023-02-25 02:31:03', NULL, NULL, NULL, 0),
-(10, 40, '2022-07-17 02:31:03', NULL, NULL, '2022-07-27 02:31:03', 2),
-(39, 77, '2023-01-03 02:31:03', '2023-01-13 02:31:03', NULL, NULL, 1),
-(27, 32, '2022-11-09 02:31:03', NULL, NULL, '2022-11-19 02:31:03', 2),
-(43, 81, '2022-12-16 02:31:03', NULL, '2022-12-17 02:31:03', NULL, 3),
-(22, 10, '2022-09-08 02:31:03', NULL, NULL, NULL, 0),
-(23, 19, '2023-03-24 02:31:03', NULL, NULL, '2023-03-25 02:31:03', 2),
-(9, 46, '2022-10-28 02:31:03', '2022-11-10 02:31:03', NULL, NULL, 1),
-(43, 88, '2023-03-08 02:31:03', NULL, '2023-03-20 02:31:03', NULL, 3),
-(38, 7, '2022-08-28 02:31:03', NULL, NULL, '2022-08-30 02:31:03', 2),
-(6, 73, '2023-02-16 02:31:03', NULL, NULL, '2023-02-27 02:31:03', 2),
-(25, 5, '2023-05-02 02:31:03', '2023-05-16 02:31:03', NULL, NULL, 1),
-(14, 57, '2023-04-12 02:31:03', NULL, NULL, '2023-04-22 02:31:03', 2),
-(16, 73, '2022-07-27 02:31:03', NULL, NULL, NULL, 0),
-(27, 31, '2023-01-01 02:31:03', NULL, NULL, NULL, 0),
-(24, 17, '2023-02-07 02:31:03', NULL, '2023-02-09 02:31:03', NULL, 3),
-(16, 32, '2022-06-23 02:31:03', NULL, NULL, NULL, 0),
-(22, 13, '2022-10-19 02:31:03', NULL, NULL, NULL, 0),
-(8, 71, '2022-12-27 02:31:03', '2023-01-09 02:31:03', NULL, NULL, 1),
-(33, 29, '2023-03-09 02:31:03', NULL, '2023-03-23 02:31:03', NULL, 3),
-(7, 52, '2022-09-21 02:31:03', NULL, NULL, '2022-09-22 02:31:03', 2),
-(44, 24, '2022-11-06 02:31:03', NULL, NULL, NULL, 0),
-(19, 8, '2023-01-24 02:31:03', NULL, '2023-01-27 02:31:03', NULL, 3),
-(34, 13, '2023-02-17 02:31:03', NULL, NULL, '2023-03-01 02:31:03', 2),
-(40, 4, '2022-09-07 02:31:03', NULL, NULL, '2022-09-20 02:31:03', 2),
-(32, 56, '2022-12-24 02:31:03', NULL, NULL, '2022-12-30 02:31:03', 2),
-(22, 52, '2023-04-19 02:31:03', NULL, '2023-04-27 02:31:03', NULL, 3),
-(41, 39, '2022-05-19 02:31:03', NULL, '2022-05-25 02:31:03', NULL, 3),
-(21, 2, '2022-10-21 02:31:03', NULL, '2022-11-01 02:31:03', NULL, 3);
+(33, 48, DATE_SUB(NOW(), INTERVAL 3 DAY), NULL, NULL, DATE_SUB(NOW(), INTERVAL 2 DAY), 2),
+(21, 83, DATE_SUB(NOW(), INTERVAL 3 DAY), NULL, NULL, DATE_SUB(NOW(), INTERVAL 2 DAY), 2),
+(22, 19, DATE_SUB(NOW(), INTERVAL 2 DAY), NULL, NULL, NOW(), 2),
+(28, 33, DATE_SUB(NOW(), INTERVAL 3 DAY), NULL, NULL, NOW(), 2),
+(29, 23, DATE_SUB(NOW(), INTERVAL 3 DAY), NULL, NULL, NOW(), 2),
+(35, 95, '2022-04-17 09:24:04.630228', NULL, NULL, '2022-04-18 09:24:04.630228', 2),
+(26, 15, DATE_SUB(NOW(), INTERVAL 4 DAY), NULL, NULL, DATE_SUB(NOW(), INTERVAL 2 DAY), 2),
+(25, 83, DATE_SUB(NOW(), INTERVAL 4 DAY), NULL, NULL, DATE_SUB(NOW(), INTERVAL 3 DAY), 2),
+(41, 76, DATE_SUB(NOW(), INTERVAL 2 DAY), NULL, NULL, NOW(), 2),
+(38, 100, '2023-04-04 09:24:04.630228', NULL, NULL, '2023-04-06 09:24:04.630228', 2),
+(21, 96, DATE_SUB(NOW(), INTERVAL 2 DAY), NULL, NULL, NOW(), 2),
+(24, 25, '2023-04-08 09:24:04.630228', NULL, NULL, '2023-04-10 09:24:04.630228', 2),
+(36, 84, '2021-05-01 09:24:04.630228', NULL, NULL, '2021-05-03 09:24:04.630228', 2),
+(33, 32, DATE_SUB(NOW(), INTERVAL 4 DAY), NULL, NULL, NOW(), 2),
+(12, 67, '2023-04-07 09:24:04.630228', NULL, NULL, '2023-04-09 09:24:04.630228', 2),
+(7, 30, DATE_SUB(NOW(), INTERVAL 4 DAY), NULL, NULL, DATE_SUB(NOW(), INTERVAL 3 DAY), 2),
+(14, 68, DATE_SUB(NOW(), INTERVAL 4 DAY), NULL, NULL, NOW(), 2),
+(28, 30, DATE_SUB(NOW(), INTERVAL 4 DAY), NULL, NULL, DATE_SUB(NOW(), INTERVAL 3 DAY), 2),
+(6, 45, DATE_SUB(NOW(), INTERVAL 5 DAY), NULL, NULL, DATE_SUB(NOW(), INTERVAL 4 DAY), 2),
+(10, 14, '2022-04-09 09:24:04.630228', NULL, NULL, '2022-04-10 09:24:04.630228', 2),
+(19, 30, DATE_SUB(NOW(), INTERVAL 2 DAY), DATE_SUB(NOW(), INTERVAL 1 DAY), NULL, NULL, 1),
+(37, 45, DATE_SUB(NOW(), INTERVAL 4 DAY), DATE_SUB(NOW(), INTERVAL 3 DAY), NULL, NULL, 1),
+(14, 48, DATE_SUB(NOW(), INTERVAL 2 DAY), DATE_SUB(NOW(), INTERVAL 1 DAY), NULL, NULL, 1),
+(34, 83, DATE_SUB(NOW(), INTERVAL 1 DAY), NOW(), NULL, NULL, 1),
+(33, 15, DATE_SUB(NOW(), INTERVAL 1 DAY), NOW(), NULL, NULL, 1),
+(33, 53, DATE_SUB(NOW(), INTERVAL 1 DAY), NULL, NULL, NULL, 0),
+(21, 39, NOW(), NULL, NULL, NULL, 0),
+(21, 12, NOW(), NULL, NULL, NULL, 0),
+(6, 11, NOW(), NULL, NULL, NULL, 0),
+(19, 19, DATE_SUB(NOW(), INTERVAL 2 DAY), NULL, NULL, NULL, 0),
+(36, 62, DATE_SUB(NOW(), INTERVAL 2 DAY), NULL, NULL, NULL, 0),
+(10, 76, NOW(), NULL, NULL, NULL, 0),
+(13, 16, DATE_SUB(NOW(), INTERVAL 2 DAY), NULL, NULL, NULL, 0),
+(26, 16, DATE_SUB(NOW(), INTERVAL 2 DAY), NULL, NULL, NULL, 0),
+(9, 3, DATE_SUB(NOW(), INTERVAL 5 DAY), NULL, NULL, NULL, 0),
+(9, 6, DATE_SUB(NOW(), INTERVAL 5 DAY), NULL, DATE_SUB(NOW(), INTERVAL 3 DAY), NULL, 3),
+(5, 58, DATE_SUB(NOW(), INTERVAL 2 DAY), NULL, NOW(), NULL, 3),
+(17, 59, DATE_SUB(NOW(), INTERVAL 5 DAY), NULL, DATE_SUB(NOW(), INTERVAL 3 DAY), NULL, 3),
+(17, 95, DATE_SUB(NOW(), INTERVAL 5 DAY), NULL, DATE_SUB(NOW(), INTERVAL 2 DAY), NULL, 3),
+(25, 29, DATE_SUB(NOW(), INTERVAL 5 DAY), NULL, NOW(), NULL, 3);
 
 INSERT INTO Lending (user_ID, book_ID, lending_date, must_be_returned_at, was_returned_at) VALUES
-(7, 30, '2023-04-29 09:24:04.630228', '2023-05-29 09:24:04.630228', NULL),
-(14, 69, '2023-05-02 09:24:04.630228', '2023-06-01 09:24:04.630228', '2023-05-17 09:24:04.630228'),
-(28, 94, '2023-04-26 09:24:04.630228', '2023-05-26 09:24:04.630228', '2023-05-11 09:24:04.630228'),
-(16, 83, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-24 09:24:04.630228'),
-(31, 67, '2023-04-12 09:24:04.630228', '2023-05-12 09:24:04.630228', '2023-04-28 09:24:04.630228'),
-(43, 4, '2023-04-21 09:24:04.630228', '2023-05-21 09:24:04.630228', '2023-04-23 09:24:04.630228'),
-(6, 100, '2023-04-22 09:24:04.630228', '2023-05-22 09:24:04.630228', '2023-05-20 09:24:04.630228'),
-(30, 61, '2023-04-22 09:24:04.630228', '2023-05-22 09:24:04.630228', NULL),
-(40, 90, '2023-04-29 09:24:04.630228', '2023-05-29 09:24:04.630228', '2023-05-02 09:24:04.630228'),
-(10, 40, '2023-04-10 09:24:04.630228', '2023-05-10 09:24:04.630228', '2023-04-20 09:24:04.630228'),
-(8, 37, '2023-04-15 09:24:04.630228', '2023-05-15 09:24:04.630228', '2023-05-06 09:24:04.630228'),
-(23, 99, '2023-05-02 09:24:04.630228', '2023-06-01 09:24:04.630228', '2023-05-20 09:24:04.630228'),
-(5, 36, '2023-04-10 09:24:04.630228', '2023-05-10 09:24:04.630228', '2023-04-14 09:24:04.630228'),
-(20, 84, '2023-05-06 09:24:04.630228', '2023-06-05 09:24:04.630228', '2023-05-27 09:24:04.630228'),
-(29, 73, '2023-04-14 09:24:04.630228', '2023-05-14 09:24:04.630228', NULL),
-(42, 9, '2023-04-14 09:24:04.630228', '2023-05-14 09:24:04.630228', '2023-04-28 09:24:04.630228'),
-(21, 58, '2023-05-07 09:24:04.630228', '2023-06-06 09:24:04.630228', NULL),
-(22, 37, '2023-05-09 09:24:04.630228', '2023-06-08 09:24:04.630228', '2023-05-30 09:24:04.630228'),
-(30, 31, '2023-05-04 09:24:04.630228', '2023-06-03 09:24:04.630228', '2023-05-21 09:24:04.630228'),
-(29, 35, '2023-04-13 09:24:04.630228', '2023-05-13 09:24:04.630228', NULL),
-(35, 35, '2023-04-18 09:24:04.630228', '2023-05-18 09:24:04.630228', '2023-04-25 09:24:04.630228'),
-(26, 98, '2023-04-24 09:24:04.630228', '2023-05-24 09:24:04.630228', '2023-04-27 09:24:04.630228'),
-(25, 92, '2023-04-22 09:24:04.630228', '2023-05-22 09:24:04.630228', '2023-05-21 09:24:04.630228'),
-(41, 47, '2023-04-22 09:24:04.630228', '2023-05-22 09:24:04.630228', '2023-04-23 09:24:04.630228'),
-(30, 54, '2023-04-26 09:24:04.630228', '2023-05-26 09:24:04.630228', '2023-05-24 09:24:04.630228'),
-(44, 33, '2023-04-28 09:24:04.630228', '2023-05-28 09:24:04.630228', '2023-05-08 09:24:04.630228'),
-(14, 63, '2023-04-18 09:24:04.630228', '2023-05-18 09:24:04.630228', '2023-05-05 09:24:04.630228'),
-(36, 88, '2023-05-03 09:24:04.630228', '2023-06-02 09:24:04.630228', '2023-05-27 09:24:04.630228'),
-(42, 100, '2023-04-20 09:24:04.630228', '2023-05-20 09:24:04.630228', '2023-04-27 09:24:04.630228'),
-(31, 60, '2023-04-15 09:24:04.630228', '2023-05-15 09:24:04.630228', '2023-05-10 09:24:04.630228'),
-(11, 84, '2023-05-09 09:24:04.630228', '2023-06-08 09:24:04.630228', '2023-05-18 09:24:04.630228'),
-(14, 94, '2023-04-09 09:24:04.631266', '2023-05-09 09:24:04.631266', '2023-04-19 09:24:04.631266'),
-(29, 74, '2023-04-14 09:24:04.631266', '2023-05-14 09:24:04.631266', '2023-04-28 09:24:04.631266'),
-(30, 5, '2023-05-08 09:24:04.631266', '2023-06-07 09:24:04.631266', '2023-05-09 09:24:04.631266'),
-(12, 48, '2023-04-09 09:24:04.631266', '2023-05-09 09:24:04.631266', NULL),
-(29, 40, '2023-05-09 09:24:04.631266', '2023-06-08 09:24:04.631266', '2023-05-12 09:24:04.631266'),
-(21, 49, '2023-05-01 09:24:04.631266', '2023-05-31 09:24:04.631266', '2023-05-23 09:24:04.631266'),
-(42, 53, '2023-04-11 09:24:04.631266', '2023-05-11 09:24:04.631266', '2023-05-09 09:24:04.631266'),
-(36, 82, '2023-04-16 09:24:04.631266', '2023-05-16 09:24:04.631266', NULL),
-(39, 67, '2023-05-01 09:24:04.631266', '2023-05-31 09:24:04.631266', NULL),
-(7, 77, '2023-04-18 09:24:04.631266', '2023-05-18 09:24:04.631266', '2023-05-04 09:24:04.631266'),
-(19, 86, '2023-04-26 09:24:04.631266', '2023-05-26 09:24:04.631266', NULL),
-(36, 54, '2023-04-26 09:24:04.631266', '2023-05-26 09:24:04.631266', NULL),
-(19, 22, '2023-05-07 09:24:04.631266', '2023-06-06 09:24:04.631266', '2023-05-16 09:24:04.631266'),
-(14, 58, '2023-04-12 09:24:04.631266', '2023-05-12 09:24:04.631266', '2023-05-02 09:24:04.631266'),
-(18, 78, '2023-04-16 09:24:04.631266', '2023-05-16 09:24:04.631266', '2023-05-07 09:24:04.631266'),
-(9, 47, '2023-05-08 09:24:04.631266', '2023-06-07 09:24:04.631266', '2023-05-09 09:24:04.631266'),
-(33, 24, '2023-04-13 09:24:04.631266', '2023-05-13 09:24:04.631266', '2023-04-14 09:24:04.631266'),
-(18, 65, '2023-04-13 09:24:04.631266', '2023-05-13 09:24:04.631266', NULL),
-(13, 27, '2023-04-11 09:24:04.631266', '2023-05-11 09:24:04.631266', NULL);
+(7, 30, DATE_SUB(NOW(), INTERVAL 3 DAY), DATE_ADD(DATE_SUB(NOW(), INTERVAL 3 DAY),INTERVAL 1 MONTH), NULL),
+(14, 68, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(28, 30, DATE_SUB(NOW(), INTERVAL 3 DAY), DATE_ADD(DATE_SUB(NOW(), INTERVAL 3 DAY),INTERVAL 1 MONTH), NULL),
+(16, 30, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(31, 33, '2023-04-12 09:24:04.630228', '2023-05-12 09:24:04.630228', NULL),
+(28, 4, '2022-04-21 09:24:04.630228', '2022-05-21 09:24:04.630228', '2022-05-01 09:24:04.630228'),
+(6, 45, DATE_SUB(NOW(), INTERVAL 4 DAY), DATE_ADD(DATE_SUB(NOW(), INTERVAL 4 DAY),INTERVAL 1 MONTH), NULL),
+(30, 18, '2023-04-12 09:24:04.630228', '2023-05-12 09:24:04.630228', NULL),
+(40, 2, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(10, 14, '2022-04-10 09:24:04.630228', '2022-05-10 09:24:04.630228', '2022-04-20 09:24:04.630228'),
+(7, 9, '2022-04-15 09:24:04.630228', '2022-05-15 09:24:04.630228', '2022-05-06 09:24:04.630228'),
+(23, 99, '2023-04-01 09:24:04.630228', '2023-05-01 09:24:04.630228', NULL),
+(5, 20, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(20, 50, '2023-04-06 09:24:04.630228', '2023-05-05 09:24:04.630228', NULL),
+(29, 28, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(33, 48, DATE_SUB(NOW(), INTERVAL 2 DAY), DATE_ADD(DATE_SUB(NOW(), INTERVAL 2 DAY),INTERVAL 1 MONTH), NULL),
+(21, 83, DATE_SUB(NOW(), INTERVAL 2 DAY), DATE_ADD(DATE_SUB(NOW(), INTERVAL 2 DAY),INTERVAL 1 MONTH), NULL),
+(22, 19, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(28, 33, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(29, 23, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(35, 35, '2022-04-18 09:24:04.630228', '2022-05-18 09:24:04.630228', '2022-04-25 09:24:04.630228'),
+(26, 15, DATE_SUB(NOW(), INTERVAL 2 DAY), DATE_ADD(DATE_SUB(NOW(), INTERVAL 2 DAY),INTERVAL 1 MONTH), NULL),
+(25, 83, DATE_SUB(NOW(), INTERVAL 3 DAY), DATE_ADD(DATE_SUB(NOW(), INTERVAL 3 DAY),INTERVAL 1 MONTH), NULL),
+(41, 76, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(38, 100, '2023-04-06 09:24:04.630228', '2023-05-06 09:24:04.630228', NULL),
+(21, 96, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(24, 25, '2023-04-10 09:24:04.630228', '2023-05-10 09:24:04.630228', NULL),
+(36, 84, '2021-05-03 09:24:04.630228', '2021-06-02 09:24:04.630228', '2021-05-27 09:24:04.630228'),
+(33, 32, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(12, 67, '2023-04-09 09:24:04.630228', '2023-05-09 09:24:04.630228', '2023-05-03 09:24:04.630228'),
+(11, 75, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(14, 55, '2022-04-09 09:24:04.631266', '2022-05-09 09:24:04.631266', '2022-04-19 09:24:04.631266'),
+(29, 14, '2023-01-14 09:24:04.631266', '2023-02-14 09:24:04.631266', '2023-01-28 09:24:04.631266'),
+(30, 4, '2023-02-08 09:24:04.631266', '2023-03-08 09:24:04.631266', '2023-03-04 09:24:04.631266'),
+(12, 10, '2023-04-11 09:24:04.631266', '2023-05-11 09:24:04.631266', NULL),
+(29, 59, '2022-11-09 09:24:04.631266', '2022-12-09 09:24:04.631266', '2022-11-30 09:24:04.631266'),
+(21, 71, '2023-03-01 09:24:04.631266', '2023-04-01 09:24:04.631266', '2023-03-23 09:24:04.631266'),
+(33, 73, '2023-03-11 09:24:04.631266', '2023-04-11 09:24:04.631266', '2023-04-09 09:24:04.631266'),
+(36, 17, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(39, 42, '2023-04-01 09:24:04.631266', '2023-05-01 09:24:04.631266', NULL),
+(7, 42, '2022-04-18 09:24:04.631266', '2022-05-18 09:24:04.631266', '2022-05-04 09:24:04.631266'),
+(13, 1, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(27, 66, '2023-03-26 09:24:04.631266', '2023-04-26 09:24:04.631266', NULL),
+(20, 97, '2022-05-07 09:24:04.631266', '2022-06-07 09:24:04.631266', '2022-06-01 09:24:04.631266'),
+(34, 74, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(33, 68, '2023-04-04 09:24:04.631266', '2023-05-04 09:24:04.631266', '2023-05-02 09:24:04.631266'),
+(8, 54, NOW(), DATE_ADD(NOW(),INTERVAL 1 MONTH), NULL),
+(26, 72, '2022-04-13 09:24:04.631266', '2022-05-13 09:24:04.631266', '2022-05-11 09:24:04.631266'),
+(40, 19, '2021-04-13 09:24:04.631266', '2021-05-13 09:24:04.631266', '2021-05-11 09:24:04.631266'),
+(13, 43, '2022-04-13 09:24:04.631266', '2022-05-13 09:24:04.631266', '2022-05-11 09:24:04.631266'),
+(6, 7, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(11, 10, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(12, 11, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(18, 12, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(20, 13, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(21, 22, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(6, 29, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(11, 34, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(12, 39, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(18, 40, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(5, 2, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(7, 4, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(8, 5, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228'),
+(10, 9, '2023-04-27 09:24:04.630228', '2023-05-27 09:24:04.630228', '2023-05-11 09:24:04.630228');
 
 INSERT INTO Review (user_ID, book_ID, review, rating) VALUES
-(18, 52, 'This book was okay.', 4),
-(10, 26, 'This book was disappointing.', 0),
-(32, 92, 'This book was amazing.', 4),
-(34, 80, 'This book was amazing.', 4),
-(42, 39, 'This book was good.', 1),
-(34, 74, 'This book was okay.', 5),
-(22, 12, 'This book was great.', 0),
-(9, 53, 'This book was okay.', 5),
-(12, 40, 'This book was okay.', 5),
-(39, 53, 'This book was disappointing.', 2),
-(26, 11, 'This book was okay.', 0),
-(42, 66, 'This book was good.', 4),
-(23, 2, 'This book was okay.', 0),
-(15, 11, 'This book was great.', 2),
-(28, 23, 'This book was disappointing.', 0),
-(29, 25, 'This book was disappointing.', 3),
-(34, 39, 'This book was disappointing.', 1),
-(25, 80, 'This book was okay.', 1),
-(30, 72, 'This book was great.', 0),
-(23, 21, 'This book was disappointing.', 3);
+(7, 30, 'This book was okay.', 3),
+(14, 68, 'This book was disappointing.', 0),
+(28, 30, 'This book was amazing.', 5),
+(16, 30, 'This book was amazing.', 5),
+(31, 33, 'This book was good.', 4),
+(28, 4, 'This book was okay.', 3),
+(6, 45, 'This book was great.', 4),
+(30, 18, 'This book was okay.', 2),
+(40, 2, 'This book was okay.', 3),
+(10, 14, 'This book was disappointing.', 0),
+(7, 9, 'This book was okay.', 3),
+(21, 83, 'This book was good.', 4),
+(24, 25, 'This book was okay.', 2),
+(33, 32, 'This book was great.', 5),
+(12, 67, 'This book was disappointing.', 0),
+(14, 55, 'This book was disappointing.', 1),
+(21, 71, 'This book was disappointing.', 1),
+(34, 74, 'This book was okay.', 2),
+(8, 54, 'This book was great.', 5),
+(38, 100, 'This book was disappointing.', 2),
+(6, 7, 'This book was okay.', 3),
+(11, 10, 'This book was disappointing.', 0),
+(12, 11, 'This book was amazing.', 5),
+(18, 12, 'This book was amazing.', 5),
+(20, 13, 'This book was good.', 4),
+(21, 22, 'This book was okay.', 3),
+(6, 29, 'This book was great.', 4),
+(11, 34, 'This book was okay.', 2),
+(12, 39, 'This book was okay.', 3),
+(18, 40, 'This book was disappointing.', 0),
+(5, 2, 'This book was okay.', 3),
+(7, 4, 'This book was good.', 4),
+(8, 5, 'This book was okay.', 2),
+(10, 9, 'This book was great.', 5);
