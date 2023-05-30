@@ -233,6 +233,11 @@ label {
   color: #004085;
 }
 
+.gap_new{
+  position: relative;
+  width: 50%;
+}
+
 .loading {
   position: relative;
 }
@@ -1156,16 +1161,17 @@ h2 {
   position: absolute;
   top: 10px;
   left: 50px;
-  width: 90px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background-color: purple;
   color: white;
-  padding: 5px;
+  padding: 8px;
   border-radius: 50%;
+  font-size: 12px;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translate(-70%, -30%);
+  transform: translate(-100%, -40%);
   z-index: 1;
 }
