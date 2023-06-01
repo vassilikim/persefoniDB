@@ -42,13 +42,17 @@ function renderReviews(reviews) {
     const ratingValue = review.rating;
 
     for (let i = 0; i < 5; i++) {
-      if (i < ratingValue) {
+      if (5 === ratingValue){
         const star = document.createElement("span");
         star.className = "yellow-icon full-star";
         starContainer.appendChild(star);
-      } else {
+      } else if (i < ratingValue) {
         const star = document.createElement("span");
         star.className = "black-star full-star";
+        starContainer.appendChild(star);
+      } else {
+        const star = document.createElement("span");
+        star.className = "yellow-icon full-star";
         starContainer.appendChild(star);
       }
     }
