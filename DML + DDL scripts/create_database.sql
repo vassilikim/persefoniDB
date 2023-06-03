@@ -47,7 +47,6 @@ CREATE TABLE Writes (
     PRIMARY KEY (writer_ID, book_ID),
     FOREIGN KEY (writer_ID) REFERENCES Writer(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (book_ID) REFERENCES Book(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
-    INDEX index_writer (writer_ID),
     INDEX index_book_written (book_ID)
 );
 
@@ -86,8 +85,7 @@ CREATE TABLE Reservation (
     PRIMARY KEY (user_ID, book_ID, request_date),
     FOREIGN KEY (user_ID) REFERENCES Users(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (book_ID) REFERENCES Book(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
-    INDEX index_reserv_user (user_ID),
-    INDEX index_reserv_book (book_ID)
+    INDEX index_reserv_book (book_ID, user_ID)
 );
 
 CREATE TABLE Lending (
@@ -99,8 +97,7 @@ CREATE TABLE Lending (
     PRIMARY KEY (user_ID, book_ID, lending_date),
     FOREIGN KEY (user_ID) REFERENCES Users(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (book_ID) REFERENCES Book(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
-    INDEX index_lend_user (user_ID),
-    INDEX index_lend_book (book_ID)
+    INDEX index_lend_book (book_ID, user_ID)
 );
 
 CREATE TABLE Review (
@@ -113,8 +110,7 @@ CREATE TABLE Review (
     FOREIGN KEY (user_ID) REFERENCES Users(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (book_ID) REFERENCES Book(ID) ON DELETE RESTRICT ON UPDATE CASCADE,
     CHECK (rating<=5 AND rating>=0),
-    INDEX index_review_user (user_ID),
-    INDEX index_review_book (book_ID)
+    INDEX index_review_book (book_ID, user_ID)
 );
 
 CREATE VIEW activeUsers AS
@@ -438,29 +434,29 @@ BEGIN
     IF year_param IS NULL AND month_param IS NULL THEN
         SELECT s.school_name, COUNT(l.book_ID) as lendings
 		FROM School s 
-		JOIN activeUsers u ON s.ID=u.school_ID
-		LEFT JOIN Lending l ON l.user_ID=u.ID
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
 		WHERE s.school_active=1
 		GROUP BY s.school_name;
     ELSEIF year_param IS NULL AND month_param IS NOT NULL THEN
         SELECT s.school_name, COUNT(CASE WHEN MONTH(l.lending_date) = month_param THEN l.book_ID ELSE NULL END) as lendings
 		FROM School s 
-		JOIN activeUsers u ON s.ID=u.school_ID
-		LEFT JOIN Lending l ON l.user_ID=u.ID
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
 		WHERE s.school_active=1
 		GROUP BY s.school_name;
     ELSEIF year_param IS NOT NULL AND month_param IS NULL THEN
         SELECT s.school_name, COUNT(CASE WHEN YEAR(l.lending_date) = year_param THEN l.book_ID ELSE NULL END) as lendings
 		FROM School s 
-		JOIN activeUsers u ON s.ID=u.school_ID
-		LEFT JOIN Lending l ON l.user_ID=u.ID
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
 		WHERE s.school_active=1
 		GROUP BY s.school_name;
     ELSE
         SELECT s.school_name, COUNT(CASE WHEN MONTH(l.lending_date) = month_param AND YEAR(l.lending_date) = year_param THEN l.book_ID ELSE NULL END) as lendings
 		FROM School s 
-		JOIN activeUsers u ON s.ID=u.school_ID
-		LEFT JOIN Lending l ON l.user_ID=u.ID
+		LEFT JOIN activeUsers u ON s.ID=u.school_ID
+		JOIN Lending l ON l.user_ID=u.ID
 		WHERE s.school_active=1
 		GROUP BY s.school_name;
     END IF;
@@ -531,16 +527,15 @@ BEGIN
 		FROM School s
 		JOIN activeUsers u ON u.school_ID=s.ID
 		JOIN Book b ON b.school_ID=s.ID
-		JOIN Lending l ON l.book_ID=b.ID 
+		LEFT JOIN Lending l ON l.book_ID=b.ID 
 		WHERE u.user_role='school-admin'
 		GROUP BY u.username, YEAR(l.lending_date)
 	)
-	SELECT GROUP_CONCAT(sc.username SEPARATOR ', ') AS schooladmins, sc.lendings AS lendings, sc.year
+	SELECT GROUP_CONCAT(sc.username SEPARATOR ', ') AS schooladmins, sc.lendings AS lendings
 	FROM schooladmin_lendings sc
     WHERE sc.lendings > 20
-	GROUP BY sc.lendings, sc.year
+	GROUP BY sc.lendings
 	HAVING COUNT(*) >= 2;
-    
 END //
 DELIMITER ;
 
@@ -563,7 +558,7 @@ BEGIN
 	WITH writer_books AS (
 		SELECT CONCAT(w.first_name, ' ', w.last_name) AS writer, COUNT(wr.book_ID) AS books
 		FROM Writer w 
-		JOIN Writes wr ON wr.writer_ID=w.ID
+		LEFT JOIN Writes wr ON wr.writer_ID=w.ID
 		GROUP BY w.first_name, w.last_name
 		ORDER BY books DESC
 	),
@@ -643,13 +638,11 @@ BEGIN
 		JOIN Book b ON b.ID=g.book_ID
 		JOIN Review r ON r.book_ID=b.ID
 		JOIN activeUsers u ON u.ID=r.user_ID AND u.school_ID=school_id 
-        WHERE r.verified=1
 		GROUP BY g.genre;
         
         SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, ROUND(AVG(r.rating), 2) AS avg_rating
 		FROM activeUsers u
 		JOIN Review r ON r.user_ID=u.ID AND u.school_ID=school_id
-        WHERE r.verified=1
 		GROUP BY u.username, u.first_name, u.last_name;
     ELSEIF genre IS NOT NULL AND full_name IS NULL THEN
         SELECT g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
@@ -657,7 +650,7 @@ BEGIN
 		JOIN Book b ON b.ID=g.book_ID
 		JOIN Review r ON r.book_ID=b.ID
 		JOIN activeUsers u ON u.ID=r.user_ID AND u.school_ID=school_id
-        WHERE g.genre=genre AND r.verified=1
+        WHERE g.genre=genre
 		GROUP BY g.genre;
         
         SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, ROUND(AVG(r.rating), 2) AS avg_rating
@@ -665,7 +658,7 @@ BEGIN
 		JOIN activeUsers u ON u.school_ID=school_id
 		JOIN Book b ON b.ID=g.book_ID
 		JOIN Review r ON r.book_ID=b.ID AND r.user_ID=u.ID
-        WHERE g.genre=genre AND r.verified=1
+        WHERE g.genre=genre
 		GROUP BY u.username, u.first_name, u.last_name;
 	ELSEIF genre IS NULL AND full_name IS NOT NULL THEN
 		SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
@@ -673,13 +666,13 @@ BEGIN
 		JOIN activeUsers u ON u.school_ID=school_id
 		JOIN Book b ON b.ID=g.book_ID
 		JOIN Review r ON r.book_ID=b.ID AND r.user_ID=u.ID
-        WHERE CONCAT(u.first_name, ' ', u.last_name)=full_name AND r.verified=1
+        WHERE CONCAT(u.first_name, ' ', u.last_name)=full_name
 		GROUP BY g.genre, u.username, u.first_name, u.last_name;
         
         SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, ROUND(AVG(r.rating), 2) AS avg_rating
 		FROM activeUsers u
 		JOIN Review r ON r.user_ID=u.ID AND u.school_ID=school_id
-        WHERE CONCAT(u.first_name, ' ', u.last_name)=full_name AND r.verified=1
+        WHERE CONCAT(u.first_name, ' ', u.last_name)=full_name
 		GROUP BY u.username, u.first_name, u.last_name;
     ELSE
         SELECT u.username, CONCAT(u.first_name, ' ', u.last_name) AS full_name, g.genre, ROUND(AVG(r.rating), 2) AS avg_rating
@@ -687,7 +680,7 @@ BEGIN
 		JOIN activeUsers u ON u.school_ID=school_id
 		JOIN Book b ON b.ID=g.book_ID
 		JOIN Review r ON r.book_ID=b.ID AND r.user_ID=u.ID
-        WHERE g.genre=genre AND CONCAT(u.first_name, ' ', u.last_name)=full_name AND r.verified=1
+        WHERE g.genre=genre AND CONCAT(u.first_name, ' ', u.last_name)=full_name
 		GROUP BY g.genre, u.username, u.first_name, u.last_name;
     END IF;
 END //
@@ -895,7 +888,7 @@ BEGIN
 	FROM Writes
 	WHERE book_ID IN (SELECT book_id FROM Books);
 
-	SELECT b.ID, b.title, b.publisher, b.ISBN, b.page_number, b.summary, b.copies, b.image, b.lang, b.keywords, gen.genres, final.full_names, l.was_returned_at, l.must_be_returned_at, l.lending_date
+	SELECT b.ID, b.title, b.publisher, b.ISBN, b.page_number, b.summary, b.copies, b.image, b.lang, b.keywords, gen.genres, final.full_names, l.was_returned_at
 	FROM Book b
     JOIN Lending l ON l.book_ID = b.ID
 	JOIN (SELECT g.book_ID, GROUP_CONCAT(g.genre SEPARATOR ", ") AS genres
@@ -1002,4 +995,3 @@ BEGIN
 	END IF;
 END //
 DELIMITER ;
-
