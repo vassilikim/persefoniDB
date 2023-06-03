@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS persefoniDB;
-CREATE DATABASE persefoniDB;
-USE persefoniDB;
+DROP DATABASE IF EXISTS <db_name>;
+CREATE DATABASE <db_name>;
+USE <db_name>;
 
 CREATE TABLE School (
     ID INT NOT NULL AUTO_INCREMENT,
