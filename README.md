@@ -31,7 +31,6 @@ To install the application from GitHub and connect it to a local MySQL database,
      - Replace <db_username> and <db_password> with the username and password you set during the database installation.
      - Replace <db_instancename> and <db_port> with the name and port of your specific MySQL instance (e.g., root and 3036).
      - Replace <db_name> with the name of your database.
-     - <jwt_secret> and <password_hashing_phrase> are phrases of your choice used for JWT token encoding and password encryption in the database, respectively.
 
 6. Run the application:
    - In the command prompt, execute the command "npm start" inside the "backend" folder.
